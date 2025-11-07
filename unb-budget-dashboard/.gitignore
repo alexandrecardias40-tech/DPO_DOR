@@ -2,8 +2,7 @@
 **/node_modules
 .pnpm-store/
 
-# Build outputs
-dist/
+# Build outputs (keep dist committed for deployment)
 build/
 *.dist
 
