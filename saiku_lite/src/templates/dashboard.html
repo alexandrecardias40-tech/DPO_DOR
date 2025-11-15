@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dashboard - Diretoria de Orçamento (DOR)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20241017" />
+    <script>
+      window.SAIKU_BASE_PATH = {{ saiku_base_path|tojson }};
+    </script>
+  </head>
+  <body class="dashboard-legacy">
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <span class="brand-mark">DOR</span>
+          <div>
+            <h1>Diretoria de Orçamento (DOR)</h1>
+            <p>Monitoramento rápido de contratos e execução.</p>
+          </div>
+        </div>
+        <div class="user-meta">
+          <a class="logout-link" href="{{ url_for('logout') }}">Sair</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-fallback">
+      <section class="card dashboard-controls">
+        <div class="controls-header">
+          <h2>Gerenciar bases do dashboard</h2>
+          <p class="muted small">
+            Use a mesma planilha do pivot para obter indicadores consolidados sem depender do backend em Node.js.
+          </p>
+        </div>
+        <div class="controls-grid">
+          <div>
+            <label for="dashboard-dataset-select">Base ativa</label>
+            <select id="dashboard-dataset-select" {% if not datasets %}disabled{% endif %}>
+              {% if datasets %}
+                {% for item in datasets %}
+                <option value="{{ item.id }}" {% if item.id == initial_dataset_id %}selected{% endif %}>
+                  {{ item.name }}
+                </option>
+                {% endfor %}
+              {% else %}
+                <option value="" selected>Nenhuma base disponível</option>
+              {% endif %}
+            </select>
+            {% if not datasets %}
+            <p class="muted small" id="dashboard-empty-hint">Nenhuma base disponível. Envie um arquivo para começar.</p>
+            {% endif %}
+          </div>
+          <div class="control-actions">
+            <button id="dashboard-delete-btn" class="ghost tiny-button danger" type="button" {% if not datasets %}disabled{% endif %}>
+              Remover base atual
+            </button>
+            <div id="dashboard-updated-at" class="muted small"></div>
+          </div>
+        </div>
+
+        <form id="dashboard-upload-form" class="upload-form" enctype="multipart/form-data">
+          <label class="file-input">
+            <span>Enviar nova base (CSV, TSV, XLS, XLSX ou JSON)</span>
+            <input id="dashboard-file" type="file" name="file" required />
+          </label>
+          <button class="primary" type="submit">Atualizar dashboard</button>
+        </form>
+        <div id="dashboard-upload-status" class="status-message muted"></div>
+      </section>
+
+      <section class="dashboard-panels">
+        <div id="dashboard-message" class="flash-message info hidden"></div>
+        <article class="card panel-item">
+          <div class="panel-header">
+            <div>
+              <h3>Indicadores principais</h3>
+              <p class="muted small">Totais calculados automaticamente com base na base ativa.</p>
+            </div>
+            <button class="ghost tiny-button" id="dashboard-refresh-btn" type="button">Recarregar</button>
+          </div>
+          <div id="dashboard-kpis" class="kpi-grid placeholder">Carregue uma base para visualizar os indicadores.</div>
+        </article>
+
+        <article class="card panel-item">
+          <div class="panel-header">
+            <div>
+              <h3>Alertas e situações críticas</h3>
+              <p class="muted small">Contratos vencidos, saldos baixos e execução acima do planejado.</p>
+            </div>
+          </div>
+          <div id="dashboard-alerts" class="alert-list placeholder">Nenhum alerta disponível.</div>
+        </article>
+
+        <article class="card panel-item">
+          <div class="panel-header">
+            <div>
+              <h3>Detalhamento por UGR</h3>
+              <p class="muted small">Resumo das unidades gestoras com valores planejados, executados e empenhados.</p>
+            </div>
+          </div>
+          <div id="dashboard-units" class="unit-table placeholder">Sem dados para exibir.</div>
+        </article>
+
+        <article class="card panel-item">
+          <div class="panel-header">
+            <div>
+              <h3>Tabela detalhada</h3>
+              <p class="muted small">Até 200 linhas para inspeção rápida diretamente no navegador.</p>
+            </div>
+          </div>
+          <div id="dashboard-table" class="table-wrapper placeholder">Nenhum dado disponível.</div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      Created by <a href="mailto:alexandrecardias@unb.br">alexandrecardias@unb.br</a>
+    </footer>
+    <script>
+      window.DashboardBootstrap = {
+        datasets: {{ datasets | tojson }},
+        initialDatasetId: {{ initial_dataset_id | tojson }},
+        config: {{ config | tojson }},
+      };
+    </script>
+    <script src="{{ url_for('static', filename='js/dashboard_fallback.js') }}?v=20241017" defer></script>
+  </body>
+</html>

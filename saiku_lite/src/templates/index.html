@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Diretoria de Orçamento (DOR)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20241017" />
+    <script>
+      window.SAIKU_BASE_PATH = {{ saiku_base_path|tojson }};
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <span class="brand-mark">DOR</span>
+          <div>
+            <h1>Diretoria de Orçamento (DOR)</h1>
+            <p>Ferramenta de análise interativa de dados orçamentários.</p>
+          </div>
+        </div>
+        <div class="user-meta">
+          <a class="logout-link" href="{{ url_for('logout') }}">Sair</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      {% endwith %}
+      <section class="card" id="upload-card">
+        <h2>Carregar base</h2>
+        <form id="upload-form" class="upload-form">
+          <label class="file-input">
+            <span>Escolher arquivo (CSV, TXT, XLS, XLSX)</span>
+            <input id="dataset-file" type="file" name="file" required />
+          </label>
+        </form>
+        <div id="dataset-info" class="info-box hidden"></div>
+      </section>
+
+      <section id="analysis-area" class="hidden">
+        <div class="workspace-shell">
+          <div class="tabs hidden" id="universe-tabs"></div>
+          <div class="toolbar card">
+            <div class="toolbar-group">
+              <button type="button" class="toolbar-button" id="toolbar-upload">
+                <span class="icon" aria-hidden="true">⬆</span>
+                <span>Carregar base</span>
+              </button>
+              <button type="button" class="toolbar-button" id="toolbar-new">
+                <span class="icon" aria-hidden="true">＋</span>
+                <span>Nova consulta</span>
+              </button>
+              <button type="button" class="toolbar-button" id="toolbar-refresh">
+                <span class="icon" aria-hidden="true">⟳</span>
+                <span>Atualizar</span>
+              </button>
+            </div>
+            <div class="toolbar-status">
+              <span id="status-dataset" class="status-pill hidden"></span>
+              <span id="status-message" class="status-message muted">Aguardando carregamento...</span>
+            </div>
+          </div>
+
+          <div class="analysis-grid">
+            <aside id="fields-panel" class="card panel">
+              <div class="panel-header">
+                <h2>Campos</h2>
+              </div>
+              <div id="dataset-meta" class="dataset-meta hidden">
+                <p><strong>Linhas:</strong> <span id="meta-rows"></span></p>
+                <p><strong>Colunas:</strong> <span id="meta-columns"></span></p>
+              </div>
+              <div class="field-group">
+                <h3>Dimensões</h3>
+                <div id="dimension-list" class="field-list" data-list-type="dimension"></div>
+              </div>
+              <div class="field-group">
+                <h3>Medidas</h3>
+                <div id="measure-list" class="field-list" data-list-type="measure"></div>
+              </div>
+              <div class="field-group calculations-group">
+                <div class="calculations-header">
+                  <h3>Colunas calculadas</h3>
+                  <button type="button" id="add-calculation-btn" class="tiny-button" aria-label="Nova coluna calculada">＋</button>
+                </div>
+                <div id="calculation-list" class="calculation-list"></div>
+              </div>
+              <div id="excluded-group" class="field-group hidden">
+                <h3>Campos excluídos</h3>
+                <p class="muted">Esses campos não entram na análise atual. Clique para restaurar.</p>
+                <div id="excluded-list" class="field-list" data-list-type="excluded"></div>
+              </div>
+            </aside>
+
+            <section class="workspace">
+              <div class="card drop-card">
+                <p class="drop-hint">Arraste campos para as áreas desejadas e clique em executar.</p>
+                <div class="drop-row">
+                  <div class="dropzone" data-zone="columns">
+                    <div class="dropzone-header">Colunas</div>
+                    <div class="dropzone-body"></div>
+                  </div>
+                </div>
+                <div class="drop-row">
+                  <div class="dropzone" data-zone="rows">
+                    <div class="dropzone-header">Linhas</div>
+                    <div class="dropzone-body"></div>
+                  </div>
+                </div>
+                <div class="drop-row">
+                  <div class="dropzone" data-zone="filters">
+                    <div class="dropzone-header">Filtros</div>
+                    <div class="dropzone-body"></div>
+                  </div>
+                </div>
+                <div class="drop-row measures-row">
+                  <div class="dropzone" data-zone="measures">
+                    <div class="dropzone-header">
+                      <span>Medidas</span>
+                      <label class="aggregator-control">
+                        <span>Agregador</span>
+                        <select id="aggregator-select" disabled></select>
+                      </label>
+                    </div>
+                    <div class="dropzone-body"></div>
+                  </div>
+                </div>
+                <div class="actions-row">
+                  <button id="run-pivot" class="primary">Executar consulta</button>
+                  <div class="export-buttons">
+                    <button type="button" class="ghost export" data-export="excel">Excel</button>
+                    <button type="button" class="ghost export" data-export="pdf">PDF</button>
+                  </div>
+                  <div id="pivot-error" class="error hidden"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="pivot-output" class="card hidden">
+        <h2>Resultado</h2>
+        <div id="pivot-summary" class="hidden"></div>
+        <div id="pivot-table-container"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <span class="dor-tagline">Diretoria de Orçamento (DOR) - Ferramenta interna.</span>
+      </p>
+    </footer>
+
+    <div id="dialog-backdrop" class="dialog-backdrop hidden"></div>
+<div id="filter-dialog" class="dialog hidden" role="dialog" aria-modal="true">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h3 id="filter-dialog-title">Filtro</h3>
+      <button type="button" class="dialog-close" id="filter-dialog-close" aria-label="Fechar">×</button>
+    </div>
+    <div id="filter-dialog-body" class="dialog-body"></div>
+    <div class="dialog-actions">
+      <button type="button" class="ghost" id="filter-dialog-cancel">Cancelar</button>
+      <button type="button" class="primary" id="filter-dialog-apply">Aplicar</button>
+    </div>
+  </div>
+</div>
+    <div id="calculation-dialog" class="dialog hidden" role="dialog" aria-modal="true">
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <h3 id="calculation-dialog-title">Nova coluna calculada</h3>
+          <button type="button" class="dialog-close" id="calculation-dialog-close" aria-label="Fechar">×</button>
+        </div>
+        <form id="calculation-form" class="dialog-body calculation-form">
+          <label class="form-field">
+            <span>Nome</span>
+            <input type="text" id="calc-name" required autocomplete="off" />
+          </label>
+          <div class="form-row">
+            <label class="form-field">
+              <span>Etapa</span>
+              <select id="calc-stage">
+                <option value="post">Após o pivot (resultado)</option>
+                <option value="pre">Antes da consulta (nova medida)</option>
+              </select>
+            </label>
+            <label class="form-field">
+              <span>Operação</span>
+              <select id="calc-operation">
+                <option value="expression">Expressão personalizada</option>
+              </select>
+            </label>
+          </div>
+          <p id="calc-operand-notice" class="muted hidden"></p>
+          <div id="calc-operands" class="calc-operands hidden"></div>
+          <div id="calc-between-range" class="calc-between hidden">
+            <label class="form-field">
+              <span>Limite inferior</span>
+              <input type="number" id="calc-between-lower" step="any" />
+            </label>
+            <label class="form-field">
+              <span>Limite superior</span>
+              <input type="number" id="calc-between-upper" step="any" />
+            </label>
+          </div>
+          <label class="form-field" id="calc-expression-field">
+            <span>Expressão</span>
+            <textarea id="calc-expression" rows="3" placeholder="{Valor Executado} - {Total Estimado}"></textarea>
+            <p class="form-hint">
+              Use <code>{Nome da Coluna}</code> para referenciar campos. Ex.: {Valor Executado} / {Total Estimado} * 100.
+            </p>
+          </label>
+          <div class="calc-expression-suggestions hidden" id="calc-expression-suggestions">
+            <p class="form-hint">Clique para inserir na expressão:</p>
+            <div class="calc-expression-chips" id="calc-expression-chips"></div>
+          </div>
+          <label class="form-field">
+            <span>Casas decimais (opcional)</span>
+            <input type="number" id="calc-decimals" min="0" step="1" />
+          </label>
+        </form>
+        <div class="dialog-actions">
+          <button type="button" class="ghost" id="calculation-dialog-cancel">Cancelar</button>
+          <button type="submit" form="calculation-form" class="primary" id="calculation-dialog-save">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      Created by <a href="mailto:alexandrecardias@unb.br">alexandrecardias@unb.br</a>
+    </footer>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=20241017" defer></script>
+  </body>
+</html>

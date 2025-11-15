@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+import sys
 from typing import Dict, List, Optional, Tuple
 
 import json
@@ -21,6 +22,7 @@ from cpor_data_processing import (
 BASE_DIR = Path(__file__).resolve().parent
 UNB_PUBLIC_DIR = BASE_DIR / "unb-budget-dashboard" / "dist" / "public"
 CPOR_UPLOAD_DIR = BASE_DIR / "uploads" / "cpor"
+SAIKU_LITE_DIR = Path(os.environ.get("SAIKU_LITE_PATH", str(BASE_DIR / "saiku_lite"))).resolve()
 
 
 def _load_dash_apps() -> Tuple:
@@ -46,7 +48,28 @@ def _load_dash_apps() -> Tuple:
     finally:
         os.environ.pop("LOA_DASH_BASEPATH", None)
 
-    return caor_app, loa_app
+    if not SAIKU_LITE_DIR.exists():
+        raise FileNotFoundError(
+            f"Diretório do Saiku Lite não encontrado em '{SAIKU_LITE_DIR}'. "
+            "Ajuste a variável de ambiente SAIKU_LITE_PATH ou coloque a pasta ao lado do portal."
+        )
+    os.environ.setdefault("SAIKU_BASE_PATH", "/saiku")
+    os.environ.setdefault("PORTAL_HOME_URL", "/")
+    for candidate in (SAIKU_LITE_DIR, SAIKU_LITE_DIR.parent):
+        # Add both the package directory and its parent so `saiku_lite` is importable.
+        candidate_str = str(candidate)
+        if candidate_str not in sys.path:
+            sys.path.insert(0, candidate_str)
+    try:
+        from saiku_lite import create_app as create_saiku_app
+    except ModuleNotFoundError as exc:
+        raise ModuleNotFoundError(
+            "Não foi possível importar o Saiku Lite. Verifique se as dependências foram instaladas "
+            "e se o pacote contém a função create_app."
+        ) from exc
+    saiku_app = create_saiku_app()
+
+    return caor_app, loa_app, saiku_app
 
 
 def _portal_entries() -> List[Dict[str, str]]:
@@ -71,6 +94,13 @@ def _portal_entries() -> List[Dict[str, str]]:
             "description": "Análise de despesas e execução orçamentária.",
             "href": "/dashboard/",
             "accent": "#f97316",
+        },
+        {
+            "slug": "BI",
+            "title": "Business Intelligence",
+            "description": "Monte análises estilo BI com tabelas dinâmicas rápidas.",
+            "href": "/saiku/",
+            "accent": "#a855f7",
         },
     ]
 
@@ -121,7 +151,7 @@ def _create_portal_app() -> Flask:
 
     @portal.route("/<path:spa_path>")
     def serve_dashboard_fallback(spa_path: str):
-        protected_prefixes = ("api/", "caor", "loa", "healthz", "uploads/")
+        protected_prefixes = ("api/", "caor", "loa", "saiku", "healthz", "uploads/")
         if any(spa_path.startswith(prefix) for prefix in protected_prefixes):
             abort(404)
         return send_from_directory(UNB_PUBLIC_DIR, "index.html")
@@ -268,7 +298,7 @@ def _create_portal_app() -> Flask:
 
 
 def create_site_application() -> DispatcherMiddleware:
-    caor_app, loa_app = _load_dash_apps()
+    caor_app, loa_app, saiku_app = _load_dash_apps()
     portal_app = _create_portal_app()
 
     return DispatcherMiddleware(
@@ -276,6 +306,7 @@ def create_site_application() -> DispatcherMiddleware:
         {
             "/caor": caor_app.server,
             "/loa": loa_app.server,
+            "/saiku": saiku_app,
         },
     )
 
