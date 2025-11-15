@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.DS_Store
+uploads/
+instance/
+*.pyc
+*.pyo
+*.orig
+*.log
+/saiku_lite/cookies.txt
+/saiku_lite/src/static/dashboard.bak*/

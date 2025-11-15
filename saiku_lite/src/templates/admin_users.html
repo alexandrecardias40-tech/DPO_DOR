@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Administração de usuários - Diretoria de Orçamento (DOR)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20241017" />
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <span class="brand-mark">DOR</span>
+          <div>
+            <h1>Administração de usuários</h1>
+            <p>Gerencie acessos ao sistema.</p>
+          </div>
+        </div>
+        <nav class="main-nav">
+          {% if current_user.can_access_reports %}
+          <a class="nav-link nav-button" href="{{ url_for('index') }}">Relatórios</a>
+          {% endif %}
+          {% if current_user.can_access_dashboard %}
+          <a class="nav-link nav-button" href="{{ url_for('dashboard_page') }}">Dashboard</a>
+          {% endif %}
+        </nav>
+        <div class="user-meta">
+          <a class="admin-link" href="{{ url_for('index') }}">← Voltar</a>
+          <span class="user-name">Logado como {{ current_user.username }}</span>
+          <a class="logout-link" href="{{ url_for('logout') }}">Sair</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      {% endwith %}
+
+      <section class="card">
+        <h2>Usuários cadastrados</h2>
+        <p class="muted">
+          Usuários marcados com <strong>Obrigatório</strong> precisarão definir uma nova senha no próximo login.
+        </p>
+        <div class="user-list">
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>Usuário</th>
+                <th>Perfil</th>
+                <th>Acessos</th>
+                <th>Última atualização</th>
+                <th>Troca obrigatória</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td>
+                  <strong>{{ user.username }}</strong>
+                  {% if user.id == current_user.id %}
+                  <span class="tag">Você</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if user.is_admin %}
+                  <span class="tag tag-admin">Administrador</span>
+                  {% else %}
+                  <span class="tag">Usuário</span>
+                  {% endif %}
+                </td>
+                <td class="user-permissions">
+                  {% if user.is_admin %}
+                  <span class="tag tag-success">Relatórios e Dashboard</span>
+                  <p class="muted small">Administradores sempre acessam tudo.</p>
+                  {% else %}
+                  <form method="post" action="{{ url_for('update_user_permissions', user_id=user.id) }}" class="inline-form permissions-form">
+                    <label class="checkbox-field">
+                      <input type="checkbox" name="can_access_reports" value="1" {% if user.can_access_reports %}checked{% endif %} />
+                      <span>Relatórios</span>
+                    </label>
+                    <label class="checkbox-field">
+                      <input type="checkbox" name="can_access_dashboard" value="1" {% if user.can_access_dashboard %}checked{% endif %} />
+                      <span>Dashboard</span>
+                    </label>
+                    <button type="submit" class="tiny-button">Salvar</button>
+                  </form>
+                  {% endif %}
+                </td>
+                <td>{{ user.created_at }}</td>
+                <td>
+                  {% if user.must_change_password %}
+                  <span class="tag tag-warning">Obrigatório</span>
+                  {% else %}
+                  <span class="tag tag-success">Liberado</span>
+                  {% endif %}
+                </td>
+                <td class="user-actions">
+                  <form method="post" action="{{ url_for('reset_user_password', user_id=user.id) }}" class="inline-form">
+                    <input type="password" name="new_password" placeholder="Nova senha" required minlength="6" />
+                    <input type="password" name="confirm_password" placeholder="Confirmar" required minlength="6" />
+                    <button type="submit" class="tiny-button">Redefinir</button>
+                  </form>
+                  {% if user.id != current_user.id %}
+                  <form method="post" action="{{ url_for('delete_user', user_id=user.id) }}" class="inline-form">
+                    <button type="submit" class="tiny-button danger" onclick="return confirm('Confirma remover {{ user.username }}?')">
+                      Remover
+                    </button>
+                  </form>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Novo usuário</h2>
+        <form method="post" action="{{ url_for('manage_users') }}" class="admin-form">
+          <label class="form-field">
+            <span>Usuário</span>
+            <input type="text" name="username" autocomplete="off" required />
+          </label>
+          <label class="form-field">
+            <span>Senha temporária</span>
+            <input type="password" name="password" autocomplete="new-password" required minlength="6" />
+            <small class="muted">O usuário precisará alterá-la no primeiro acesso.</small>
+          </label>
+          <div class="form-field">
+            <span>Acessos permitidos</span>
+            <label class="checkbox-field">
+              <input type="checkbox" name="can_access_reports" value="1" checked />
+              <span>Relatórios</span>
+            </label>
+            <label class="checkbox-field">
+              <input type="checkbox" name="can_access_dashboard" value="1" checked />
+              <span>Dashboard</span>
+            </label>
+            <small class="muted">Selecione os módulos disponíveis. Administradores recebem ambos automaticamente.</small>
+          </div>
+          <label class="form-field checkbox-field">
+            <input type="checkbox" name="is_admin" value="1" />
+            <span>Conceder perfil de administrador</span>
+          </label>
+          <button type="submit" class="primary">Criar usuário</button>
+        </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  Created by <a href="mailto:alexandrecardias@unb.br">alexandrecardias@unb.br</a>
+</footer>
+</body>
+</html>

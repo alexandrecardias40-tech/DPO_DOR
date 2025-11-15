@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Acesso - Diretoria de Orçamento (DOR)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20241017" />
+  </head>
+  <body class="login-page">
+    <main class="login-main">
+      <section class="card login-card">
+        <div class="login-header">
+          <span class="brand-mark">DOR</span>
+          <div>
+            <h1>Acessar o sistema</h1>
+            <p class="login-description">Informe usuário e senha administrativos para continuar.</p>
+          </div>
+        </div>
+        {% if error %}
+        <div class="login-error" role="alert">{{ error }}</div>
+        {% endif %}
+        <form method="post" class="login-form">
+          <input type="hidden" name="next" value="{{ next_url }}" />
+          <label class="login-field">
+            <span>Usuário</span>
+            <input type="text" name="username" autocomplete="username" required autofocus />
+          </label>
+          <label class="login-field">
+            <span>Senha</span>
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit" class="primary login-submit">Entrar</button>
+        </form>
+        <p class="login-hint muted">Created by <a href="mailto:alexandrecardias@unb.br">alexandrecardias@unb.br</a></p>
+  </section>
+</main>
+
+<footer class="site-footer"></footer>
+</body>
+</html>

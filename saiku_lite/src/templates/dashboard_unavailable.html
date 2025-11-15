@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dashboard indisponível</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20241017" />
+  </head>
+  <body class="dashboard-page">
+    <main class="dashboard-main">
+      <section class="card">
+        {% set cause = reason or 'assets' %}
+        {% if cause == 'backend' %}
+        <h1>Dashboard indisponível</h1>
+        <p class="muted">
+          O frontend foi encontrado, mas o backend moderno (Node.js) não está configurado neste ambiente.
+        </p>
+        <p>
+          Instale o Node.js, defina o diretório com o build em <code>DASHBOARD_NODE_DIR</code> e, se preferir usar
+          um backend remoto, configure <code>DASHBOARD_API_URL</code>.
+        </p>
+        <p>Após ajustar a configuração, recarregue a página.</p>
+        {% else %}
+        <h1>Dashboard visual ainda não foi compilado</h1>
+        <p class="muted">
+          Gere a interface moderna executando <code>npm install && npm run build</code> no diretório
+          <code>dashboard_ui</code>. Esse comando cria a pasta <code>src/static/dashboard</code> com os assets prontos.
+        </p>
+        <p>
+          Após a compilação, recarregue a página ou acesse
+          <a href="{{ url_for('dashboard_page') }}">/dashboard</a> novamente.
+        </p>
+        {% endif %}
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      Created by <a href="mailto:alexandrecardias@unb.br">alexandrecardias@unb.br</a>
+    </footer>
+  </body>
+</html>
