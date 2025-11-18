@@ -346,7 +346,6 @@ function applyUniverse(universe) {
         : [],
     filters: [...(layout.filtersZone || [])],
   };
-  sanitizeZonesForMeasures();
   state.excluded = [];
 
   aggregatorSelect.innerHTML = '';
@@ -1342,32 +1341,12 @@ function showError(message) {
   updateStatus(message, 'error');
 }
 
-function isMeasureField(field) {
-  const meta = state.schema[field] || {};
-  if (typeof meta.isMeasure === 'boolean') {
-    return meta.isMeasure;
-  }
-  return state.measures.includes(field);
-}
-
 function removeFromZones(field) {
   state.zones.rows = state.zones.rows.filter((item) => item !== field);
   state.zones.columns = state.zones.columns.filter((item) => item !== field);
   state.zones.measures = state.zones.measures.filter((item) => item !== field);
   state.zones.filters = state.zones.filters.filter((item) => item !== field);
   delete state.filters[field];
-}
-
-function sanitizeZonesForMeasures() {
-  const measureSet = new Set(state.measures);
-  ['rows', 'columns', 'filters'].forEach((zone) => {
-    state.zones[zone] = state.zones[zone].filter((field) => !measureSet.has(field));
-  });
-  Object.keys(state.filters || {}).forEach((field) => {
-    if (measureSet.has(field)) {
-      delete state.filters[field];
-    }
-  });
 }
 
 function excludeField(field) {
@@ -1410,11 +1389,6 @@ function handleDrop(event) {
 
   const zoneName = event.currentTarget.dataset.zone;
   const { field } = payload;
-  const isDimensionZone = zoneName === 'rows' || zoneName === 'columns' || zoneName === 'filters';
-  if (isDimensionZone && isMeasureField(field)) {
-    updateStatus(`Campo "${getFieldLabel(field)}" é numérico e só pode ser usado em Medidas.`, 'error');
-    return;
-  }
 
   state.excluded = state.excluded.filter((item) => item !== field);
   removeFromZones(field);
