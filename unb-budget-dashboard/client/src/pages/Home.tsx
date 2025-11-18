@@ -362,7 +362,7 @@ const monthStatusClass = (status: string) => {
                     <th className="px-2 py-2 text-center w-[10%]">Valor Contrato</th>
                     <th className="px-2 py-2 text-center w-[10%]">Média Mensal</th>
                     <th className="px-2 py-2 text-center w-[12%]">Total RAP+Empenho</th>
-                    <th className="px-2 py-2 text-left w-[34%]">Cronograma (Jan–Dez)</th>
+                    <th className="px-2 py-2 text-center w-[34%]">Cronograma (Jan–Dez)</th>
                   </tr>
                 </thead>
                 <tbody>
