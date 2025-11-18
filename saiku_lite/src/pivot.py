@@ -6,6 +6,7 @@ import copy
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import date, datetime
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
 
 import numpy as np
@@ -103,6 +104,8 @@ def _to_series_list(items: Iterable[Any]) -> List[List[Any]]:
 def _to_native(value: Any) -> Any:
     if pd.isna(value):
         return None
+    if isinstance(value, (pd.Timestamp, datetime, date)):
+        return value.isoformat()
     if hasattr(value, "item"):
         try:
             return value.item()
@@ -117,6 +120,26 @@ def _column_to_key(column: Any) -> str:
     else:
         flattened = [_to_native(column)]
     return json.dumps(flattened, ensure_ascii=False)
+
+
+def _sort_axis_safe(obj: Union[pd.DataFrame, pd.Series], axis: int) -> Union[pd.DataFrame, pd.Series]:
+    if not isinstance(obj, (pd.DataFrame, pd.Series)):
+        return obj
+    max_axis = obj.ndim - 1
+    if axis > max_axis:
+        axis = max_axis
+    try:
+        return obj.sort_index(axis=axis)
+    except TypeError:
+        labels = obj.axes[axis]
+        try:
+            labels_as_text = ["" if label is None else str(label) for label in labels]
+            order = np.argsort(labels_as_text, kind="mergesort")
+        except Exception:
+            return obj
+        if isinstance(obj, pd.Series) or axis == 0:
+            return obj.iloc[order]
+        return obj.iloc[:, order]
 
 
 def _ensure_measure(frame: pd.DataFrame, measure: str) -> None:
@@ -439,18 +462,19 @@ def build_pivot(
             columns=columns,
             aggfunc=aggfunc,
             dropna=False,
+            sort=False,
         )
     elif rows:
-        grouped = frame.groupby(rows, dropna=False)[pivot_values].agg(aggfunc)
+        grouped = frame.groupby(rows, dropna=False, sort=False)[pivot_values].agg(aggfunc)
     else:  # columns only
-        grouped = frame.groupby(columns, dropna=False)[pivot_values].agg(aggfunc)
+        grouped = frame.groupby(columns, dropna=False, sort=False)[pivot_values].agg(aggfunc)
         grouped = pd.DataFrame(grouped).transpose()
 
     if isinstance(grouped, pd.Series):
         grouped = grouped.to_frame(name=measures[0])
 
-    grouped = grouped.sort_index(axis=0)
-    grouped = grouped.sort_index(axis=1)
+    grouped = _sort_axis_safe(grouped, axis=0)
+    grouped = _sort_axis_safe(grouped, axis=1)
 
     return _create_pivot_result_from_grouped(
         dataset_id=dataset_id,

@@ -6,6 +6,7 @@ import io
 import json
 import os
 import shutil
+import threading
 import uuid
 from functools import wraps
 from pathlib import Path
@@ -400,6 +401,7 @@ class DatasetRegistry:
 
     def __init__(self) -> None:
         self._datasets: Dict[str, Dict[str, Any]] = {}
+        self._lock = threading.RLock()
 
     def create(self, filename: str, dataframe: pd.DataFrame) -> Dict[str, Any]:
         dataset_id = str(uuid.uuid4())
@@ -415,19 +417,23 @@ class DatasetRegistry:
             "row_count": int(dataframe.shape[0]),
             "schema": {col: str(dtype) for col, dtype in dataframe.dtypes.items()},
         }
-        self._datasets[dataset_id] = info
+        with self._lock:
+            self._datasets[dataset_id] = info
         return info
 
     def get(self, dataset_id: str) -> Dict[str, Any]:
-        if dataset_id not in self._datasets:
-            raise KeyError(dataset_id)
-        return self._datasets[dataset_id]
+        with self._lock:
+            if dataset_id not in self._datasets:
+                raise KeyError(dataset_id)
+            return self._datasets[dataset_id]
 
     def ids(self) -> List[str]:
-        return list(self._datasets.keys())
+        with self._lock:
+            return list(self._datasets.keys())
 
     def delete(self, dataset_id: str) -> None:
-        self._datasets.pop(dataset_id, None)
+        with self._lock:
+            self._datasets.pop(dataset_id, None)
 
 
 datasets = DatasetRegistry()

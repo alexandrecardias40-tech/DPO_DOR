@@ -316,7 +316,15 @@ application = create_site_application()
 
 def main() -> None:
     port = int(os.getenv("PORT", "8050"))
-    run_simple("0.0.0.0", port, application, use_reloader=True, use_debugger=False)
+    threaded = os.getenv("PORTAL_THREADED", "1").strip().lower() in {"1", "true", "yes", "on"}
+    run_simple(
+        "0.0.0.0",
+        port,
+        application,
+        use_reloader=True,
+        use_debugger=False,
+        threaded=threaded,
+    )
 
 
 if __name__ == "__main__":
