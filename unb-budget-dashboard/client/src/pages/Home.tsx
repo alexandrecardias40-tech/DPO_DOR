@@ -19,34 +19,22 @@ export default function Home() {
   const { data: allData } = trpc.budget.getAllData.useQuery();
 
   const [selectedPi, setSelectedPi] = useState<string>("");
-  const [selectedContract, setSelectedContract] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const hasActiveFilters = Boolean(selectedPi || selectedContract);
+  const hasActiveFilters = Boolean(selectedPi);
   const piOptions = useMemo(() => {
     if (!allData) return [];
-    const base = selectedContract
-      ? allData.filter((item: any) => (item["nº  Contrato"] || "") === selectedContract)
-      : allData;
-    const options = new Set(base.map((item: any) => item.PI_2025).filter(Boolean));
+    const options = new Set(allData.map((item: any) => item.PI_2025).filter(Boolean));
     return Array.from(options).sort();
-  }, [allData, selectedContract]);
-
-  const contractOptions = useMemo(() => {
-    if (!allData) return [];
-    const base = selectedPi ? allData.filter((item: any) => item.PI_2025 === selectedPi) : allData;
-    const options = new Set(base.map((item: any) => (item["nº  Contrato"] || "")).filter(Boolean));
-    return Array.from(options).sort();
-  }, [allData, selectedPi]);
+  }, [allData]);
 
   // Filter data based on active filters
   const filteredData = useMemo(() => {
     if (!allData) return [];
     return allData.filter((item: any) => {
       if (selectedPi && item.PI_2025 !== selectedPi) return false;
-      if (selectedContract && (item["nº  Contrato"] || "") !== selectedContract) return false;
       return true;
     });
-  }, [allData, selectedPi, selectedContract]);
+  }, [allData, selectedPi]);
 
   // Calculate totals from filtered data
   const totals = useMemo(() => {
@@ -251,65 +239,6 @@ const monthStatusClass = (status: string) => {
           </div>
         </div>
 
-        {/* Filtros Melhorados */}
-        <Card className="bg-white border border-slate-200 shadow-sm">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-bold">Filtros</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-900">Plano Interno (PI)</label>
-              <select
-                value={selectedPi}
-                onChange={(e) => setSelectedPi(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-              >
-                <option value="">Selecione um PI...</option>
-                {piOptions.map((pi) => (
-                  <option key={pi} value={pi}>
-                    {pi}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-900">Contrato</label>
-              <select
-                value={selectedContract}
-                onChange={(e) => setSelectedContract(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-              >
-                <option value="">Selecione um contrato...</option>
-                {contractOptions.map((contract) => (
-                  <option key={contract} value={contract}>
-                    {contract}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {hasActiveFilters && (
-              <div className="flex gap-2 pt-2 border-t border-slate-200">
-                <Button
-                  onClick={() => {
-                    setSelectedPi("");
-                    setSelectedContract("");
-                  }}
-                  variant="outline"
-                  size="sm"
-                >
-                  <X className="w-4 h-4 mr-1" />
-                  Limpar Seleção
-                </Button>
-                <span className="text-xs text-slate-600 self-center">
-                  {filteredData.length} contrato(s) filtrado(s)
-                </span>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
         {/* KPIs Grid - Estilo Detalhado */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <Card className="bg-white border-l-4 border-l-blue-500">
@@ -380,19 +309,49 @@ const monthStatusClass = (status: string) => {
           <Card className="bg-white border border-slate-200 shadow-sm">
             <CardHeader className="pb-2 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <CardTitle className="text-sm font-bold">Planejamento de Empenho por Contrato</CardTitle>
-              <div className="flex items-center gap-2 text-xs text-slate-600">
-                <span className="font-semibold">Status:</span>
-                <select
-                  value={statusFilter}
-                  onChange={(event) => setStatusFilter(event.target.value)}
-                  className="text-xs border border-slate-300 rounded-md bg-white px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {STATUS_FILTERS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+              <div className="flex flex-wrap items-end gap-3 text-xs text-slate-600">
+                <label className="flex flex-col gap-1 font-semibold text-slate-700">
+                  Plano Interno (PI)
+                  <select
+                    value={selectedPi}
+                    onChange={(e) => setSelectedPi(e.target.value)}
+                    className="w-48 text-xs border border-slate-300 rounded-md bg-white px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Selecione um PI...</option>
+                    {piOptions.map((pi) => (
+                      <option key={pi} value={pi}>
+                        {pi}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="flex flex-col gap-1 font-semibold text-slate-700">
+                  Status
+                  <select
+                    value={statusFilter}
+                    onChange={(event) => setStatusFilter(event.target.value)}
+                    className="w-48 text-xs border border-slate-300 rounded-md bg-white px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    {STATUS_FILTERS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                {hasActiveFilters && (
+                  <Button
+                    onClick={() => {
+                      setSelectedPi("");
+                    }}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs"
+                  >
+                    <X className="w-3 h-3 mr-1" />
+                    Limpar filtros
+                  </Button>
+                )}
               </div>
             </CardHeader>
             <CardContent className="px-0">
