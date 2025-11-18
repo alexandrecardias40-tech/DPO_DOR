@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -100,26 +100,17 @@ export default function Home() {
     }).format(value);
   };
 
-  const formatPiLines = useCallback((pi: string) => {
-    if (!pi) return ["—"];
-    const trimmed = pi.trim();
-    const match = trimmed.match(/^(.*?)\s*\((.*)\)\s*$/);
-    if (match) {
-      return [match[1].trim(), match[2].trim()];
-    }
-    if (trimmed.length > 18) {
-      const midpoint = Math.ceil(trimmed.length / 2);
-      return [trimmed.slice(0, midpoint).trim(), trimmed.slice(midpoint).trim()].filter(Boolean);
-    }
-    return [trimmed];
-  }, []);
-
   const contractTimeline = useMemo(() => {
     const today = new Date();
     const currentYear = today.getFullYear();
 
     return filteredData.map((item: any, index: number) => {
       const pi = item.PI_2025 || "—";
+      const descricao =
+        item["Descrição das despesas"] ||
+        item.descricao ||
+        item.Despesa ||
+        "—";
       const contrato = item["nº  Contrato"] || "—";
       const valorContrato = item.Total_Anual_Estimado || 0;
       const mediaMensal = item.Valor_Mensal_Medio_Contrato || 0;
@@ -215,6 +206,7 @@ export default function Home() {
       return {
         id: `timeline-${index}-${contrato}-${pi}`,
         pi,
+        descricao,
         contrato,
         valorContrato,
         mediaMensal,
@@ -232,11 +224,11 @@ export default function Home() {
     return contractTimeline.filter((item: any) => item.statusInfo?.tone === statusFilter);
   }, [contractTimeline, statusFilter]);
 
-  const monthStatusClass = (status: string) => {
-    if (status === "ok") return "bg-emerald-100 text-emerald-700";
-    if (status === "partial") return "bg-amber-100 text-amber-800";
-    return "bg-rose-100 text-rose-700";
-  };
+const monthStatusClass = (status: string) => {
+  if (status === "ok") return "bg-emerald-50 border-emerald-200 text-emerald-700";
+  if (status === "partial") return "bg-amber-50 border-amber-200 text-amber-800";
+  return "bg-rose-50 border-rose-200 text-rose-700";
+};
 
 
   const KPICard = ({ title, value }: { title: string; value: string }) => (
@@ -403,94 +395,97 @@ export default function Home() {
                 </select>
               </div>
             </CardHeader>
-            <CardContent className="overflow-x-auto">
-              <table className="w-full min-w-[1080px] border-collapse text-[11px] md:text-xs">
+            <CardContent className="px-0">
+              <table className="w-full table-fixed border-collapse text-[11px] md:text-xs">
                 <thead>
                   <tr className="text-[10px] uppercase tracking-wide text-slate-500">
-                    <th className="px-2 py-2 text-left">PI</th>
-                    <th className="px-2 py-2 text-left">Status</th>
-                    <th className="px-2 py-2 text-left">Valor Contrato</th>
-                    <th className="px-2 py-2 text-left">Média Mensal</th>
-                    <th className="px-2 py-2 text-left">Total RAP+Empenho</th>
-                    {MONTH_LABELS.map((label) => (
-                      <th key={label} className="px-1.5 py-2 text-center">
-                        {label}
-                      </th>
-                    ))}
+                    <th className="px-3 py-2 text-left w-[34%]">Descrição das Despesas</th>
+                    <th className="px-2 py-2 text-center w-[10%]">Valor Contrato</th>
+                    <th className="px-2 py-2 text-center w-[10%]">Média Mensal</th>
+                    <th className="px-2 py-2 text-center w-[12%]">Total RAP+Empenho</th>
+                    <th className="px-2 py-2 text-left w-[34%]">Cronograma (Jan–Dez)</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredTimeline.length === 0 ? (
                     <tr>
-                      <td colSpan={MONTH_LABELS.length + 5} className="px-4 py-4 text-center text-xs text-slate-500">
+                      <td colSpan={6} className="px-4 py-4 text-center text-xs text-slate-500">
                         Nenhum contrato com esse status.
                       </td>
                     </tr>
                   ) : (
                     filteredTimeline.map((item) => (
                       <tr key={item.id} className="border-b border-slate-100 text-slate-900 align-top">
-                        <td className="px-2 py-2">
-                          <div className="flex flex-col leading-tight text-[11px]">
-                            {formatPiLines(item.pi || "—").map((segment, segmentIndex) => (
-                            <span
-                              key={`${item.id}-pi-${segmentIndex}`}
-                              className={segmentIndex === 0 ? "font-semibold text-slate-900" : "text-[10px] text-slate-500"}
+                        <td className="px-3 py-3">
+                          <div className="flex flex-col gap-1 text-[11px] leading-snug">
+                            <span className="font-semibold text-slate-900 line-clamp-2">{item.descricao}</span>
+                            {item.contrato && <span className="text-[10px] text-slate-500">{item.contrato}</span>}
+                            <span className="text-[10px] text-slate-500">PI: {item.pi}</span>
+                            <div
+                              className={`inline-flex flex-col items-start gap-0.5 rounded-md px-2.5 py-2 border text-[10px] font-semibold ${item.statusInfo.badgeClass}`}
                             >
-                              {segment}
-                            </span>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="px-2 py-2">
-                        <div
-                          className={`inline-flex min-w-[120px] flex-col items-start gap-0.5 rounded-md px-3 py-2 border text-[11px] font-semibold ${item.statusInfo.badgeClass}`}
-                        >
-                          <span className="uppercase tracking-wide text-[10px]">{item.statusInfo.label}</span>
-                          {item.statusInfo.detail && (
-                            <span className="text-[10px] font-normal opacity-80">{item.statusInfo.detail}</span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-2 py-2 whitespace-nowrap">{formatCurrency(item.valorContrato)}</td>
-                      <td className="px-2 py-2 whitespace-nowrap">{formatCurrency(item.mediaMensal)}</td>
-                      <td className="px-2 py-2 whitespace-nowrap">{formatCurrency(item.totalRapEmpenho)}</td>
-                        {item.months.map((month) => {
-                          const isExpiry = month.highlight;
-                          return (
-                            <td
-                              key={`${item.id}-${month.label}`}
-                              className="px-1.5 py-1 text-center text-[10px] font-semibold whitespace-nowrap align-middle"
-                            >
-                              {isExpiry ? (
-                                <div
-                                  className={`w-full min-w-[70px] h-full flex flex-col items-center justify-center gap-0.5 rounded-md border shadow-lg ${
-                                    item.statusInfo.isExpired
-                                      ? "border-rose-500 bg-gradient-to-br from-rose-700 via-rose-600 to-rose-500 text-white shadow-rose-500/40"
-                                      : "border-amber-400 bg-gradient-to-br from-amber-200 via-amber-100 to-yellow-50 text-amber-900 shadow-amber-200/60"
-                                  }`}
-                                >
-                                  <span className="text-[8px] uppercase tracking-wide font-black opacity-80">
-                                    {item.expiry}
-                                  </span>
-                                  <span className="text-xs font-extrabold">
-                                    {month.amount > 0 ? formatCurrency(month.amount) : formatCurrency(item.mediaMensal)}
-                                  </span>
-                                  <span
-                                    className={`text-[8px] font-bold uppercase tracking-wide ${
-                                      item.statusInfo.isExpired ? "opacity-95" : "opacity-80"
+                              <span className="uppercase tracking-wide">{item.statusInfo.label}</span>
+                              {item.statusInfo.detail && (
+                                <span className="text-[9px] font-normal opacity-80">{item.statusInfo.detail}</span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-2 py-3 text-center whitespace-nowrap">
+                          <div className="text-xs font-semibold text-slate-400 mb-1">Valor Contrato</div>
+                          <div className="text-sm font-bold text-slate-900">{formatCurrency(item.valorContrato)}</div>
+                        </td>
+                        <td className="px-2 py-3 text-center whitespace-nowrap">
+                          <div className="text-xs font-semibold text-slate-400 mb-1">Média Mensal</div>
+                          <div className="text-sm font-bold text-slate-900">{formatCurrency(item.mediaMensal)}</div>
+                        </td>
+                        <td className="px-2 py-3 text-center whitespace-nowrap">
+                          <div className="text-xs font-semibold text-slate-400 mb-1">Total RAP+Empenho</div>
+                          <div className="text-sm font-bold text-slate-900">{formatCurrency(item.totalRapEmpenho)}</div>
+                        </td>
+                        <td className="px-3 py-3">
+                          <div className="grid grid-cols-6 gap-1">
+                            {item.months.map((month) => {
+                              const isExpiry = month.highlight;
+                              if (isExpiry) {
+                                return (
+                                  <div
+                                    key={`${item.id}-${month.label}`}
+                                    className={`col-span-2 flex flex-col items-center justify-center rounded-lg border px-2 py-2 text-center shadow ${
+                                      item.statusInfo.isExpired
+                                        ? "border-rose-500 bg-gradient-to-br from-rose-700 via-rose-600 to-rose-500 text-white shadow-rose-400/50"
+                                        : "border-amber-400 bg-gradient-to-br from-amber-200 via-amber-100 to-yellow-50 text-amber-900 shadow-amber-200/60"
                                     }`}
                                   >
-                                    {item.statusInfo.isExpired ? "Expirado" : "Vencendo"}
+                                    <span className="text-[8px] uppercase tracking-wide font-black opacity-80 leading-3">
+                                      {month.label}
+                                    </span>
+                                    <span className="text-[11px] font-extrabold leading-4">
+                                      {month.amount > 0 ? formatCurrency(month.amount) : formatCurrency(item.mediaMensal)}
+                                    </span>
+                                    <span className="text-[8px] font-bold uppercase tracking-wide opacity-90 leading-3">
+                                      {item.statusInfo.isExpired ? "Expirado" : "Vencendo"}
+                                    </span>
+                                  </div>
+                                );
+                              }
+
+                              return (
+                                <div
+                                  key={`${item.id}-${month.label}`}
+                                  className={`flex flex-col items-center justify-center rounded-md border px-1.5 py-2 text-[9px] font-semibold text-center ${monthStatusClass(
+                                    month.status
+                                  )}`}
+                                >
+                                  <span className="uppercase text-[7px] tracking-wide leading-3">{month.label}</span>
+                                  <span className="text-[9px] font-semibold leading-4">
+                                    {month.amount > 0 ? formatCurrencyCompact(month.amount) : "—"}
                                   </span>
                                 </div>
-                              ) : (
-                                <div className={`relative flex items-center justify-center rounded ${monthStatusClass(month.status)} px-1 py-1`}>
-                                  <span>{month.amount > 0 ? formatCurrencyCompact(month.amount) : "—"}</span>
-                                </div>
-                              )}
-                            </td>
-                          );
-                        })}
+                              );
+                            })}
+                          </div>
+                        </td>
                       </tr>
                     ))
                   )}
