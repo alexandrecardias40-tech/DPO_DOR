@@ -3,24 +3,8 @@ import { trpc } from "@/lib/trpc";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  type PieLabelRenderProps,
-} from "recharts";
 import { X } from "lucide-react";
 
-const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#06b6d4"];
 const MONTH_LABELS = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
 const STATUS_FILTERS = [
   { value: "all", label: "Todos" },
@@ -33,40 +17,11 @@ const STATUS_FILTERS = [
 export default function Home() {
   const { data: kpis } = trpc.budget.getKPIs.useQuery();
   const { data: allData } = trpc.budget.getAllData.useQuery();
-  const { data: monthlyData } = trpc.budget.getMonthlyConsumption.useQuery();
-  const { data: ugrData } = trpc.budget.getUGRAnalysis.useQuery();
-  const { data: expiringContracts } = trpc.budget.getExpiringContracts.useQuery();
-  const { data: expiredContracts } = trpc.budget.getExpiredContracts.useQuery();
 
   const [selectedPi, setSelectedPi] = useState<string>("");
   const [selectedContract, setSelectedContract] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const hasActiveFilters = Boolean(selectedPi || selectedContract);
-  const splitLabel = useCallback((label: string) => {
-    if (!label) return ["Sem nome"];
-    const words = label.split(" ");
-    const lines: string[] = [];
-    let current = "";
-
-    words.forEach((word) => {
-      const candidate = current ? `${current} ${word}` : word;
-      if (candidate.length <= 18) {
-        current = candidate;
-        return;
-      }
-      if (current) {
-        lines.push(current);
-      }
-      current = word;
-    });
-
-    if (current) {
-      lines.push(current);
-    }
-
-    return lines;
-  }, []);
-
   const piOptions = useMemo(() => {
     if (!allData) return [];
     const base = selectedContract
@@ -92,88 +47,6 @@ export default function Home() {
       return true;
     });
   }, [allData, selectedPi, selectedContract]);
-
-  // Filter UGR data based on selected UOrgs
-  const filteredUgrData = useMemo(() => {
-    if (!ugrData) return [];
-    if (!hasActiveFilters) return ugrData;
-    const allowed = new Set(filteredData.map((item: any) => item.UGR));
-    return ugrData.filter((item: any) => allowed.has(item.UGR));
-  }, [ugrData, filteredData, hasActiveFilters]);
-
-  const pieData = useMemo(() => {
-    const source = (filteredUgrData || []).filter((item: any) => (item.Total_Anual_Estimado || 0) > 0);
-    const total = source.reduce((sum: number, item: any) => sum + (item.Total_Anual_Estimado || 0), 0);
-    if (!total) {
-      return source.map((item: any) => ({
-        ...item,
-        displayName: item.UGR,
-        percentValue: 0,
-      }));
-    }
-    return source.map((item: any) => {
-      const value = item.Total_Anual_Estimado || 0;
-      const percent = (value / total) * 100;
-      return {
-        ...item,
-        displayName: item.UGR,
-        percentValue: percent,
-      };
-    });
-  }, [filteredUgrData]);
-  const renderPieLabel = useCallback((props: PieLabelRenderProps) => {
-    if (!pieData || pieData.length === 0) return null;
-    const { cx = 0, cy = 0, midAngle = 0, outerRadius = 0, index = 0 } = props;
-    const entry = pieData[index];
-    if (!entry) return null;
-
-    const RAD = Math.PI / 180;
-    const labelRadius = outerRadius + 42;
-    const x = cx + labelRadius * Math.cos(-midAngle * RAD);
-    const y = cy + labelRadius * Math.sin(-midAngle * RAD);
-    const textAnchor = x > cx ? "start" : "end";
-
-    const labelLines = splitLabel(entry.displayName || entry.UGR || `UGR ${index + 1}`);
-    const percentValue = entry.percentValue ?? 0;
-    const formattedPercent = `${percentValue.toFixed(percentValue >= 10 ? 0 : 1)}%`;
-
-    return (
-      <text
-        x={x}
-        y={y}
-        textAnchor={textAnchor}
-        dominantBaseline="central"
-        fill="#334155"
-        fontSize="9px"
-        fontWeight={500}
-      >
-        {labelLines.map((line, lineIndex) => (
-          <tspan key={`label-line-${lineIndex}`} x={x} dy={lineIndex === 0 ? "0" : "1.1em"}>
-            {line}
-          </tspan>
-        ))}
-        <tspan x={x} dy="1.1em" fill="#0f172a" fontSize="8px" fontWeight={600}>
-          {formattedPercent}
-        </tspan>
-      </text>
-    );
-  }, [pieData, splitLabel]);
-
-  // Filter monthly data based on selected UOrgs
-  const filteredMonthlyData = useMemo(() => {
-    if (!monthlyData) return [];
-    if (!hasActiveFilters) return monthlyData;
-    return monthlyData.map((month: any) => {
-      const monthKey = `${month.Mês} 00:00:00`;
-      const filteredConsumption = filteredData.reduce((sum: number, item: any) => {
-        return sum + (item[monthKey] || 0);
-      }, 0);
-      return {
-        ...month,
-        Consumo_Mensal: filteredConsumption,
-      };
-    });
-  }, [monthlyData, filteredData, hasActiveFilters]);
 
   // Calculate totals from filtered data
   const totals = useMemo(() => {
@@ -627,132 +500,6 @@ export default function Home() {
           </Card>
         )}
 
-        {/* Charts Stack */}
-        <div className="space-y-6">
-          {/* Consumo Mensal */}
-          <Card className="border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-sm font-bold">Consumo Mensal 2025</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <LineChart data={filteredMonthlyData || []}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis
-                    dataKey="Mês"
-                    tick={{ fontSize: 12 }}
-                    angle={-45}
-                    textAnchor="end"
-                    height={70}
-                  />
-                  <YAxis 
-                    tick={{ fontSize: 12 }}
-                    width={100}
-                    tickFormatter={(value) => formatCurrency(value)}
-                  />
-                  <Tooltip
-                    formatter={(value: any) => formatCurrency(value)}
-                    contentStyle={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="Consumo_Mensal"
-                    stroke="#3b82f6"
-                    strokeWidth={2}
-                    dot={{ fill: "#3b82f6", r: 4 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          {/* Distribuição por UGR - Pizza Melhorada */}
-          <Card className="border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-sm font-bold">Distribuição por UGR</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={500}>
-                <PieChart>
-                  <Pie
-                    data={pieData}
-                    dataKey="Total_Anual_Estimado"
-                    nameKey="displayName"
-                    cx="50%"
-                    cy="52%"
-                    outerRadius={158}
-                    innerRadius={88}
-                    paddingAngle={2}
-                    label={renderPieLabel}
-                    labelLine={{
-                      strokeWidth: 0.6,
-                      stroke: '#94a3b8',
-                      type: 'linear',
-                      length: 20,
-                      length2: 8,
-                    }}
-                    onClick={(entry: any) => window.location.href = `/ugr-details?ugr=${encodeURIComponent(entry.UGR)}`}
-                  >
-                    {(pieData || []).map((entry: any, index: number) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length] as string}
-                        style={{ cursor: 'pointer' }}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value: any) => formatCurrency(value)}
-                    labelFormatter={(label: string) => `UGR: ${label}`}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-          
-        </div>
-
-        {/* Taxa de Execução por UGR */}
-        <Card className="border-0 shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-sm font-bold">Taxa de Execução por UGR</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={filteredUgrData || []}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis
-                  dataKey="UGR"
-                  tick={{ fontSize: 12 }}
-                  angle={-45}
-                  textAnchor="end"
-                  height={100}
-                  interval={0}
-                />
-                <YAxis
-                  tick={{ fontSize: 12 }}
-                  label={{ 
-                    value: "Percentual de Execução (%)", 
-                    angle: -90, 
-                    position: "insideLeft",
-                    offset: 10,
-                    style: { fontSize: '14px' }
-                  }}
-                />
-                <Tooltip 
-                  formatter={(value: any) => `${value.toFixed(2)}%`}
-                  contentStyle={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }}
-                />
-                <Bar
-                  dataKey="Percentual_Execucao"
-                  fill="#10b981"
-                  radius={[8, 8, 0, 0]}
-                  onClick={(entry: any) => window.location.href = `/ugr-details?ugr=${encodeURIComponent(entry.UGR)}`}
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
       </div>
     </DashboardLayout>
   );
