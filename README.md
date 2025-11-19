@@ -56,6 +56,26 @@ O dashboard em React usa o arquivo `unb-budget-dashboard/dashboard_data.json`. V
 
 Também é possível gerar o arquivo manualmente e sobrescrever `dashboard_data.json`.
 
+#### Atualização automática via Google Drive
+
+Se preferir manter a planilha "Contratos" em um Google Drive compartilhado:
+
+1. Crie um link compartilhável (qualquer pessoa com o link pode visualizar) e anote o **file ID** presente na URL.
+2. Defina as variáveis de ambiente no servidor:
+   - `CPOR_DRIVE_FILE_ID`: ID do arquivo no Drive.
+   - `CPOR_DRIVE_BOOT_SYNC` (opcional, padrão `1`): coloque `0`/`false` para desativar a sincronização automática na inicialização.
+   - `CPOR_DRIVE_SYNC_TOKEN` (opcional): se definido, o endpoint manual exigirá o header `X-Portal-Token` com esse valor.
+3. Reinicie o servidor. Na subida o portal baixa o arquivo do Drive, processa e publica o `dashboard_data.json` atualizado.
+
+Você também pode acionar o processo a qualquer momento com:
+
+```bash
+curl -X POST "https://seu-servidor/api/dashboard/refresh-drive" \\
+  -H "X-Portal-Token: $CPOR_DRIVE_SYNC_TOKEN"
+```
+
+Isso dispara o download mais recente e reaproveita o mesmo pipeline do upload manual.
+
 ## 4. Executar o site unificado
 
 ```bash

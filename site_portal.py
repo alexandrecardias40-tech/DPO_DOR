@@ -5,9 +5,11 @@ from pathlib import Path
 import sys
 from typing import Dict, List, Optional, Tuple
 
+import hmac
 import json
 from datetime import datetime
 
+import requests
 from flask import Flask, abort, jsonify, render_template, request, send_from_directory
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
@@ -124,6 +126,40 @@ def _store_cpor_upload(filename: str, data: bytes) -> None:
     target.write_bytes(data)
 
 
+def _ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> Dict[str, int]:
+    payload = process_dashboard_upload(file_bytes)
+    save_dashboard_data(payload)
+    _store_cpor_upload(source_name, file_bytes)
+    return {
+        "linhas_processadas": len(payload.get("raw_data_for_filters", [])),
+        "ugr_mapeadas": len(payload.get("ugr_analysis", [])),
+    }
+
+
+def _drive_confirm_token(response: requests.Response) -> Optional[str]:
+    for key, value in response.cookies.items():
+        if key.startswith("download_warning"):
+            return value
+    return None
+
+
+def _download_drive_file(file_id: str, *, timeout: int = 60) -> bytes:
+    if not file_id:
+        raise ValueError("ID do arquivo do Google Drive não foi informado.")
+    session = requests.Session()
+    base_url = "https://drive.google.com/uc?export=download"
+    params = {"id": file_id}
+    response = session.get(base_url, params=params, timeout=timeout)
+    token = _drive_confirm_token(response)
+    if token:
+        params["confirm"] = token
+        response = session.get(base_url, params=params, timeout=timeout)
+    response.raise_for_status()
+    if not response.content:
+        raise RuntimeError("Download do Google Drive retornou um arquivo vazio.")
+    return response.content
+
+
 def _create_portal_app() -> Flask:
     template_dir = BASE_DIR / "site_templates"
     portal = Flask(__name__, static_folder=None, template_folder=str(template_dir))
@@ -167,13 +203,7 @@ def _create_portal_app() -> Flask:
             return jsonify({"success": False, "message": "Selecione um arquivo Excel para enviar."}), 400
         try:
             file_bytes = file.read()
-            payload = process_dashboard_upload(file_bytes)
-            save_dashboard_data(payload)
-            _store_cpor_upload(file.filename, file_bytes)
-            summary = {
-                "linhas_processadas": len(payload.get("raw_data_for_filters", [])),
-                "ugr_mapeadas": len(payload.get("ugr_analysis", [])),
-            }
+            summary = _ingest_dashboard_spreadsheet(file_bytes, file.filename)
             return jsonify(
                 {
                     "success": True,
@@ -183,6 +213,43 @@ def _create_portal_app() -> Flask:
             )
         except Exception as exc:
             return jsonify({"success": False, "message": str(exc)}), 400
+
+    def _refresh_dashboard_from_drive() -> Dict[str, int]:
+        file_id = os.environ.get("CPOR_DRIVE_FILE_ID")
+        if not file_id:
+            raise RuntimeError("Variável de ambiente CPOR_DRIVE_FILE_ID não foi configurada.")
+        file_bytes = _download_drive_file(file_id)
+        return _ingest_dashboard_spreadsheet(file_bytes, "drive_contracts.xlsx")
+
+    @portal.route("/api/dashboard/refresh-drive", methods=["POST"])
+    def dashboard_refresh_drive():
+        if not os.environ.get("CPOR_DRIVE_FILE_ID"):
+            return jsonify({"success": False, "message": "CPOR_DRIVE_FILE_ID não está configurada."}), 400
+
+        expected_token = os.environ.get("CPOR_DRIVE_SYNC_TOKEN")
+        if expected_token:
+            provided = request.headers.get("X-Portal-Token") or request.args.get("token")
+            if not provided or not hmac.compare_digest(provided, expected_token):
+                return jsonify({"success": False, "message": "Token inválido."}), 403
+
+        try:
+            summary = _refresh_dashboard_from_drive()
+            return jsonify({"success": True, "summary": summary})
+        except Exception as exc:
+            portal.logger.exception("Falha ao sincronizar dados do Google Drive")
+            return jsonify({"success": False, "message": str(exc)}), 500
+
+    drive_boot_flag = os.environ.get("CPOR_DRIVE_BOOT_SYNC", "1").strip().lower()
+    if os.environ.get("CPOR_DRIVE_FILE_ID") and drive_boot_flag not in {"0", "false", "no", "off"}:
+        try:
+            summary = _refresh_dashboard_from_drive()
+            portal.logger.info(
+                "Planilha CPOR atualizada automaticamente do Google Drive (linhas=%s, ugr=%s)",
+                summary.get("linhas_processadas"),
+                summary.get("ugr_mapeadas"),
+            )
+        except Exception:
+            portal.logger.exception("Falha ao atualizar planilha do Google Drive durante o boot")
 
     def _resolve_trpc_operation(operation: str, dataset: Dict[str, object]):
         if operation == "auth.me":
