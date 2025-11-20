@@ -52,9 +52,9 @@ O dashboard em React usa o arquivo `unb-budget-dashboard/dashboard_data.json`. V
 
 1. Abra `http://localhost:8050/dashboard/data-upload`.
 2. Envie uma planilha `.xlsx/.xls` com as colunas de contratos (Despesa, UGR, PI, vigência, valores mensais, etc.).
-3. O servidor converte automaticamente para o JSON esperado (KPIs, séries mensais, análise por UGR, contratos vencidos/vencendo).
+3. O servidor cruza esses dados com `Variáveis Fixas.xlsx` (mantida no repositório) e gera o `dashboard_data.json` que alimenta o React.
 
-Também é possível gerar o arquivo manualmente e sobrescrever `dashboard_data.json`.
+> Importante: mantenha `Variáveis Fixas.xlsx` atualizado no repositório (ou no mesmo diretório do portal) para que o cruzamento preencha corretamente os campos estáticos.
 
 #### Atualização automática via Google Drive
 

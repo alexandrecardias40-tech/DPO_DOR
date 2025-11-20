@@ -12,6 +12,11 @@ from difflib import get_close_matches
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "unb-budget-dashboard" / "dashboard_data.json"
+FIXED_DATA_CANDIDATES = (
+    "Varia01veis Fixas.xlsx",
+    "Variáveis Fixas.xlsx",
+    "Variaveis Fixas.xlsx",
+)
 MONTH_COLUMN_REGEX = re.compile(r"^\s*(20\d{2})[-_/]?(0[1-9]|1[0-2])")
 MONTH_NAME_REGEX = re.compile(r"(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)", re.IGNORECASE)
 MONTH_NAME_TO_NUM = {
@@ -97,6 +102,37 @@ DATE_FIELDS = {"Data_Vigencia_Fim"}
 TEXT_FIELDS = set(FIELD_ALIASES.keys()) - NUMERIC_FIELDS - DATE_FIELDS
 RESERVED_SANITIZED = {alias for seq in FIELD_ALIASES.values() for alias in seq}
 
+FIXED_COLUMN_MAP = {
+    "Descrição das despesas": "Despesa",
+    "UGR": "UGR",
+    "PI 2025": "PI_2025",
+    "CNPJ": "CNPJ",
+    "Processo": "Processo",
+    "Vigência": "Data_Vigencia_Fim",
+    "Status do Contrato": "Status_Contrato",
+    "Situação da prorrogação": "Situacao_Prorrogacao",
+    "nº  Contrato": "nº  Contrato",
+    "Valor Contrato Média mensal": "Valor_Mensal_Medio_Contrato",
+    "Valor Cont Continuado Mensal ": "Valor_Mensal_Continuado",
+    "Total estimado Anual": "Total_Anual_Estimado",
+    "Saldo Empenhos 2025": "Saldo_Empenhos_2025",
+    "Saldo\nde Empenhos RAP": "Saldo_Empenhos_RAP",
+    "Total RAP + Empenho": "Total_Empenho_RAP",
+    "Total necessário": "Total_Necessario",
+}
+
+FIXED_NUMERIC_FIELDS = {
+    "Valor_Mensal_Medio_Contrato",
+    "Valor_Mensal_Continuado",
+    "Total_Anual_Estimado",
+    "Saldo_Empenhos_2025",
+    "Saldo_Empenhos_RAP",
+    "Total_Empenho_RAP",
+    "Executado_Total",
+    "Total_Necessario",
+}
+
+
 
 def _default_payload() -> Dict[str, object]:
     return {
@@ -129,6 +165,100 @@ def load_dashboard_data() -> Dict[str, object]:
 
 def save_dashboard_data(payload: Dict[str, object]) -> None:
     DATA_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _resolve_fixed_path() -> Optional[Path]:
+    for name in FIXED_DATA_CANDIDATES:
+        path = BASE_DIR / name
+        if path.exists():
+            return path
+    for candidate in BASE_DIR.glob("Varia*Fixas*.xlsx"):
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _load_fixed_dataframe() -> Optional[pd.DataFrame]:
+    path = _resolve_fixed_path()
+    if path is None:
+        return None
+    try:
+        df = pd.read_excel(path, header=2)
+    except Exception:
+        return None
+    if df.empty:
+        return None
+    rename: Dict[str, str] = {}
+    for source, target in FIXED_COLUMN_MAP.items():
+        rename[source] = target
+    # handle datetime columns (months)
+    for column in list(df.columns):
+        if isinstance(column, (datetime, pd.Timestamp)):
+            label = column.strftime("%Y-%m-%d")
+            rename[column] = label
+    df = df.rename(columns=rename)
+    df = df.dropna(how="all")
+    return df
+
+
+class FixedLookup:
+    def __init__(self, dataframe: Optional[pd.DataFrame]):
+        self.by_pi: Dict[str, List[Dict[str, object]]] = {}
+        self.by_combo: Dict[Tuple[str, str], Dict[str, object]] = {}
+        self.by_contract: Dict[str, Dict[str, object]] = {}
+        if dataframe is not None:
+            self._build(dataframe)
+
+    def has_data(self) -> bool:
+        return bool(self.by_pi or self.by_contract)
+
+    def _build(self, df: pd.DataFrame) -> None:
+        for _, row in df.iterrows():
+            record: Dict[str, object] = {}
+            for target in FIXED_COLUMN_MAP.values():
+                if target in row and pd.notna(row[target]):
+                    record[target] = row[target]
+            if not record:
+                continue
+            pi_key = _clean_key(record.get("PI_2025"))
+            desc_key = _clean_key(record.get("Despesa"))
+            contract_key = _clean_key(record.get("nº  Contrato"))
+            if pi_key:
+                self.by_pi.setdefault(pi_key, []).append(record)
+                if desc_key:
+                    self.by_combo[(pi_key, desc_key)] = record
+            if contract_key:
+                self.by_contract[contract_key] = record
+
+    def match(self, row: Dict[str, object]) -> Optional[Dict[str, object]]:
+        pi_key = _clean_key(row.get("PI_2025"))
+        desc_key = _clean_key(row.get("Despesa"))
+        contract_key = _clean_key(row.get("nº  Contrato"))
+        if contract_key and contract_key in self.by_contract:
+            return self.by_contract[contract_key]
+        if pi_key:
+            candidates = self.by_pi.get(pi_key)
+            if not candidates:
+                return None
+            if len(candidates) == 1:
+                return candidates[0]
+            if desc_key and (pi_key, desc_key) in self.by_combo:
+                return self.by_combo[(pi_key, desc_key)]
+            return candidates[0]
+        return None
+
+
+def _clean_key(value: object) -> str:
+    if value is None:
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    # remove observações entre parênteses ou após quebras de linha
+    text = text.split("\n")[0]
+    if "(" in text and ")" in text:
+        text = text.split("(", 1)[0]
+    return sanitize(text)
 
 
 def _format_column_name(value) -> str:
@@ -513,6 +643,23 @@ def _split_contracts(rows: Sequence[Dict[str, object]]) -> Tuple[List[Dict[str, 
     return expiring, expired
 
 
+def _merge_fixed_row(row: Dict[str, object], lookup: FixedLookup) -> Dict[str, object]:
+    fixed = lookup.match(row)
+    if not fixed:
+        return row
+    merged = row.copy()
+    for field, value in fixed.items():
+        if field in {"Despesa", "PI_2025"}:
+            continue
+        if value is None or (isinstance(value, float) and pd.isna(value)):
+            continue
+        if field in FIXED_NUMERIC_FIELDS:
+            merged[field] = _normalize_number(value)
+        else:
+            merged[field] = value
+    return merged
+
+
 def process_dashboard_upload(file_bytes: bytes) -> Dict[str, object]:
     if not file_bytes:
         raise ValueError("Arquivo vazio.")
@@ -520,6 +667,9 @@ def process_dashboard_upload(file_bytes: bytes) -> Dict[str, object]:
     if df.empty:
         raise ValueError("Nenhuma linha encontrada na planilha.")
     raw_rows, month_columns = _extract_rows(df)
+    fixed_lookup = FixedLookup(_load_fixed_dataframe())
+    if fixed_lookup.has_data():
+        raw_rows = [_merge_fixed_row(row, fixed_lookup) for row in raw_rows]
     filtered = [
         _normalize_row(row, month_columns)
         for row in raw_rows
