@@ -5,7 +5,7 @@ import re
 from datetime import date, datetime
 from io import BytesIO
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import pandas as pd
 from difflib import get_close_matches
@@ -176,8 +176,19 @@ def load_dashboard_data() -> Dict[str, object]:
         return _default_payload()
 
 
+def _json_serializer(value: Any) -> Any:
+    if isinstance(value, (datetime, date)):
+        return value.isoformat()
+    if isinstance(value, pd.Timestamp):
+        return value.isoformat()
+    raise TypeError(f"Object of type {value.__class__.__name__} is not JSON serializable")
+
+
 def save_dashboard_data(payload: Dict[str, object]) -> None:
-    DATA_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    DATA_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, default=_json_serializer),
+        encoding="utf-8",
+    )
 
 
 def _resolve_fixed_path() -> Optional[Path]:
