@@ -129,6 +129,12 @@ FIXED_NUMERIC_FIELDS = {
     "Total_Necessario",
 }
 
+FIELDS_ONLY_FROM_DYNAMIC = {
+    "Saldo_Empenhos_2025",
+    "Saldo_Empenhos_RAP",
+    "Total_Empenho_RAP",
+}
+
 
 
 def _default_payload() -> Dict[str, object]:
@@ -647,6 +653,8 @@ def _merge_fixed_row(row: Dict[str, object], lookup: FixedLookup) -> Dict[str, o
     merged = row.copy()
     for field, value in fixed.items():
         if field in {"Despesa", "PI_2025"}:
+            continue
+        if field in FIELDS_ONLY_FROM_DYNAMIC:
             continue
         if value is None or (isinstance(value, float) and pd.isna(value)):
             continue
