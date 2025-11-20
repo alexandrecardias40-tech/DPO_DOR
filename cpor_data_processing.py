@@ -125,9 +125,6 @@ FIXED_NUMERIC_FIELDS = {
     "Valor_Mensal_Medio_Contrato",
     "Valor_Mensal_Continuado",
     "Total_Anual_Estimado",
-    "Saldo_Empenhos_2025",
-    "Saldo_Empenhos_RAP",
-    "Total_Empenho_RAP",
     "Executado_Total",
     "Total_Necessario",
 }
