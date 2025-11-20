@@ -525,8 +525,11 @@ def _normalize_row(row: Dict[str, object], month_keys: Sequence[str]) -> Dict[st
     empenho_rap = _normalize_number(row.get("Total_Empenho_RAP"))
     saldo25 = _normalize_number(row.get("Saldo_Empenhos_2025"))
     saldo_rap = _normalize_number(row.get("Saldo_Empenhos_RAP"))
+    total_rap = saldo25 + saldo_rap
+    if total_rap:
+        normalized["Total_Empenho_RAP"] = total_rap
     meses = _sum_month_values(row, month_keys)
-    comprometido = empenho_rap if empenho_rap else saldo25 + saldo_rap
+    comprometido = empenho_rap if empenho_rap else total_rap
     executado = executado_informado or meses or comprometido
     taxa_execucao = (executado / total_estimado * 100) if total_estimado else 0.0
     normalized["Total_Empenho_RAP"] = comprometido
