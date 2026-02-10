@@ -116,6 +116,15 @@ def _create_portal_app() -> Flask:
     @portal.route("/")
     def index():
         return render_template("index.html", entries=_portal_entries())
+    
+    # Health check endpoint for keep-alive
+    @portal.route("/health")
+    def health_check():
+        return jsonify({
+            "status": "healthy",
+            "timestamp": datetime.utcnow().isoformat(),
+            "service": "DPO Dashboard UnB"
+        }), 200
 
     # --- Serving React App (CPOR) ---
     @portal.route("/dashboard/")
@@ -280,6 +289,13 @@ def create_application() -> DispatcherMiddleware:
 application = create_application()
 
 def main():
+    # Iniciar keep-alive para evitar que o serviço durma no Render (plano free)
+    try:
+        from keep_alive import start_keep_alive
+        start_keep_alive()
+    except Exception as e:
+        print(f"⚠️ Keep-alive não iniciado: {e}")
+    
     # Using 8050 as requested to replicate, but if 8050 is busy we might need to kill it first in the terminal.
     port = int(os.getenv("PORT", "8050"))
     run_simple(
