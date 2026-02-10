@@ -245,52 +245,72 @@ VERSIONS_UI_TEMPLATE = """
         /* Mobile Responsive */
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 15px;
             }
             .container {
-                padding: 20px 15px;
-                border-radius: 8px;
+                padding: 25px 20px;
+                border-radius: 12px;
             }
             h1 {
-                font-size: 22px;
+                font-size: 24px;
+                margin-bottom: 12px;
             }
             .subtitle {
-                font-size: 13px;
+                font-size: 14px;
+                margin-bottom: 25px;
             }
             .version-card {
-                padding: 15px;
+                padding: 20px;
+                margin-bottom: 20px;
             }
             .version-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 5px;
+                gap: 8px;
+                margin-bottom: 15px;
             }
             .version-id {
-                font-size: 14px;
+                font-size: 15px;
+                word-break: break-word;
             }
             .version-timestamp {
-                font-size: 11px;
+                font-size: 12px;
+                margin-top: 4px;
             }
             .version-description {
-                font-size: 13px;
+                font-size: 14px;
+                line-height: 1.6;
+                margin: 12px 0;
             }
             .version-actions {
                 flex-direction: column;
-                gap: 8px;
+                gap: 12px;
+                margin-top: 18px;
             }
             button {
                 width: 100%;
-                padding: 12px 16px;
-                font-size: 14px;
+                padding: 14px 20px;
+                font-size: 15px;
+                border-radius: 8px;
+            }
+            .back-link {
+                font-size: 15px;
+                margin-bottom: 25px;
             }
         }
         
         @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
             h1 {
-                font-size: 20px;
+                font-size: 22px;
             }
             .container {
-                padding: 15px 10px;
+                padding: 20px 16px;
+            }
+            .version-card {
+                padding: 18px 16px;
             }
         }
     </style>
