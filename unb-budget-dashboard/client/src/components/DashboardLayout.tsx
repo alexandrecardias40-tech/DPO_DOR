@@ -90,7 +90,7 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
   );
 
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(sections.map((section) => [section.key, true]))
+    Object.fromEntries(sections.map((section) => [section.key, false]))
   );
 
   useEffect(() => {

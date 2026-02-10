@@ -369,7 +369,7 @@
       "CNPJ": "12859652000165",
       "Processo": "23106.056117/2023-60",
       "Data_Vigencia_Fim": "2026-04-11",
-      "Status_Contrato": "NO PRAZO",
+      "Status_Contrato": "EM BREVE",
       "Situacao_Prorrogacao": "",
       "nº  Contrato": "616/2024",
       "Valor_Mensal_Medio_Contrato": 0.0,
@@ -686,7 +686,7 @@
       "CNPJ": "09169349000126",
       "Processo": "23106.000890/2021-18",
       "Data_Vigencia_Fim": "2026-02-09",
-      "Status_Contrato": "EM BREVE",
+      "Status_Contrato": "EXPIRADO",
       "Situacao_Prorrogacao": "em fase de renovação",
       "nº  Contrato": "604/2022",
       "Valor_Mensal_Medio_Contrato": 90000.0,
@@ -1773,7 +1773,7 @@
       "CNPJ": "09169349000126",
       "Processo": "23106.000890/2021-18",
       "Data_Vigencia_Fim": "2026-02-09",
-      "Status_Contrato": "EM BREVE",
+      "Status_Contrato": "EXPIRADO",
       "Situacao_Prorrogacao": "em fase de renovação",
       "nº  Contrato": "604/2022",
       "Valor_Mensal_Medio_Contrato": 90000.0,
@@ -1808,7 +1808,7 @@
       "CNPJ": "12859652000165",
       "Processo": "23106.056117/2023-60",
       "Data_Vigencia_Fim": "2026-04-11",
-      "Status_Contrato": "NO PRAZO",
+      "Status_Contrato": "EM BREVE",
       "Situacao_Prorrogacao": "",
       "nº  Contrato": "616/2024",
       "Valor_Mensal_Medio_Contrato": 0.0,
@@ -4008,6 +4008,6 @@
     }
   ],
   "metadata": {
-    "updated_at": "2026-02-10T14:04:41.892746Z"
+    "updated_at": "2026-02-10T19:18:14.132266Z"
   }
 }

@@ -568,6 +568,35 @@ def _ensure_cpor_dataset_loaded() -> Optional[str]:
             df = df.drop(columns=columns_to_drop)
             app.logger.info(f"Removidas {len(columns_to_drop)} colunas de meses do dataset Saiku")
         
+        # 5. Manter apenas as 4 medidas solicitadas pelo usuário
+        # Medidas permitidas (com nomes aproximados):
+        allowed_measures = {
+            "Saldo Disponível NC": ["Saldo_Disponivel_NC", "Saldo Disponível NC", "Saldo Disponivel NC"],
+            "Saldo Empenhos 2026": ["Saldo_Empenhos_2025", "Saldo Empenhos 2026", "Saldo_Empenhos_2026"],
+            "Saldo de Empenhos RAP": ["Saldo_Empenhos_RAP", "Saldo de Empenhos RAP", "Saldo Empenhos RAP"],
+            "Total RAP+Empenho": ["Total_Empenho_RAP", "Total RAP+Empenho", "Total Empenho RAP"]
+        }
+        
+        # Identificar colunas numéricas (medidas) vs dimensões (texto)
+        numeric_cols = df.select_dtypes(include=['number']).columns.tolist()
+        text_cols = df.select_dtypes(exclude=['number']).columns.tolist()
+        
+        # Manter apenas as medidas permitidas
+        measures_to_keep = []
+        for measure_name, variations in allowed_measures.items():
+            for col in numeric_cols:
+                if col in variations or any(var.lower() == col.lower() for var in variations):
+                    measures_to_keep.append(col)
+                    break
+        
+        # Remover medidas não permitidas
+        measures_to_remove = [col for col in numeric_cols if col not in measures_to_keep]
+        if measures_to_remove:
+            df = df.drop(columns=measures_to_remove)
+            app.logger.info(f"Removidas {len(measures_to_remove)} medidas não solicitadas: {measures_to_remove}")
+        
+        app.logger.info(f"Medidas mantidas no BI: {measures_to_keep}")
+        
         # Cria o dataset no registro
         dataset = datasets.create(dataset_name, df)
         app.logger.info("Base do dashboard carregada automaticamente como dataset %s", dataset["id"])
