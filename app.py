@@ -59,13 +59,6 @@ def _portal_entries() -> List[Dict[str, str]]:
             "href": "/dashboard/",
             "accent": "#f97316",
         },
-        {
-            "slug": "BI",
-            "title": "Business Intelligence",
-            "description": "Monte análises estilo BI com tabelas dinâmicas rápidas.",
-            "href": "/saiku/",
-            "accent": "#a855f7",
-        },
     ]
 
 def _portal_user_profile() -> Dict[str, str]:

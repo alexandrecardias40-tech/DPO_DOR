@@ -35,6 +35,7 @@ import requests
 from urllib.parse import urljoin
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
+import cpor_data_processing
 
 from .data_loader import DataLoaderError, load_dataframe
 from .pivot import (
@@ -503,6 +504,10 @@ def _normalize_measures(value: Any) -> List[str]:
 @reports_access_required
 def index():
     user = _get_current_user()
+    
+    # Tenta carregar automaticamente a base do dashboard se existir
+    initial_dataset_id = _ensure_cpor_dataset_loaded()
+    
     return render_template(
         "index.html",
         username=session.get("username"),
@@ -510,7 +515,67 @@ def index():
         active_tab="reports",
         can_access_reports=_user_can_access_reports(user),
         can_access_dashboard=_user_can_access_dashboard(user),
+        initial_dataset_id=initial_dataset_id,
     )
+
+
+def _ensure_cpor_dataset_loaded() -> Optional[str]:
+    """
+    Verifica se a base 'Base Completa (Dashboard)' já está carregada no DatasetRegistry.
+    Se não, carrega a partir do cpor_data_processing e registra.
+    Retorna o ID do dataset.
+    """
+    dataset_name = "Base Completa (Dashboard)"
+    
+    # Verifica se já existe
+    with datasets._lock:
+        for ds_id, info in datasets._datasets.items():
+            if info["name"] == dataset_name:
+                return ds_id
+
+    # Tenta carregar do arquivo do dashboard
+    try:
+        data = cpor_data_processing.load_dashboard_data()
+        rows = data.get("raw_data_for_filters")
+        if not rows:
+            return None
+            
+        # Converte para DataFrame
+        df = pd.DataFrame(rows)
+        if df.empty:
+            return None
+            
+        # --- Transformações Específicas para o Saiku (Solicitação do Usuário) ---
+        # 1. Renomear Despesa para "Nome da Despesa"
+        if "Despesa" in df.columns:
+            df = df.rename(columns={"Despesa": "Nome da Despesa"})
+            
+        # 2. Renomear Saldo Empenhos 2025 para "Saldo Empenhos 2026"
+        # 2. Renomear Saldo Empenhos 2025 para "Saldo Empenhos 2026"
+        if "Saldo_Empenhos_2025" in df.columns:
+            df = df.rename(columns={"Saldo_Empenhos_2025": "Saldo Empenhos 2026"})
+            
+        # 3. Remover colunas de data (Data_Vigencia_Fim)
+        if "Data_Vigencia_Fim" in df.columns:
+            df = df.drop(columns=["Data_Vigencia_Fim"])
+            
+        # 4. Remover colunas de meses (2026-01-01 00:00:00, etc.)
+        # O usuário solicitou remover todas as colunas que têm formato de data
+        import re
+        month_pattern = re.compile(r'^\d{4}-\d{2}-\d{2}')
+        columns_to_drop = [col for col in df.columns if month_pattern.match(str(col))]
+        if columns_to_drop:
+            df = df.drop(columns=columns_to_drop)
+            app.logger.info(f"Removidas {len(columns_to_drop)} colunas de meses do dataset Saiku")
+        
+        # Cria o dataset no registro
+        dataset = datasets.create(dataset_name, df)
+        app.logger.info("Base do dashboard carregada automaticamente como dataset %s", dataset["id"])
+        return dataset["id"]
+        
+    except Exception:
+        app.logger.exception("Erro ao carregar base automática do dashboard para o Saiku")
+        return None
 
 
 def _unb_dashboard_available() -> bool:
@@ -1250,6 +1315,26 @@ def export_pivot():
 @reports_access_required
 def list_datasets():
     return jsonify({"datasets": datasets.ids()})
+
+
+@app.get("/api/dataset/<dataset_id>")
+@reports_access_required
+def get_dataset_info(dataset_id: str):
+    try:
+        dataset = datasets.get(dataset_id)
+        response = {
+            "datasetId": dataset["id"],
+            "name": dataset["name"],
+            "columns": dataset["columns"],
+            "dimensions": dataset["dimensions"],
+            "measures": dataset["measures"],
+            "aggregations": available_aggregations(),
+            "rowCount": dataset["row_count"],
+            "schema": dataset["schema"],
+        }
+        return jsonify(response)
+    except KeyError:
+        return jsonify({"error": "Dataset não encontrado."}), 404
 
 
 @app.delete("/api/dataset/<dataset_id>")

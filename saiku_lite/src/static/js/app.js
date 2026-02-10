@@ -309,11 +309,11 @@ function applyUniverse(universe) {
     const schemaInfo = typeof info === 'object'
       ? { ...info }
       : {
-          dtype: info,
-          isMeasure: (meta.measures || []).includes(field),
-          label: field,
-          calculated: false,
-        };
+        dtype: info,
+        isMeasure: (meta.measures || []).includes(field),
+        label: field,
+        calculated: false,
+      };
     state.schema[field] = schemaInfo;
     registerFieldLabel(field, schemaInfo.label || field);
   });
@@ -423,9 +423,9 @@ function switchUniverse(universeId) {
       : 0;
   const shouldQuery = Boolean(
     (layout.rows && layout.rows.length) ||
-      (layout.columns && layout.columns.length) ||
-      (layout.filtersZone && layout.filtersZone.length) ||
-      layoutHasMeasures,
+    (layout.columns && layout.columns.length) ||
+    (layout.filtersZone && layout.filtersZone.length) ||
+    layoutHasMeasures,
   );
   if (shouldQuery) {
     runPivot();
@@ -453,7 +453,7 @@ function removeUniverse(universeId) {
       .then((response) => {
         redirectToLoginIfNeeded(response);
       })
-      .catch(() => {});
+      .catch(() => { });
   }
 
   const wasActive = state.activeUniverseId === universeId;
@@ -493,9 +493,9 @@ function removeUniverse(universeId) {
       : 0;
   const shouldQuery = Boolean(
     (layout.rows && layout.rows.length) ||
-      (layout.columns && layout.columns.length) ||
-      (layout.filtersZone && layout.filtersZone.length) ||
-      layoutHasMeasures
+    (layout.columns && layout.columns.length) ||
+    (layout.filtersZone && layout.filtersZone.length) ||
+    layoutHasMeasures
   );
   if (shouldQuery) {
     runPivot();
@@ -1554,9 +1554,9 @@ function setDataset(info, layoutOverride = null) {
       : 0;
   const shouldQuery = Boolean(
     (layout.rows && layout.rows.length) ||
-      (layout.columns && layout.columns.length) ||
-      (layout.filtersZone && layout.filtersZone.length) ||
-      layoutHasMeasures,
+    (layout.columns && layout.columns.length) ||
+    (layout.filtersZone && layout.filtersZone.length) ||
+    layoutHasMeasures,
   );
 
   if (shouldQuery) {
@@ -2189,3 +2189,36 @@ resetDatasetState();
 renderState();
 renderTabs();
 initializeEvents();
+
+if (window.INITIAL_DATASET_ID) {
+  (async () => {
+    try {
+      if (datasetInfo) {
+        datasetInfo.textContent = 'Carregando base de dados do dashboard...';
+        datasetInfo.classList.remove('hidden');
+      }
+      updateStatus('Carregando base inicial...', 'muted');
+
+      const response = await fetch(buildUrl(`/api/dataset/${window.INITIAL_DATASET_ID}`));
+      if (redirectToLoginIfNeeded(response)) return;
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Erro ao carregar base inicial');
+
+      setDataset(data);
+      updateStatus('Base inicial carregada com sucesso.', 'success');
+
+      const uploadCard = document.getElementById('upload-card');
+      if (uploadCard) {
+        uploadCard.classList.add('hidden');
+      }
+
+    } catch (err) {
+      console.error(err);
+      if (datasetInfo) {
+        datasetInfo.innerHTML = `<span class="error">Falha ao carregar base automática: ${err.message}</span>`;
+      }
+      updateStatus('Falha ao carregar base inicial.', 'error');
+    }
+  })();
+}

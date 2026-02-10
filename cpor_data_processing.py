@@ -60,6 +60,7 @@ FIELD_ALIASES: Dict[str, Sequence[str]] = {
 "CNPJ": ("cnpj", "cnpj_cpf"),
 "Processo": ("processo", "processo_sei", "numero_processo"),
 "Data_Vigencia_Fim": ("data_vigencia_fim", "vigencia_final", "data_fim_vigencia", "vigencia", "vig_ncia"),
+
 "Status_Contrato": ("status_contrato", "status", "situacao_contrato", "status_do_contrato"),
 "Situacao_Prorrogacao": (
     "situacao_prorrogacao",
@@ -697,6 +698,7 @@ def _build_kpis(rows: Sequence[Dict[str, object]]) -> Dict[str, object]:
         "count_expiring_contracts": expiring,
         "count_expired_contracts": expired,
         # New precise breakdowns
+
         "total_saldo_rap": total_rap_val,
         "total_saldo_2025": total_2025_val,
     }

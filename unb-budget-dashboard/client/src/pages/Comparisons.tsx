@@ -112,7 +112,9 @@ export default function Comparisons() {
    } = PROCESSED_DATA;
 
    // Calculate generic percentage based on total committed for high-level view
-   const globalRate = totalBudget > 0 ? (totalCommitted / totalBudget) * 100 : 0;
+   // Corrected: Use the sum of Saldo 2025 + RAP (not totalCommitted which may include other values)
+   const actualCommitted = currentYearExecution + legacyExecution;
+   const globalRate = totalBudget > 0 ? (actualCommitted / totalBudget) * 100 : 0;
 
    return (
       <DashboardLayout>

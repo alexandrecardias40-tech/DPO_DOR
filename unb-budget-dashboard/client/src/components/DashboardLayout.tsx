@@ -15,6 +15,7 @@ import {
   Activity,
   GitCompare,
   ChevronDown,
+  FileText,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "wouter";
@@ -23,6 +24,7 @@ interface MenuItem {
   href: string;
   label: React.ReactNode;
   icon: React.ReactNode;
+  external?: boolean;
 }
 
 interface MenuSectionConfig {
@@ -63,7 +65,14 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
       ),
       icon: <TrendingUp className="w-4 h-4" />,
     },
+  ];
+
+  const updateItems: MenuItem[] = [
     { href: "/data-upload", label: "Atualizar Dados", icon: <Settings className="w-4 h-4" /> },
+  ];
+
+  const reportItems: MenuItem[] = [
+    { href: "/saiku/", label: "Business Inteligence", icon: <FileText className="w-4 h-4" />, external: true },
   ];
 
   const sections: MenuSectionConfig[] = useMemo(
@@ -74,6 +83,8 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
           { key: "indicators", title: "📊 Indicadores", items: indicatorItems },
           { key: "charts", title: "📈 Gráficos", items: chartItems },
           { key: "comparatives", title: "🔄 Comparativos", items: comparativeItems },
+          { key: "reports", title: "📑 Gerador de Relatórios", items: reportItems },
+          { key: "updates", title: "⚙️ Atualizações", items: updateItems },
         ],
     [menuConfig]
   );
@@ -125,12 +136,27 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
       {expandedSections[sectionKey] && (
         <div className="space-y-1 mt-1 ml-2">
           {items.map((item) => {
+            const className = `flex items-center gap-3 px-4 py-2 rounded-lg transition-colors text-sm ${isActive(item.href) ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+              }`;
+
+            if (item.external) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={className}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </a>
+              );
+            }
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors text-sm ${isActive(item.href) ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
-                  }`}
+                className={className}
               >
                 {item.icon}
                 <span>{item.label}</span>
@@ -190,9 +216,8 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
 
         {/* User Section */}
         <div className="p-4 border-t border-slate-700 space-y-3">
-          {sidebarOpen && user && (
+          {sidebarOpen && user && user.email && (
             <div className="text-xs text-slate-300 px-2 py-2 bg-slate-700 rounded-lg">
-              <div className="font-semibold truncate">{user.name || "Usuário"}</div>
               <div className="text-slate-400 text-xs truncate">{user.email}</div>
             </div>
           )}
@@ -210,15 +235,15 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto bg-slate-50 relative">
-        {metadata?.updated_at && (
-          <div className="absolute top-4 right-8 z-10">
+        <div className="absolute top-4 right-8 z-10 flex flex-col items-end gap-2">
+          {metadata?.updated_at && (
             <div className="text-xs text-slate-500 bg-white/90 px-3 py-1.5 rounded-full border border-slate-200 shadow-sm backdrop-blur-sm flex items-center gap-2 transition-all hover:bg-white hover:shadow-md cursor-help" title={`Última atualização em: ${new Date(metadata.updated_at).toLocaleString('pt-BR')}`}>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="font-medium">Atualizado:</span>
               {new Date(metadata.updated_at).toLocaleDateString('pt-BR')}
             </div>
-          </div>
-        )}
+          )}
+        </div>
         <div className="p-8">
           {children}
         </div>

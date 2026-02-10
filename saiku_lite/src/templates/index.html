@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20241017" />
     <script>
       window.SAIKU_BASE_PATH = {{ saiku_base_path|tojson }};
+      window.INITIAL_DATASET_ID = {{ initial_dataset_id|tojson }};
     </script>
   </head>
   <body>
