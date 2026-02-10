@@ -72,18 +72,34 @@ def _portal_user_profile() -> Dict[str, str]:
     }
 
 # --- Shared Logic Copy (for Uploads) ---
-def _store_cpor_upload(filename: str, data: bytes) -> None:
+def _store_cpor_upload(filename: str, data: bytes) -> Path:
     CPOR_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     sanitized = secure_filename(filename) or "cpor.xlsx"
     timestamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
     target = CPOR_UPLOAD_DIR / f"{timestamp}-{sanitized}"
     target.write_bytes(data)
+    return target
 
 def _ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> Dict[str, int]:
+    from data_versioning import create_version
+    
+    # Criar versão antes de atualizar (backup automático)
+    try:
+        create_version(description=f"Backup automático antes de upload: {source_name}")
+    except FileNotFoundError:
+        pass  # Primeira vez, não há dados para fazer backup
+    
     existing = load_dashboard_data()
     payload = process_dashboard_upload(file_bytes, existing)
     save_dashboard_data(payload)
-    _store_cpor_upload(source_name, file_bytes)
+    upload_path = _store_cpor_upload(source_name, file_bytes)
+    
+    # Criar versão após atualização bem-sucedida
+    create_version(
+        description=f"Atualização via upload: {source_name}",
+        source_file=str(upload_path)
+    )
+    
     return {
         "linhas_processadas": len(payload.get("raw_data_for_filters", [])),
         "ugr_mapeadas": len(payload.get("ugr_analysis", [])),
@@ -92,6 +108,10 @@ def _ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> Dict[s
 def _create_portal_app() -> Flask:
     template_dir = BASE_DIR / "templates"
     portal = Flask(__name__, static_folder=None, template_folder=str(template_dir))
+    
+    # Registrar blueprint de versões
+    from versions_routes import versions_bp
+    portal.register_blueprint(versions_bp)
 
     @portal.route("/")
     def index():

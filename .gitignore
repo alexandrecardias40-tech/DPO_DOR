@@ -14,3 +14,8 @@ dist/
 # Project specific
 *.xlsx
 inspect_headers.py
+
+# Data versioning (não versionar dados sensíveis)
+data_versions/
+uploads/
+instance/
