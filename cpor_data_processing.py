@@ -95,6 +95,9 @@ FIELD_ALIASES: Dict[str, Sequence[str]] = {
 "Total_Empenho_RAP": ("total_empenho_rap", "valor_empenho_rap", "empenho_rap", "total_rap_empenho", "total_rap_mais_empenho"),
 "Executado_Total": ("executado_total", "valor_executado", "executado"),
 "Total_Necessario": ("total_necessario", "saldo_necessario"),
+"Fonte": ("fonte", "fonte_recurso", "fonte_de_recursos", "ft"),
+"Nota_Empenho": ("nc_detalhada", "nota_de_empenho", "ne", "nota_empenho", "nc", "nota_de_credito"),
+"Saldo_Disponivel_NC": ("saldo_disponivel_nc", "saldo_nc", "saldo_disponivel"),
 }
 
 NUMERIC_FIELDS = {
@@ -106,6 +109,7 @@ NUMERIC_FIELDS = {
     "Total_Empenho_RAP",
     "Executado_Total",
     "Total_Necessario",
+    "Saldo_Disponivel_NC",
 }
 
 DATE_FIELDS = {"Data_Vigencia_Fim"}

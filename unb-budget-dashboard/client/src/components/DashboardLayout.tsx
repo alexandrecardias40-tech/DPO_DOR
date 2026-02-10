@@ -21,7 +21,7 @@ import { Link, useLocation } from "wouter";
 
 interface MenuItem {
   href: string;
-  label: string;
+  label: React.ReactNode;
   icon: React.ReactNode;
 }
 
@@ -53,7 +53,16 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
 
   const comparativeItems: MenuItem[] = [
     { href: "/comparisons", label: "Comparativo Geral", icon: <GitCompare className="w-4 h-4" /> },
-    { href: "/predictive-analysis", label: "Análise Preditiva", icon: <TrendingUp className="w-4 h-4" /> },
+    {
+      href: "/predictive-analysis",
+      label: (
+        <span className="flex items-center gap-2">
+          Análise Preditiva
+          <span className="text-[10px] opacity-70">(em construção)</span>
+        </span>
+      ),
+      icon: <TrendingUp className="w-4 h-4" />,
+    },
     { href: "/data-upload", label: "Atualizar Dados", icon: <Settings className="w-4 h-4" /> },
   ];
 
