@@ -241,6 +241,58 @@ VERSIONS_UI_TEMPLATE = """
         .back-link:hover {
             text-decoration: underline;
         }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px 15px;
+                border-radius: 8px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+            .subtitle {
+                font-size: 13px;
+            }
+            .version-card {
+                padding: 15px;
+            }
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            .version-id {
+                font-size: 14px;
+            }
+            .version-timestamp {
+                font-size: 11px;
+            }
+            .version-description {
+                font-size: 13px;
+            }
+            .version-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            button {
+                width: 100%;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+            .container {
+                padding: 15px 10px;
+            }
+        }
     </style>
 </head>
 <body>
