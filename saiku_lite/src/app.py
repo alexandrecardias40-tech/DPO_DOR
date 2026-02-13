@@ -554,9 +554,14 @@ def _ensure_cpor_dataset_loaded() -> Optional[str]:
         if "Saldo_Empenhos_2025" in df.columns:
             df = df.rename(columns={"Saldo_Empenhos_2025": "Saldo Empenhos 2026"})
             
+            
         # 2.1. Renomear PI_2025 para "PI_2026"
         if "PI_2025" in df.columns:
             df = df.rename(columns={"PI_2025": "PI_2026"})
+            
+        # 2.2. Renomear Nota_Empenho para "NC Detalhada"
+        if "Nota_Empenho" in df.columns:
+            df = df.rename(columns={"Nota_Empenho": "NC Detalhada"})
             
         # 3. Remover colunas de data (Data_Vigencia_Fim)
         if "Data_Vigencia_Fim" in df.columns:

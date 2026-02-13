@@ -135,7 +135,7 @@ export default function Comparisons() {
                <Card className="border-l-4 border-blue-600 shadow-sm">
                   <CardContent className="pt-6">
                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-500">Orçamento Total (LOA)</span>
+                        <span className="text-sm font-medium text-slate-500">Previsão Total das Despesas Institucionais</span>
                         <DollarSign className="w-5 h-5 text-blue-600 opacity-60" />
                      </div>
                      <div className="text-2xl font-bold text-slate-900">{formatCurrency(totalBudget)}</div>
@@ -146,7 +146,7 @@ export default function Comparisons() {
                <Card className="border-l-4 border-emerald-500 shadow-sm">
                   <CardContent className="pt-6">
                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-500">Execução do Ano (2026)</span>
+                        <span className="text-sm font-medium text-slate-500">Total Empenhado LOA Atual</span>
                         <TrendingUp className="w-5 h-5 text-emerald-500 opacity-60" />
                      </div>
                      <div className="text-2xl font-bold text-slate-900">{formatCurrency(currentYearExecution)}</div>
@@ -264,8 +264,8 @@ export default function Comparisons() {
                               return null;
                            }} />
                            <Legend verticalAlign="top" align="right" iconType="circle" />
-                           <Bar dataKey="Total_Anual_Estimado" name="Orçamento Disponível" fill="#e2e8f0" radius={[0, 4, 4, 0]} barSize={20} />
-                           <Bar dataKey="Total_Empenho_RAP" name="Executado (Comprometido)" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={20} className="opacity-90 hover:opacity-100" />
+                           <Bar dataKey="Total_Anual_Estimado" name="Despesa Anual" fill="#e2e8f0" radius={[0, 4, 4, 0]} barSize={20} />
+                           <Bar dataKey="Total_Empenho_RAP" name="Empenhado Atual" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={20} className="opacity-90 hover:opacity-100" />
                         </BarChart>
                      </ResponsiveContainer>
                   </CardContent>

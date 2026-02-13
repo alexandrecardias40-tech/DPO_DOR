@@ -9,7 +9,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Checkbox } from "@/components/ui/checkbox";
 import { X, ChevronDown } from "lucide-react";
 
-const MONTH_LABELS = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+const MONTH_LABELS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
 export default function Home() {
   const { data: kpis } = trpc.budget.getKPIs.useQuery();
@@ -38,14 +38,14 @@ export default function Home() {
 
   const descriptionOptions = useMemo<string[]>(() => {
     if (!allData) return [];
-    
+
     // If PIs are selected, show only descriptions that exist for those PIs
     if (selectedPi.length > 0) {
       const filteredData = allData.filter((item: any) => {
         const itemPi = getPiValue(item);
         return selectedPi.includes(itemPi);
       });
-      
+
       const options = new Set<string>(
         filteredData
           .map((item: any) => (item.Despesa || "").replace(/^-+\s*/, ""))
@@ -53,7 +53,7 @@ export default function Home() {
       );
       return Array.from(options).sort();
     }
-    
+
     // Otherwise show all available descriptions
     const options = new Set<string>(
       allData
@@ -65,14 +65,14 @@ export default function Home() {
 
   const piOptions = useMemo<string[]>(() => {
     if (!allData) return [];
-    
+
     // If descriptions are selected, show only PIs that exist for those descriptions
     if (selectedDescription.length > 0) {
       const filteredData = allData.filter((item: any) => {
         const itemDescription = (item.Despesa || "").replace(/^-+\s*/, "");
         return selectedDescription.includes(itemDescription);
       });
-      
+
       const options = new Set<string>(
         filteredData
           .map((item: any) => getPiValue(item))
@@ -80,7 +80,7 @@ export default function Home() {
       );
       return Array.from(options).sort();
     }
-    
+
     // Otherwise show all available PIs
     const options = new Set<string>(
       allData
@@ -92,24 +92,24 @@ export default function Home() {
 
   const statusOptions = useMemo<string[]>(() => {
     if (!allData) return [];
-    
+
     // Filter data based on current selections
     let filteredData = allData;
-    
+
     if (selectedDescription.length > 0) {
       filteredData = filteredData.filter((item: any) => {
         const itemDescription = (item.Despesa || "").replace(/^-+\s*/, "");
         return selectedDescription.includes(itemDescription);
       });
     }
-    
+
     if (selectedPi.length > 0) {
       filteredData = filteredData.filter((item: any) => {
         const itemPi = getPiValue(item);
         return selectedPi.includes(itemPi);
       });
     }
-    
+
     // Show statuses that exist for the filtered data
     const options = new Set<string>(
       filteredData
@@ -142,6 +142,7 @@ export default function Home() {
         saldo_empenhos_rap: 0,
         total_rap_empenho: 0,
         total_necessario: 0,
+        total_a_empenhar: 0,
       };
     }
     if (!filteredData || filteredData.length === 0) {
@@ -152,16 +153,17 @@ export default function Home() {
         saldo_empenhos_rap: 0,
         total_rap_empenho: 0,
         total_necessario: 0,
+        total_a_empenhar: 0,
       };
     }
 
-    const valor_contrato = filteredData.reduce((sum: number, item: any) => sum + (item.Valor_Mensal_Medio_Contrato || 0), 0);
-    const media_mensal = valor_contrato / filteredData.length;
     const total_estimado = filteredData.reduce((sum: number, item: any) => sum + (item.Total_Anual_Estimado || 0), 0);
+    const media_mensal = total_estimado / 12;
     const saldo_empenhos_2025 = filteredData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_2025 || 0), 0);
     const saldo_empenhos_rap = filteredData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_RAP || 0), 0);
     const total_rap_empenho = saldo_empenhos_2025 + saldo_empenhos_rap;
     const total_necessario = filteredData.reduce((sum: number, item: any) => sum + (item.Total_Necessario || 0), 0);
+    const total_a_empenhar = Math.max(total_estimado - total_rap_empenho, 0);
 
     return {
       media_mensal,
@@ -170,6 +172,7 @@ export default function Home() {
       saldo_empenhos_rap,
       total_rap_empenho,
       total_necessario,
+      total_a_empenhar,
     };
   }, [filteredData, selectedDescription]);
 
@@ -205,13 +208,13 @@ export default function Home() {
         "—";
       const contrato = item["nº  Contrato"] || "—";
       const valorContrato = item.Total_Anual_Estimado || 0;
-      const mediaMensal = item.Valor_Mensal_Medio_Contrato || 0;
+      const mediaMensal = valorContrato / 12;
       const saldoEmpenhos = Number(item.Saldo_Empenhos_2025 || 0);
       const saldoRap = Number(item.Saldo_Empenhos_RAP || 0);
       const totalRapEmpenho = saldoEmpenhos + saldoRap;
       const expiryDate = item.Data_Vigencia_Fim ? new Date(item.Data_Vigencia_Fim) : null;
       const expiryLabel = expiryDate && !Number.isNaN(expiryDate.getTime())
-        ? expiryDate.toLocaleDateString("pt-BR", { month: "short", year: "numeric" })
+        ? expiryDate.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })
         : "—";
       const expiryMonthIndex = expiryDate && !Number.isNaN(expiryDate.getTime()) ? expiryDate.getMonth() : -1;
       const expiryYear = expiryDate && !Number.isNaN(expiryDate.getTime()) ? expiryDate.getFullYear() : null;
@@ -286,13 +289,23 @@ export default function Home() {
         const lower = mediaMensal * monthIndex;
         const upper = lower + mediaMensal;
         let status = "exceeded";
-        if (totalRapEmpenho >= upper) status = "ok";
-        else if (totalRapEmpenho > lower) status = "partial";
-        const amount = Math.max(Math.min(totalRapEmpenho - lower, mediaMensal), 0);
+        let amountRemaining = 0;
+
+        if (totalRapEmpenho >= upper) {
+          status = "ok";
+          amountRemaining = 0; // Nada falta
+        } else if (totalRapEmpenho > lower) {
+          status = "partial";
+          amountRemaining = upper - totalRapEmpenho; // Falta parcial
+        } else {
+          status = "exceeded";
+          amountRemaining = mediaMensal; // Falta tudo
+        }
+
         return {
           label,
           status,
-          amount,
+          amount: amountRemaining, // Agora representa o que FALTA
           highlight: expiryYear === currentYear && monthIndex === expiryMonthIndex,
         };
       });
@@ -318,11 +331,11 @@ export default function Home() {
     return contractTimeline.filter((item: any) => item.statusInfo?.tone === statusFilter);
   }, [contractTimeline, statusFilter]);
 
-const monthStatusClass = (status: string) => {
-  if (status === "ok") return "bg-emerald-50 border-emerald-200 text-emerald-700";
-  if (status === "partial") return "bg-amber-50 border-amber-200 text-amber-800";
-  return "bg-rose-50 border-rose-200 text-rose-700";
-};
+  const monthStatusClass = (status: string) => {
+    if (status === "ok") return "bg-emerald-50 border-emerald-200 text-emerald-700";
+    if (status === "partial") return "bg-amber-50 border-amber-200 text-amber-800";
+    return "bg-rose-50 border-rose-200 text-rose-700";
+  };
 
 
   const KPICard = ({ title, value }: { title: string; value: string }) => (
@@ -348,8 +361,8 @@ const monthStatusClass = (status: string) => {
             {selectedDescription.length > 0 && (
               <div className="mt-3 text-center">
                 <h2 className="text-xl font-semibold text-blue-700 bg-blue-50 px-4 py-2 rounded-lg border border-blue-200 inline-block">
-                  📊 {selectedDescription.length === 1 
-                    ? selectedDescription[0] 
+                  📊 {selectedDescription.length === 1
+                    ? selectedDescription[0]
                     : `${selectedDescription.length} Descrições Selecionadas`}
                 </h2>
               </div>
@@ -358,7 +371,7 @@ const monthStatusClass = (status: string) => {
         </div>
 
         {/* KPIs Grid - Estilo Detalhado */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           <Card className="bg-white border-l-4 border-l-green-500">
             <CardHeader className="py-1 px-3">
               <CardTitle className="text-xs font-semibold text-slate-600 tracking-wide uppercase">Total Estimado Anual</CardTitle>
@@ -406,12 +419,12 @@ const monthStatusClass = (status: string) => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-l-4 border-l-orange-500">
+          <Card className="bg-white border-l-4 border-l-red-500">
             <CardHeader className="py-1 px-3">
-              <CardTitle className="text-xs font-semibold text-slate-600 tracking-wide uppercase">Total Necessário</CardTitle>
+              <CardTitle className="text-xs font-semibold text-slate-600 tracking-wide uppercase">Total a Empenhar</CardTitle>
             </CardHeader>
             <CardContent className="pt-0 pb-3 px-3">
-              <div className="text-lg font-semibold text-slate-900">{formatCurrency(totals.total_necessario)}</div>
+              <div className="text-lg font-semibold text-slate-900">{formatCurrency(totals.total_a_empenhar)}</div>
             </CardContent>
           </Card>
         </div>
@@ -436,13 +449,13 @@ const monthStatusClass = (status: string) => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-48 p-0">
-                      <Command>
+                      <Command shouldFilter={true}>
                         <CommandInput placeholder="Buscar..." />
                         <CommandList>
                           <CommandEmpty>Nenhuma descrição encontrada.</CommandEmpty>
                           <CommandGroup>
                             {descriptionOptions.map((desc) => (
-                              <CommandItem key={desc} className="flex items-center space-x-2">
+                              <CommandItem key={desc} value={desc} className="flex items-center space-x-2">
                                 <Checkbox
                                   checked={selectedDescription.includes(desc)}
                                   onCheckedChange={(checked) => {
@@ -477,13 +490,13 @@ const monthStatusClass = (status: string) => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-48 p-0">
-                      <Command>
+                      <Command shouldFilter={true}>
                         <CommandInput placeholder="Buscar..." />
                         <CommandList>
                           <CommandEmpty>Nenhum PI encontrado.</CommandEmpty>
                           <CommandGroup>
                             {piOptions.map((pi) => (
-                              <CommandItem key={pi} className="flex items-center space-x-2">
+                              <CommandItem key={pi} value={pi} className="flex items-center space-x-2">
                                 <Checkbox
                                   checked={selectedPi.includes(pi)}
                                   onCheckedChange={(checked) => {
@@ -589,17 +602,16 @@ const monthStatusClass = (status: string) => {
                                 return (
                                   <div
                                     key={`${item.id}-${month.label}`}
-                                    className={`col-span-2 flex flex-col items-center justify-center rounded-lg border px-2 py-2 text-center shadow ${
-                                      item.statusInfo.isExpired
-                                        ? "border-rose-500 bg-gradient-to-br from-rose-700 via-rose-600 to-rose-500 text-white shadow-rose-400/50"
-                                        : "border-amber-400 bg-gradient-to-br from-amber-200 via-amber-100 to-yellow-50 text-amber-900 shadow-amber-200/60"
-                                    }`}
+                                    className={`col-span-2 flex flex-col items-center justify-center rounded-lg border px-2 py-2 text-center shadow ${item.statusInfo.isExpired
+                                      ? "border-rose-500 bg-gradient-to-br from-rose-700 via-rose-600 to-rose-500 text-white shadow-rose-400/50"
+                                      : "border-amber-400 bg-gradient-to-br from-amber-200 via-amber-100 to-yellow-50 text-amber-900 shadow-amber-200/60"
+                                      }`}
                                   >
                                     <span className="text-[8px] uppercase tracking-wide font-black opacity-80 leading-3">
                                       {month.label}
                                     </span>
                                     <span className="text-[11px] font-extrabold leading-4">
-                                      {month.amount > 0 ? formatCurrency(month.amount) : formatCurrency(item.mediaMensal)}
+                                      {month.status === "ok" ? "OK" : formatCurrency(month.amount > 0 ? month.amount : item.mediaMensal)}
                                     </span>
                                     <span className="text-[8px] font-bold uppercase tracking-wide opacity-90 leading-3">
                                       {item.statusInfo.isExpired ? "Expirado" : "Vencendo"}
@@ -617,7 +629,7 @@ const monthStatusClass = (status: string) => {
                                 >
                                   <span className="uppercase text-[7px] tracking-wide leading-3">{month.label}</span>
                                   <span className="text-[9px] font-semibold leading-4">
-                                    {month.amount > 0 ? formatCurrencyCompact(month.amount) : "—"}
+                                    {month.status === "ok" ? "OK" : (month.amount > 0 ? formatCurrencyCompact(month.amount) : "—")}
                                   </span>
                                 </div>
                               );

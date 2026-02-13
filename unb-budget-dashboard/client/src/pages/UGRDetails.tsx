@@ -303,7 +303,7 @@ export default function UGRDetails() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <Card className="bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg">
             <CardContent className="p-5">
-              <p className="text-blue-100 text-xs font-medium uppercase tracking-wider">Orçamento Total</p>
+              <p className="text-blue-100 text-xs font-medium uppercase tracking-wider">Previsão anual da Despesa</p>
               <div className="flex items-baseline gap-1 mt-2">
                 <span className="text-2xl font-bold">{formatCurrency(totalBudget)}</span>
               </div>
@@ -319,7 +319,7 @@ export default function UGRDetails() {
                 Soma de Empenhos (reserva para este ano) + Restos a Pagar (dívidas de anos anteriores). Impacta o saldo disponível.
               </div>
               <p className="text-slate-500 text-xs font-medium uppercase tracking-wider w-full text-left flex items-center gap-1">
-                Comprometido <span className="text-[9px] bg-slate-100 px-1 rounded text-slate-400">(Empenho + RAP)</span>
+                Total Empenhado <span className="text-[9px] bg-slate-100 px-1 rounded text-slate-400">(Empenho + RAP)</span>
               </p>
 
               <div className="mt-2 text-center w-full">
@@ -341,7 +341,7 @@ export default function UGRDetails() {
 
           <Card>
             <CardContent className="p-5">
-              <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">Cenário Mês Atual ({currentMonthData?.month || 'N/A'})</p>
+              <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">Previsão da despesa mês atual ({currentMonthData?.month || 'N/A'})</p>
               {currentMonthScenario ? (
                 <>
                   <div className="flex items-baseline gap-2 mt-2">
@@ -364,7 +364,7 @@ export default function UGRDetails() {
 
           <Card>
             <CardContent className="p-5">
-              <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">Saldo Disponível</p>
+              <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">A Empenhar</p>
               <div className="flex items-baseline gap-1 mt-2">
                 <span className={`text-2xl font-bold ${balance < 0 ? 'text-red-600' : 'text-slate-900'}`}>
                   {formatCurrency(balance)}
@@ -484,10 +484,10 @@ export default function UGRDetails() {
                 <thead className="text-xs text-slate-500 uppercase bg-slate-50/80 border-b border-slate-200">
                   <tr>
                     <th className="px-6 py-3 font-bold">Item & Status</th>
-                    <th className="px-6 py-3 font-bold text-right" title="Orçamento disponível (RAP + Empenho)">Recurso (RAP+Empenho)</th>
-                    <th className="px-6 py-3 font-bold text-right text-blue-700 bg-blue-50/50" title="Meta de Gasto Mensal (Orçamento Total / 12)">Teto Mensal (Ideal)</th>
+                    <th className="px-6 py-3 font-bold text-right" title="Orçamento disponível (RAP + Empenho)">Total Empenhado (RAP+Empenho)</th>
+                    <th className="px-6 py-3 font-bold text-right text-blue-700 bg-blue-50/50" title="Meta de Gasto Mensal (Orçamento Total / 12)">Média mensal da despesa</th>
                     {/* Removed Header */}
-                    <th className="px-6 py-3 font-bold text-center" title="Até quando o recurso dura se gastar exatamente o Teto Mensal">Durabilidade (Cenário Teto)</th>
+                    <th className="px-6 py-3 font-bold text-center" title="Até quando o recurso dura se gastar exatamente o Teto Mensal">Durabilidade (meses com cobertura de empenho)</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
