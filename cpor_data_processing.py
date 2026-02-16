@@ -873,13 +873,19 @@ def _enrich_row(row: Dict[str, object], lookup: Dict[str, Dict[str, object]]) ->
         current_val = enriched.get(field)
         history_val = match.get(field)
         
-        # Logic: If current is empty/zero and history has value, use history.
-        if field in NUMERIC_FIELDS:
-            if not _normalize_number(current_val) and _normalize_number(history_val):
-                enriched[field] = history_val
-        else:
-            if not _normalize_token(str(current_val)) and _normalize_token(str(history_val)):
-                enriched[field] = history_val
+        # Lógica revisada: Só usar histórico se o valor novo for NULO ou STRING VAZIA.
+        # Aceitar 0 (zero) como valor válido, pois o usuário pode estar zerando um orçamento.
+        
+        is_empty = False
+        if current_val is None:
+            is_empty = True
+        elif isinstance(current_val, str) and not current_val.strip():
+            is_empty = True
+        elif isinstance(current_val, float) and pd.isna(current_val):
+            is_empty = True
+            
+        if is_empty and history_val is not None:
+             enriched[field] = history_val
                 
     return enriched
 
