@@ -326,8 +326,8 @@ FALLBACK_FIXED_DATA = {
     "VGM01N01S6N": {"UGR": "PRC", "Despesa": "Taxa de Iluminação Pública"},
     # Água e Esgoto (INFRA) - Row 9 had INFRA, but just in case
     "VGM01N01I3N": {"UGR": "INFRA", "Despesa": "Serviços de Água e Esgoto"},
-    # Estagiários (DGP)
-    "VGM01N01N2N": {"UGR": "DGP", "Despesa": "Estagiários UnB"},
+    # Estagiários (DGP) - Removido para permitir atualização dinâmica
+    # "VGM01N01N2N": {"UGR": "DGP", "Despesa": "Estagiários UnB"},
     "VGM01N01N7N": {"UGR": "DGP", "Despesa": "Estagiários - Auxílio Transporte"},
     "VGM01N01R3N": {"UGR": "DGP", "Despesa": "Pasep - UnB"},
     # HUB
