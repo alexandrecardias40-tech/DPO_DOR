@@ -16,6 +16,7 @@ import {
   GitCompare,
   ChevronDown,
   FileText,
+  Download,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "wouter";
@@ -69,6 +70,7 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
 
   const updateItems: MenuItem[] = [
     { href: "/data-upload", label: "Atualizar Dados", icon: <Settings className="w-4 h-4" /> },
+    { href: "/api/dashboard/download-latest", label: "Baixar Última Planilha", icon: <Download className="w-4 h-4" />, external: true },
   ];
 
   const reportItems: MenuItem[] = [

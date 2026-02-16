@@ -13,7 +13,7 @@ import requests
 import base64
 import time
 import threading
-from flask import Flask, abort, jsonify, render_template, request, send_from_directory
+from flask import Flask, abort, jsonify, render_template, request, send_from_directory, send_file
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
 from werkzeug.utils import secure_filename
@@ -292,9 +292,38 @@ def _create_portal_app() -> Flask:
         except Exception as e:
             return jsonify({"success": False, "message": str(e)}), 400
 
+    @portal.route("/api/dashboard/download-latest", methods=["GET"])
+    def download_latest_cpor():
+        """Baixa a planilha de dados mais recente enviada."""
+        upload_dir = BASE_DIR / "uploads" / "cpor"
+        if not upload_dir.exists():
+            return jsonify({"error": "Nenhum arquivo encontrado."}), 404
+            
+        files = [f for f in upload_dir.glob("*.xlsx") if f.is_file()]
+        if not files:
+            files = [f for f in upload_dir.glob("*.xls") if f.is_file()]
+            
+        if not files:
+            return jsonify({"error": "Nenhuma planilha encontrada."}), 404
+            
+        latest_file = max(files, key=lambda f: f.stat().st_mtime)
+        
+        return send_file(
+            latest_file,
+            as_attachment=True,
+            download_name=latest_file.name
+        )
+
     @portal.route("/healthz")
     def healthcheck():
         return {"status": "ok"}
+
+    @portal.after_request
+    def add_header(response):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
 
     return portal
 
