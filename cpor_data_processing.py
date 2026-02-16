@@ -319,20 +319,9 @@ def _load_fixed_dataframe() -> Optional[pd.DataFrame]:
 
 
 
-FALLBACK_FIXED_DATA = {
-    # Energia (PRC)
-    "VGM01N01I2N": {"UGR": "PRC", "Despesa": "Serviços de Energia Elétrica (PRC)"},
-    # Iluminação Pública
-    "VGM01N01S6N": {"UGR": "PRC", "Despesa": "Taxa de Iluminação Pública"},
-    # Água e Esgoto (INFRA) - Row 9 had INFRA, but just in case
-    "VGM01N01I3N": {"UGR": "INFRA", "Despesa": "Serviços de Água e Esgoto"},
-    # Estagiários (DGP) - Removido para permitir atualização dinâmica
-    # "VGM01N01N2N": {"UGR": "DGP", "Despesa": "Estagiários UnB"},
-    "VGM01N01N7N": {"UGR": "DGP", "Despesa": "Estagiários - Auxílio Transporte"},
-    "VGM01N01R3N": {"UGR": "DGP", "Despesa": "Pasep - UnB"},
-    # HUB
-    "VGM01N01N1N": {"UGR": "HUB", "Despesa": "Pasep - HUB"},
-}
+FALLBACK_FIXED_DATA = {}
+# Dados fixos removidos para permitir atualização total via planilha.
+# Anteriormente continha: Energia, Água, Estagiários, etc.
 
 class FixedLookup:
     def __init__(self, dataframe: Optional[pd.DataFrame]):
