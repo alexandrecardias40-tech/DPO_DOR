@@ -11,6 +11,8 @@ from datetime import datetime
 
 import requests
 import base64
+import time
+import threading
 from flask import Flask, abort, jsonify, render_template, request, send_from_directory
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
@@ -22,6 +24,7 @@ from cpor_data_processing import (
     process_dashboard_upload,
     save_dashboard_data,
 )
+from data_manager import ingest_dashboard_spreadsheet, store_cpor_upload
 
 BASE_DIR = Path(__file__).resolve().parent
 # CPOR Static files copied to static/cpor/public
@@ -71,39 +74,8 @@ def _portal_user_profile() -> Dict[str, str]:
         "email": email or "",
     }
 
-# --- Shared Logic Copy (for Uploads) ---
-def _store_cpor_upload(filename: str, data: bytes) -> Path:
-    CPOR_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-    sanitized = secure_filename(filename) or "cpor.xlsx"
-    timestamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
-    target = CPOR_UPLOAD_DIR / f"{timestamp}-{sanitized}"
-    target.write_bytes(data)
-    return target
+# Funções movidas para data_manager.py
 
-def _ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> Dict[str, int]:
-    from data_versioning import create_version
-    
-    # Criar versão antes de atualizar (backup automático)
-    try:
-        create_version(description=f"Backup automático antes de upload: {source_name}")
-    except FileNotFoundError:
-        pass  # Primeira vez, não há dados para fazer backup
-    
-    existing = load_dashboard_data()
-    payload = process_dashboard_upload(file_bytes, existing)
-    save_dashboard_data(payload)
-    upload_path = _store_cpor_upload(source_name, file_bytes)
-    
-    # Criar versão após atualização bem-sucedida
-    create_version(
-        description=f"Atualização via upload: {source_name}",
-        source_file=str(upload_path)
-    )
-    
-    return {
-        "linhas_processadas": len(payload.get("raw_data_for_filters", [])),
-        "ugr_mapeadas": len(payload.get("ugr_analysis", [])),
-    }
 
 def _create_portal_app() -> Flask:
     template_dir = BASE_DIR / "templates"
@@ -148,6 +120,57 @@ def _create_portal_app() -> Flask:
              return send_from_directory(UNB_PUBLIC_DIR / "assets", asset_path)
         return "Asset not found", 404
 
+    # --- API Upload Endpoint (Opção 1) ---
+    @portal.route("/api/upload-data", methods=["POST"])
+    def api_upload_data():
+        """
+        Endpoint para upload direto de planilha via API.
+        Autenticação: Bearer <TOKEN>
+        """
+        token = request.headers.get("Authorization")
+        expected_token = os.environ.get("API_UPLOAD_TOKEN", "default-dev-token")
+        
+        # Remove 'Bearer ' prefix
+        if token and token.startswith("Bearer "):
+            token = token.split(" ", 1)[1]
+            
+        # Validação simples de token
+        if token != expected_token:
+            if not os.environ.get("API_UPLOAD_TOKEN"):
+                return jsonify({"error": "API Token not configured"}), 500
+            time.sleep(1) # Delay para evitar brute-force rápido
+            return jsonify({"error": "Unauthorized"}), 401
+            
+        if "file" not in request.files:
+            return jsonify({"error": "No file part"}), 400
+            
+        file = request.files["file"]
+        if file.filename == "":
+            return jsonify({"error": "No selected file"}), 400
+            
+        if not file.filename.lower().endswith((".xlsx", ".xls")):
+            return jsonify({"error": "Invalid file type. Only Excel (.xlsx, .xls) allowed"}), 400
+            
+        try:
+            file_bytes = file.read()
+            filename = secure_filename(file.filename)
+            
+            # Processa usando a lógica centralizada
+            result = ingest_dashboard_spreadsheet(file_bytes, filename)
+            
+            return jsonify({
+                "status": "success",
+                "message": "Dashboard updated successfully",
+                "filename": filename,
+                "timestamp": datetime.utcnow().isoformat(),
+                "details": result
+            })
+            
+        except Exception as e:
+            # portal.logger.error(f"Error processing API upload: {e}")
+            return jsonify({"error": str(e)}), 500
+
+
 
 
     # --- TRPC for CPOR ---
@@ -184,16 +207,16 @@ def _create_portal_app() -> Flask:
             try:
                 file_bytes = base64.b64decode(content_base64)
                 # Parse and save
-                existing = load_dashboard_data()
-                payload = process_dashboard_upload(file_bytes, existing)
-                save_dashboard_data(payload)
-                _store_cpor_upload(file_name, file_bytes)
+                result = ingest_dashboard_spreadsheet(file_bytes, file_name)
+                
+                # Reload to get updated metadata if needed
+                updated_dataset = load_dashboard_data()
                 
                 return {
                     "success": True,
                     "message": "Dados combinados e atualizados com sucesso.",
-                    "metadata": payload.get("metadata", {}),
-                    "rowsImported": len(payload.get("raw_data_for_filters", []))
+                    "metadata": updated_dataset.get("metadata", {}),
+                    "rowsImported": result.get("linhas_processadas", 0)
                 }
             except Exception as e:
                 return {"success": False, "message": str(e)}
@@ -288,13 +311,38 @@ def create_application() -> DispatcherMiddleware:
 
 application = create_application()
 
+
+# --- Email Monitor Background Thread ---
+def start_email_monitor():
+    """Inicia o monitoramento de email em uma thread separada se configurado."""
+    email_user = os.environ.get("EMAIL_USER")
+    email_pass = os.environ.get("EMAIL_PASSWORD")
+    
+    if not email_user or not email_pass:
+        print("Email monitor not started: EMAIL_USER or EMAIL_PASSWORD not set.")
+        return
+
+    try:
+        import threading
+        from mail_monitor import run_email_monitor
+        
+        monitor_thread = threading.Thread(target=run_email_monitor, daemon=True)
+        monitor_thread.start()
+        print(f"Email monitor started for {email_user}")
+    except Exception as e:
+        print(f"Failed to start email monitor: {e}")
+
 def main():
+
     # Iniciar keep-alive para evitar que o serviço durma no Render (plano free)
     try:
         from keep_alive import start_keep_alive
         start_keep_alive()
     except Exception as e:
         print(f"⚠️ Keep-alive não iniciado: {e}")
+
+    # Iniciar monitor de email em background
+    start_email_monitor()
     
     # Using 8050 as requested to replicate, but if 8050 is busy we might need to kill it first in the terminal.
     port = int(os.getenv("PORT", "8050"))
