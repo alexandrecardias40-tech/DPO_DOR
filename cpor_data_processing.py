@@ -57,8 +57,11 @@ FIELD_ALIASES: Dict[str, Sequence[str]] = {
     "nome_despesa",
     "nome_da_despesa",
     "descricao_item",
+    "pi_nome",
+    "nome_do_pi",
+    "item_informacao_nome",
 ),
-"UGR": ("ugr", "uorg", "uo", "unidade_gestora", "unidade_orcamentaria", "unidade", "ug"),
+"UGR": ("ugr", "uorg", "uo", "unidade_gestora", "unidade_orcamentaria", "unidade", "ug", "ug_responsavel_nome", "ug_responsavel"),
 "PI_2025": ("pi_2025", "pi", "plano_interno", "plano", "pi2025", "pi_2026", "pi2026"),
 "CNPJ": ("cnpj", "cnpj_cpf", "cnpj_fornecedor", "cpf_cnpj"),
 "Processo": ("processo", "processo_sei", "numero_processo", "num_processo", "n_processo"),
@@ -185,6 +188,7 @@ FIELD_ALIASES: Dict[str, Sequence[str]] = {
     "saldo_disponivel",
     "disponivel_nc",
     "saldo_disponivel_nota_credito",
+    "credito_disponivel",
 ),
 }
 
@@ -431,10 +435,14 @@ def _load_relevant_dataframe(file_bytes: bytes) -> pd.DataFrame:
                 continue
             header = []
             used = {}
-            for value in header_row:
+            for i, value in enumerate(header_row):
                 label = value.strip()
                 if not label:
-                    label = f"col_{len(header)+1}"
+                    prev = header_row[i-1].strip() if i > 0 else ""
+                    if prev:
+                        label = f"{prev} Nome"
+                    else:
+                        label = f"col_{len(header)+1}"
                 key = sanitize(label)
                 count = used.get(key, 0)
                 used[key] = count + 1
@@ -581,6 +589,10 @@ def _extract_rows(df: pd.DataFrame) -> Tuple[List[Dict[str, object]], List[str]]
     rows: List[Dict[str, object]] = []
     for _, series in df.iterrows():
         record: Dict[str, object] = {}
+        # Captura texto completo para detecção de rodapés/totais
+        record["_raw_full_text"] = " ".join([str(v) for v in series.values]).lower()
+
+        
         for target, aliases in FIELD_ALIASES.items():
             column_name = resolver.find(aliases)
             value = series.get(column_name) if column_name else None
@@ -601,6 +613,7 @@ def _extract_rows(df: pd.DataFrame) -> Tuple[List[Dict[str, object]], List[str]]
         rows.append(record)
     normalized_months = [key for key, _ in month_columns]
     return rows, normalized_months
+
 
 
 def _normalize_token(value: Optional[str]) -> str:
@@ -764,20 +777,25 @@ def _build_kpis(rows: Sequence[Dict[str, object]]) -> Dict[str, object]:
         total_rap_val += _normalize_number(row.get("Saldo_Empenhos_RAP"))
         total_2025_val += _normalize_number(row.get("Saldo_Empenhos_2025"))
             
+    total_credito_disponivel = sum(_normalize_number(r.get("Saldo_Disponivel_NC")) for r in rows)
+
     return {
-        "total_anual_estimado": total_estimado,
+        "total_estimado": total_estimado,
         "total_empenhado": executado,
         "total_comprometido": comprometido,
+        "total_rap": total_rap_val,
+        "total_2025": total_2025_val,
         "saldo_a_empenhar": saldo,
         "percentual_execucao": percentual,
         "taxa_execucao": percentual,
         "count_expiring_contracts": expiring,
         "count_expired_contracts": expired,
-        # New precise breakdowns
-
-        "total_saldo_rap": total_rap_val,
-        "total_saldo_2025": total_2025_val,
+        "credito_disponivel": total_credito_disponivel,
+        "media_mensal": total_estimado / 12 if total_estimado else 0,
+        "total_necessario": sum(_normalize_number(r.get("Total_Necessario")) for r in rows),
     }
+
+
 
 
 def _split_contracts(rows: Sequence[Dict[str, object]]) -> Tuple[List[Dict[str, object]], List[Dict[str, object]]]:
@@ -821,123 +839,343 @@ def _merge_fixed_row(row: Dict[str, object], lookup: FixedLookup) -> Dict[str, o
 
 
 
-def _build_history_lookup(old_rows: List[Dict[str, object]]) -> Dict[str, Dict[str, object]]:
-    """Builds a lookup map from historical data using PI or Contract as keys."""
-    lookup: Dict[str, Dict[str, object]] = {}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Campos financeiros que a BI do Tesouro Gerencial pode atualizar
+# ─────────────────────────────────────────────────────────────────────────────
+BI_UPDATE_FIELDS = (
+    "Saldo_Empenhos_2025",
+    "Saldo_Empenhos_RAP",
+    "Total_Empenho_RAP",
+    "Executado_Total",
+    "Saldo_Disponivel_NC",
+)
+
+
+def _is_bi_summary_row(row: Dict[str, object]) -> bool:
+    """
+    Detecta linhas de rodapé/totalizador da BI (ex: linha 'Total' no final da planilha).
+    Essas linhas NÃO têm PI e carregam os totais gerais — não devem ser forward-filled.
+    """
+    raw_text = str(row.get("_raw_full_text") or "").lower()
+    SUMMARY_TOKENS = ["total", "total_geral", "grand_total", "subtotal", "totalgeral"]
     
-    # Priority: Contract > PI
-    for row in old_rows:
-        # Check Contract
-        contract = _clean_key(row.get("nº  Contrato"))
-        if contract:
-            if contract not in lookup:
-                 lookup[contract] = row
-            # If we have a newer update (optional: timestamp check), we could update.
-            # For now, just keep the first/last encountered.
-        
-        # Check PI
-        pi = _clean_key(row.get("PI_2025"))
-        if pi:
-            # Only add if not exists, or merge? 
-            # We want static data (Budget, Desc, UGR). 
-            if pi not in lookup:
-                lookup[pi] = row
-            elif not lookup[pi].get("Total_Anual_Estimado") and row.get("Total_Anual_Estimado"):
-                lookup[pi] = row # Prefer row with budget
-                
+    # Se 'total' aparece no texto mas não temos PI, é muito provável que seja rodapé
+    if any(token in raw_text for token in SUMMARY_TOKENS) and not str(row.get("PI_2025") or "").strip():
+        return True
+    return False
+
+
+
+def _aggregate_bi_rows(rows: List[Dict[str, object]]) -> List[Dict[str, object]]:
+    """
+    Pré-processa linhas da BI do Tesouro Gerencial com células mescladas no Excel.
+
+    Quando o Excel tem células mescladas na coluna PI, o pandas lê o valor só na
+    primeira linha; as demais ficam com PI vazio mas carregam dados financeiros
+    diferentes (crédito disponível, RAP, empenho etc.).
+
+    Etapas:
+    1. Forward-fill do PI: linha sem PI herda o PI da linha anterior.
+       EXCETO linhas de rodapé (ex: "Total Geral") — essas são descartadas.
+    2. Agrupa por PI e SOMA todos os BI_UPDATE_FIELDS.
+       Campos estáticos (Despesa, UGR) vêm da primeira linha do grupo.
+    """
+    if not rows:
+        return rows
+
+    # ── Etapa 1: Forward-fill do PI ──────────────────────────────────────────
+    filled: List[Dict[str, object]] = []
+    last_pi = ""
+    last_static: Dict[str, object] = {}
+    for row in rows:
+        raw_pi = str(row.get("PI_2025") or "").strip()
+        if raw_pi:
+            last_pi = raw_pi
+            last_static = {k: v for k, v in row.items() if k not in BI_UPDATE_FIELDS}
+            filled.append(row)
+        else:
+            # Linha sem PI: verificar se é rodapé/totalizador ANTES de herdar PI
+            if _is_bi_summary_row(row):
+                # Linha de total geral → descarta; não propaga valores ao último PI
+                last_pi = ""  # reseta para não contaminar linhas seguintes
+                last_static = {}
+                continue
+            # Sub-linha legítima → herda PI e campos estáticos da linha anterior
+            if last_pi:
+                inherited = last_static.copy()
+                inherited["PI_2025"] = last_pi
+                for field in BI_UPDATE_FIELDS:
+                    inherited[field] = _normalize_number(row.get(field))
+                filled.append(inherited)
+            # Se não há último PI, descarta a linha (sem contexto)
+
+    # ── Etapa 2: Agrega por PI (soma campos financeiros) ─────────────────────
+    from collections import OrderedDict
+    groups: "OrderedDict[str, Dict[str, object]]" = OrderedDict()
+    for row in filled:
+        key = _clean_key(row.get("PI_2025"))
+        if not key:
+            continue
+        if key not in groups:
+            base = {k: v for k, v in row.items()}
+            for field in BI_UPDATE_FIELDS:
+                base[field] = _normalize_number(row.get(field))
+            groups[key] = base
+        else:
+            for field in BI_UPDATE_FIELDS:
+                groups[key][field] = (
+                    _normalize_number(groups[key].get(field))
+                    + _normalize_number(row.get(field))
+                )
+
+    return list(groups.values())
+
+
+
+def _build_pi_lookup_multi(rows: List[Dict[str, object]]) -> Dict[str, Dict[str, object]]:
+    """
+    Builds PI-fragment → row mapping.
+    Expects rows to already be aggregated by _aggregate_bi_rows (called upfront).
+    A row with PI_2025 = "ABC DEF" is indexed under both "abc" and "def".
+    """
+    lookup: Dict[str, Dict[str, object]] = {}
+    for row in rows:
+        raw_pi = str(row.get("PI_2025") or "").strip()
+        if not raw_pi:
+            continue
+        parts = re.split(r"[\s\n,;/]+", raw_pi)
+        for part in parts:
+            key = sanitize(part)
+            if key and key not in lookup:
+                lookup[key] = row
+        full_key = _clean_key(raw_pi)
+        if full_key and full_key not in lookup:
+            lookup[full_key] = row
     return lookup
 
-def _enrich_row(row: Dict[str, object], lookup: Dict[str, Dict[str, object]]) -> Dict[str, object]:
-    """Fills in missing static fields from history lookup."""
-    contract = _clean_key(row.get("nº  Contrato"))
-    pi = _clean_key(row.get("PI_2025"))
-    
-    match = None
-    if contract and contract in lookup:
-        match = lookup[contract]
-    elif pi and pi in lookup:
-        match = lookup[pi]
-        
-    if not match:
-        return row
-        
-    enriched = row.copy()
-    # Fields to preserve from history if missing/zero in new
-    fields_to_restore = [
-        "Despesa", "UGR", "CNPJ", "Processo", 
-        "Data_Vigencia_Fim", "Status_Contrato", 
-        "Total_Anual_Estimado", "Valor_Mensal_Medio_Contrato"
-    ]
-    
-    for field in fields_to_restore:
-        current_val = enriched.get(field)
-        history_val = match.get(field)
-        
-        # Lógica revisada: Só usar histórico se o valor novo for NULO ou STRING VAZIA.
-        # Aceitar 0 (zero) como valor válido, pois o usuário pode estar zerando um orçamento.
-        
-        is_empty = False
-        if current_val is None:
-            is_empty = True
-        elif isinstance(current_val, str) and not current_val.strip():
-            is_empty = True
-        elif isinstance(current_val, float) and pd.isna(current_val):
-            is_empty = True
-            
-        if is_empty and history_val is not None:
-             enriched[field] = history_val
-                
-    return enriched
 
-def process_dashboard_upload(file_bytes: bytes, existing_data: Optional[Dict[str, object]] = None) -> Dict[str, object]:
+
+def _build_contract_lookup_simple(rows: List[Dict[str, object]]) -> Dict[str, Dict[str, object]]:
+    lookup: Dict[str, Dict[str, object]] = {}
+    for row in rows:
+        key = _clean_key(row.get("nº  Contrato"))
+        if key and key not in lookup:
+            lookup[key] = row
+    return lookup
+
+
+
+
+def _find_all_update_matches(
+    base_row: Dict[str, object],
+    up_contract: Dict[str, Dict[str, object]],
+    up_pi: Dict[str, Dict[str, object]],
+) -> List[Dict[str, object]]:
+    """
+    Localiza todas as linhas da BI que correspondem a uma linha da base.
+    Pode retornar múltiplas se a linha da base tiver vários PIs separados por espaço.
+    """
+    matches: List[Dict[str, object]] = []
+    seen_ids: set = set()
+
+    # 1. Tenta por contrato (maior prioridade)
+    contract_key = _clean_key(base_row.get("nº  Contrato"))
+    if contract_key and contract_key in up_contract:
+        match = up_contract[contract_key]
+        if id(match) not in seen_ids:
+            matches.append(match)
+            seen_ids.add(id(match))
+
+    # 2. Tenta por fragmentos de PI
+    raw_pi = str(base_row.get("PI_2025") or "").strip()
+    parts = re.split(r"[\s\n,;/]+", raw_pi)
+    for part in parts:
+        key = sanitize(part)
+        if key and key in up_pi:
+            match = up_pi[key]
+            if id(match) not in seen_ids:
+                matches.append(match)
+                seen_ids.add(id(match))
+
+    # 3. Tenta por PI completo (sanitizado)
+    full_key = _clean_key(raw_pi)
+    if full_key and full_key in up_pi:
+        match = up_pi[full_key]
+        if id(match) not in seen_ids:
+            matches.append(match)
+            seen_ids.add(id(match))
+
+    return matches
+
+
+
+def _collect_month_keys(rows: List[Dict[str, object]]) -> List[str]:
+    """Returns all month-formatted keys found in any row."""
+    seen: set = set()
+    result: List[str] = []
+    for row in rows:
+        for key in row:
+            if key not in seen and _normalize_month_key(str(key)) is not None:
+                seen.add(key)
+                result.append(key)
+    return sorted(result)
+
+
+def process_dashboard_upload(
+    file_bytes: bytes,
+    existing_data: Optional[Dict[str, object]] = None,
+) -> Dict[str, object]:
+    """
+    Processa um arquivo Excel e mescla com os dados existentes do dashboard.
+
+    Estratégia de merge (PI como chave primária)
+    ─────────────────────────────────────────────
+    1. SEM dados existentes → o arquivo enviado vira a nova base completa.
+       Linhas sem PI são descartadas.
+
+    2. COM dados existentes (Planilha de Despesas é a BASE):
+       • PI bate com a base:
+           → Traz os campos financeiros da BI (Saldo_Empenhos_2025, Saldo_Empenhos_RAP,
+             Total_Empenho_RAP, Executado_Total, Saldo_Disponivel_NC).
+           → TUDO o mais vem da base: Despesa, UGR, CNPJ, Processo, Vigência,
+             Contrato, Valor Mensal, Total Anual, Fonte, meses planejados, etc.
+       • PI NÃO está na base (PI novo da BI):
+           → Adicionado com Origem="Apenas BI - sem correspondência na base".
+           → Sem PI (linha sem PI na BI): DESCARTADA — não é incluída.
+       • Linha da base sem correspondência na BI:
+           → Mantida intacta como estava.
+
+    Resultado: zero perda da Planilha de Despesas + valores financeiros sempre frescos da BI.
+    """
     if not file_bytes:
         raise ValueError("Arquivo vazio.")
+
     df = _load_relevant_dataframe(file_bytes)
     if df.empty:
         raise ValueError("Nenhuma linha encontrada na planilha.")
-    raw_rows, month_columns = _extract_rows(df)
-    
-    # 1. Apply Fixed Lookup (File based)
+
+    incoming_rows_raw, incoming_month_cols = _extract_rows(df)
+
+    # Aplica Variáveis Fixas (se existir)
     fixed_lookup = FixedLookup(_load_fixed_dataframe())
     if fixed_lookup.has_data():
-        raw_rows = [_merge_fixed_row(row, fixed_lookup) for row in raw_rows]
-        
-    # 2. Apply History Enrichment (Smart Sweep)
-    if existing_data and "raw_data_for_filters" in existing_data:
-        old_rows = existing_data.get("raw_data_for_filters", [])
-        if old_rows:
-            history_lookup = _build_history_lookup(old_rows)
-            raw_rows = [_enrich_row(row, history_lookup) for row in raw_rows]
+        incoming_rows_raw = [_merge_fixed_row(row, fixed_lookup) for row in incoming_rows_raw]
 
-    filtered = [
-        _normalize_row(row, month_columns)
-        for row in raw_rows
-        if not _should_discard(row)
+    # ── Pré-processa células mescladas da BI ─────────────────────────────────
+    # DEVE acontecer ANTES de filtrar linhas sem PI.
+    # Sub-linhas (PI vazio no Excel por célula mesclada) carregam dados como
+    # Saldo_Disponivel_NC; se filtrarmos primeiro, esses valores são perdidos.
+    # _aggregate_bi_rows: faz forward-fill do PI e soma os campos financeiros
+    # de todas as sub-linhas que pertencem ao mesmo PI.
+    incoming_rows_raw = _aggregate_bi_rows(incoming_rows_raw)
+
+    # Filtra e normaliza linhas do arquivo enviado
+    # REGRA: linhas sem PI são descartadas (após a agregação acima)
+    incoming: List[Dict[str, object]] = [
+        _normalize_row(row, incoming_month_cols)
+        for row in incoming_rows_raw
+        if not _should_discard(row) and str(row.get("PI_2025") or "").strip()
     ]
-    if not filtered:
+
+
+    is_base_file = len(incoming_month_cols) > 0
+
+    # ── Caso 1: sem dados existentes OU arquivo é uma NOVA BASE (Despesas) ───
+    # REGRA: se o arquivo tem colunas de meses (planejamento), ele substitui a base.
+    if not existing_data or not existing_data.get("raw_data_for_filters") or is_base_file:
+        final_rows = incoming
+        month_cols = incoming_month_cols
+        # Log para debug
+        # print(f"[Upload] Tipo detectado: {'BASE' if is_base_file else 'INICIAL'}. Linhas: {len(final_rows)}")
+
+
+    # ── Caso 2: merge com base existente ─────────────────────────────────────
+    else:
+        old_rows: List[Dict[str, object]] = existing_data["raw_data_for_filters"]
+
+        # Colunas de mês que já existem na base (preservadas sempre)
+        month_cols = _collect_month_keys(old_rows)
+
+        # Lookups do arquivo enviado (update source)
+        up_contract = _build_contract_lookup_simple(incoming)
+        up_pi = _build_pi_lookup_multi(incoming)
+
+        # ── Passo A: Mapear N-para-M e contar ocorrências ───────────────────
+        # Precisamos saber quantas vezes cada linha da BI (update) é usada na base,
+        # para podermos dividir o valor financeiro e evitar duplicidade nos totais.
+        base_to_matches: Dict[int, List[Dict[str, object]]] = {}
+        match_counts: Dict[int, int] = {} # id(bi_row) -> total_base_rows_using_it
+
+        for base_row in old_rows:
+            matches = _find_all_update_matches(base_row, up_contract, up_pi)
+            if matches:
+                base_to_matches[id(base_row)] = matches
+                for match in matches:
+                    mid = id(match)
+                    match_counts[mid] = match_counts.get(mid, 0) + 1
+
+        # ── Passo B: Executar o Merge com Distribuição Justa ─────────────────
+        final_rows = []
+        used_ids: set = set()
+
+        for base_row in old_rows:
+            matches = base_to_matches.get(id(base_row))
+
+            if matches:
+                merged = base_row.copy()
+                # Zera campos financeiros bi_update para somar os matches
+                for field in BI_UPDATE_FIELDS:
+                    merged[field] = 0.0
+
+                for match in matches:
+                    used_ids.add(id(match))
+                    count = match_counts.get(id(match), 1)
+                    
+                    # Distribui o valor: se o PI está em 3 linhas da base, cada uma leva 1/3
+                    for field in BI_UPDATE_FIELDS:
+                        val = _normalize_number(match.get(field))
+                        merged[field] = _normalize_number(merged[field]) + (val / count)
+
+                merged["Origem"] = "Base"
+                final_rows.append(_normalize_row(merged, month_cols))
+            else:
+                # Sem correspondência na BI: mantém linha da base intacta
+                base_copy = base_row.copy()
+                base_copy.setdefault("Origem", "Base")
+                final_rows.append(base_copy)
+
+        # ── Passo C: Ignorar PIs da BI sem correspondência na base ──────────
+        # REGRA: se o PI não está na Planilha de Despesas (base), ele é ignorado.
+        pass
+
+
+    if not final_rows:
         raise ValueError("Não foi possível identificar registros válidos na planilha.")
-    kpis = _build_kpis(filtered)
-    ugr_analysis = _build_ugr_analysis(filtered)
-    monthly = _build_monthly_consumption(filtered, month_columns)
-    expiring, expired = _split_contracts(filtered)
-    payload = {
+
+    kpis = _build_kpis(final_rows)
+    ugr_analysis = _build_ugr_analysis(final_rows)
+    monthly = _build_monthly_consumption(final_rows, month_cols)
+    expiring, expired = _split_contracts(final_rows)
+
+    return {
         "kpis": kpis,
         "monthly_consumption": monthly,
         "ugr_analysis": ugr_analysis,
         "expiring_contracts_list": expiring,
         "expired_contracts_list": expired,
-        "raw_data_for_filters": filtered,
+        "raw_data_for_filters": final_rows,
         "metadata": {
             "updated_at": datetime.utcnow().isoformat() + "Z",
         },
     }
-    return payload
-
-
 
 __all__ = [
     "DATA_PATH",
     "load_dashboard_data",
     "save_dashboard_data",
     "process_dashboard_upload",
+    "_load_relevant_dataframe",
+    "_extract_rows",
 ]
+

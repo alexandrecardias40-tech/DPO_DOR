@@ -132,9 +132,15 @@ export default function Home() {
     });
   }, [allData, selectedDescription, selectedPi]);
 
-  // Calculate totals from filtered data
+  // Calculate totals from filtered data (or all data when no filter active)
   const totals = useMemo(() => {
-    if (selectedDescription.length === 0) {
+    // Se nenhum filtro ativo → retorna lista vazia para zerar os KPIs
+    // Os totais só aparecem quando o usuário seleciona um filtro (Descrição ou PI)
+    const hasFilter = selectedDescription.length > 0 || selectedPi.length > 0;
+    const sourceData = hasFilter ? filteredData : [];
+
+
+    if (!sourceData || sourceData.length === 0) {
       return {
         media_mensal: 0,
         total_estimado: 0,
@@ -143,27 +149,18 @@ export default function Home() {
         total_rap_empenho: 0,
         total_necessario: 0,
         total_a_empenhar: 0,
-      };
-    }
-    if (!filteredData || filteredData.length === 0) {
-      return {
-        media_mensal: 0,
-        total_estimado: 0,
-        saldo_empenhos_2025: 0,
-        saldo_empenhos_rap: 0,
-        total_rap_empenho: 0,
-        total_necessario: 0,
-        total_a_empenhar: 0,
+        credito_disponivel: 0,
       };
     }
 
-    const total_estimado = filteredData.reduce((sum: number, item: any) => sum + (item.Total_Anual_Estimado || 0), 0);
+    const total_estimado = sourceData.reduce((sum: number, item: any) => sum + (item.Total_Anual_Estimado || 0), 0);
     const media_mensal = total_estimado / 12;
-    const saldo_empenhos_2025 = filteredData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_2025 || 0), 0);
-    const saldo_empenhos_rap = filteredData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_RAP || 0), 0);
+    const saldo_empenhos_2025 = sourceData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_2025 || 0), 0);
+    const saldo_empenhos_rap = sourceData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_RAP || 0), 0);
     const total_rap_empenho = saldo_empenhos_2025 + saldo_empenhos_rap;
-    const total_necessario = filteredData.reduce((sum: number, item: any) => sum + (item.Total_Necessario || 0), 0);
+    const total_necessario = sourceData.reduce((sum: number, item: any) => sum + (item.Total_Necessario || 0), 0);
     const total_a_empenhar = Math.max(total_estimado - total_rap_empenho, 0);
+    const credito_disponivel = sourceData.reduce((sum: number, item: any) => sum + Number(item.Saldo_Disponivel_NC || 0), 0);
 
     return {
       media_mensal,
@@ -173,8 +170,9 @@ export default function Home() {
       total_rap_empenho,
       total_necessario,
       total_a_empenhar,
+      credito_disponivel,
     };
-  }, [filteredData, selectedDescription]);
+  }, [filteredData, selectedDescription, selectedPi, allData]);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("pt-BR", {
@@ -425,6 +423,17 @@ export default function Home() {
             </CardHeader>
             <CardContent className="pt-0 pb-3 px-3">
               <div className="text-lg font-semibold text-slate-900">{formatCurrency(totals.total_a_empenhar)}</div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white border-l-4 border-l-teal-500">
+            <CardHeader className="py-1 px-3">
+              <CardTitle className="text-xs font-semibold text-slate-600 tracking-wide uppercase">Crédito Disponível</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-0 pb-3 px-3">
+              <div className="text-lg font-semibold text-slate-900">
+                {formatCurrency(totals.credito_disponivel)}
+              </div>
             </CardContent>
           </Card>
         </div>
