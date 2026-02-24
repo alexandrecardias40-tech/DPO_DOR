@@ -67,13 +67,16 @@ export default function UGRDetails() {
 
   // --- Intelligence & Calculations ---
 
-  // 1. Financials
-  const totalBudget = ugrStats?.Total_Anual_Estimado || 0;
-  const totalExecuted = ugrStats?.Total_Empenho_RAP || 0;
-  const balance = totalBudget - totalExecuted;
+  // 1. Financials — mesma lógica do Home.tsx (soma direta dos contratos)
+  const totalBudget = ugrContracts.reduce((sum: number, item: any) => sum + (item.Total_Anual_Estimado || 0), 0);
+  const saldo2025 = ugrContracts.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_2025 || 0), 0);
+  const saldoRAP = ugrContracts.reduce((sum: number, item: any) => sum + Number(item.Saldo_Empenhos_RAP || 0), 0);
+  // Total Empenhado (RAP + Empenho) = Saldo_Empenhos_2025 + Saldo_Empenhos_RAP
+  const totalExecuted = saldo2025 + saldoRAP;
+  // A Empenhar (Livre para execução) = Total Estimado - Total Empenhado
+  const balance = Math.max(totalBudget - totalExecuted, 0);
 
-  // Recalculate execution rate dynamically to ensure consistency with displayed values
-  // The pre-calculated field might be outdated or use different logic.
+  // Taxa de execução calculada dinamicamente para consistência
   const executionRate = totalBudget > 0 ? (totalExecuted / totalBudget) * 100 : 0;
 
   // 2. Monthly Data & Burn-up
@@ -496,7 +499,8 @@ export default function UGRDetails() {
                     .map((contract: any, idx: number) => {
                       // --- DEFINITIONS ---
                       const budget = contract.Total_Anual_Estimado || 0;
-                      const resources = contract.Total_Empenho_RAP || 0; // "O que tenho"
+                      // "O que tenho" (Garantir exatidão com o dashboard principal)
+                      const resources = Number(contract.Saldo_Empenhos_2025 || 0) + Number(contract.Saldo_Empenhos_RAP || 0);
 
                       // Hypothetical Ideal Rate (Teto)
                       const idealMonthlyCap = budget > 0 ? budget / 12 : 0;

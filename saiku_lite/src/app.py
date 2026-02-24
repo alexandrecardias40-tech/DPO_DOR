@@ -576,13 +576,28 @@ def _ensure_cpor_dataset_loaded() -> Optional[str]:
             df = df.drop(columns=columns_to_drop)
             app.logger.info(f"Removidas {len(columns_to_drop)} colunas de meses do dataset Saiku")
         
-        # 5. Manter apenas as 4 medidas solicitadas pelo usuário
-        # Medidas permitidas (com nomes aproximados):
+        # 5. Recalcular Total RAP+Empenho = Saldo Empenhos 2026 + Saldo de Empenhos RAP
+        # Garante consistência com o Dashboard Principal (mesma fórmula)
+        col_2026 = "Saldo Empenhos 2026" if "Saldo Empenhos 2026" in df.columns else None
+        col_rap = "Saldo_Empenhos_RAP" if "Saldo_Empenhos_RAP" in df.columns else None
+        if col_2026 and col_rap:
+            df["Total RAP+Empenho"] = df[col_2026].fillna(0) + df[col_rap].fillna(0)
+            app.logger.info("Total RAP+Empenho recalculado como soma de Saldo Empenhos 2026 + Saldo_Empenhos_RAP")
+        elif "Total_Empenho_RAP" in df.columns:
+            # Fallback: usa o campo original se não for possível recalcular
+            df["Total RAP+Empenho"] = df["Total_Empenho_RAP"]
+        
+        # Remover Total_Empenho_RAP original (já recalculado acima)
+        if "Total_Empenho_RAP" in df.columns:
+            df = df.drop(columns=["Total_Empenho_RAP"])
+        
+        # 6. Manter apenas as 4 medidas solicitadas pelo usuário
+        # Medidas permitidas (com nomes finais após transformações):
         allowed_measures = {
             "Saldo Disponível NC": ["Saldo_Disponivel_NC", "Saldo Disponível NC", "Saldo Disponivel NC"],
-            "Saldo Empenhos 2026": ["Saldo_Empenhos_2025", "Saldo Empenhos 2026", "Saldo_Empenhos_2026"],
+            "Saldo Empenhos 2026": ["Saldo Empenhos 2026"],
             "Saldo de Empenhos RAP": ["Saldo_Empenhos_RAP", "Saldo de Empenhos RAP", "Saldo Empenhos RAP"],
-            "Total RAP+Empenho": ["Total_Empenho_RAP", "Total RAP+Empenho", "Total Empenho RAP"]
+            "Total RAP+Empenho": ["Total RAP+Empenho"]
         }
         
         # Identificar colunas numéricas (medidas) vs dimensões (texto)

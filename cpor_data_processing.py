@@ -715,10 +715,10 @@ def _build_ugr_analysis(rows: Sequence[Dict[str, object]]) -> List[Dict[str, obj
         s25 = _normalize_number(row.get("Saldo_Empenhos_2025"))
         srap = _normalize_number(row.get("Saldo_Empenhos_RAP"))
         
-        comprometido = _normalize_number(row.get("Total_Empenho_RAP"))
-        if not comprometido:
-            comprometido = s25 + srap
-            
+        # O Dashboard Principal calcula o Total Empenhado (RAP + Empenho) 
+        # exclusivamente pela soma desses dois campos:
+        comprometido = s25 + srap
+
         stats["Total_Anual_Estimado"] += total_estimado
         stats["Executado_Total"] += executado
         stats["Total_Empenho_RAP"] += comprometido
@@ -750,9 +750,8 @@ def _build_kpis(rows: Sequence[Dict[str, object]]) -> Dict[str, object]:
     executado = sum(_normalize_number(r.get("Executado_Total")) for r in rows)
     comprometido = 0.0
     for row in rows:
-        rap = _normalize_number(row.get("Total_Empenho_RAP"))
         saldo = _normalize_number(row.get("Saldo_Empenhos_2025")) + _normalize_number(row.get("Saldo_Empenhos_RAP"))
-        comprometido += rap if rap else saldo
+        comprometido += saldo
     saldo = max(total_estimado - executado, 0.0)
     percentual = (executado / total_estimado * 100) if total_estimado else 0.0
     today = date.today()

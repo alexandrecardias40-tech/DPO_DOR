@@ -31,7 +31,7 @@ type UGRAnalysisItem = {
 export default function ComparisonsUGR() {
   const { data: ugrAnalysis, isLoading: ugrLoading } = trpc.budget.getUGRAnalysis.useQuery();
   const { data: allData, isLoading: allDataLoading } = trpc.budget.getAllData.useQuery();
-  
+
   const [selectedUGRs, setSelectedUGRs] = useState<string[]>([]);
   const [filterInput, setFilterInput] = useState("");
   const [chartType, setChartType] = useState<'bar' | 'scatter' | 'composed' | 'network'>('network');
@@ -73,7 +73,7 @@ export default function ComparisonsUGR() {
   const suggestions = useMemo(() => {
     if (!ugrAnalysis || filterInput.length === 0) return [];
     return ugrAnalysis
-      .filter((u: any) => 
+      .filter((u: any) =>
         u.UGR.toLowerCase().includes(filterInput.toLowerCase()) &&
         !selectedUGRs.includes(u.UGR)
       )
@@ -91,10 +91,10 @@ export default function ComparisonsUGR() {
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={filteredData} margin={{ top: 20, right: 30, left: 20, bottom: 100 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis 
-              dataKey="UGR" 
-              angle={-45} 
-              textAnchor="end" 
+            <XAxis
+              dataKey="UGR"
+              angle={-45}
+              textAnchor="end"
               height={120}
               interval={0}
               tick={{ fontSize: 12 }}
@@ -121,17 +121,17 @@ export default function ComparisonsUGR() {
         <ResponsiveContainer width="100%" height={400}>
           <ScatterChart margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis 
-              dataKey="Total_Anual_Estimado" 
-              name="Orçamento" 
+            <XAxis
+              dataKey="Total_Anual_Estimado"
+              name="Orçamento"
               label={{ value: 'Orçamento (R$)', position: 'insideBottomRight', offset: -5 }}
             />
-            <YAxis 
-              dataKey="Total_Empenho_RAP" 
-              name="Executado" 
+            <YAxis
+              dataKey="Total_Empenho_RAP"
+              name="Executado"
               label={{ value: 'Executado (R$)', angle: -90, position: 'insideLeft' }}
             />
-            <Tooltip 
+            <Tooltip
               cursor={{ strokeDasharray: '3 3' }}
               formatter={(value: any) => formatCurrency(value)}
               labelFormatter={(value: any) => `UGR: ${value}`}
@@ -150,10 +150,10 @@ export default function ComparisonsUGR() {
       <ResponsiveContainer width="100%" height={400}>
         <ComposedChart data={filteredData} margin={{ top: 20, right: 30, left: 20, bottom: 100 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-          <XAxis 
-            dataKey="UGR" 
-            angle={-45} 
-            textAnchor="end" 
+          <XAxis
+            dataKey="UGR"
+            angle={-45}
+            textAnchor="end"
             height={120}
             interval={0}
             tick={{ fontSize: 12 }}
@@ -201,7 +201,7 @@ export default function ComparisonsUGR() {
                 onChange={(e) => setFilterInput(e.target.value)}
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              
+
               {/* Sugestões */}
               {suggestions.length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-300 rounded-lg shadow-lg z-10">
@@ -254,11 +254,10 @@ export default function ComparisonsUGR() {
             <button
               key={type}
               onClick={() => setChartType(type)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors capitalize ${
-                chartType === type
+              className={`px-4 py-2 rounded-lg font-medium transition-colors capitalize ${chartType === type
                   ? 'bg-blue-600 text-white'
                   : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
-              }`}
+                }`}
             >
               {type === 'network'
                 ? 'Rede Viva'
@@ -314,11 +313,10 @@ export default function ComparisonsUGR() {
                           <td className="px-4 py-3 text-right text-slate-600">{formatCurrency(ugr.Total_Empenho_RAP)}</td>
                           <td className="px-4 py-3 text-right text-slate-600">{formatCurrency(saldo)}</td>
                           <td className="px-4 py-3 text-right">
-                            <span className={`font-bold ${
-                              ugr.Percentual_Execucao > 75 ? 'text-green-600' :
-                              ugr.Percentual_Execucao > 50 ? 'text-blue-600' :
-                              'text-orange-600'
-                            }`}>
+                            <span className={`font-bold ${ugr.Percentual_Execucao > 75 ? 'text-green-600' :
+                                ugr.Percentual_Execucao > 50 ? 'text-blue-600' :
+                                  'text-orange-600'
+                              }`}>
                               {formatPercent(ugr.Percentual_Execucao)}
                             </span>
                           </td>
