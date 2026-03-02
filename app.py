@@ -340,7 +340,6 @@ def create_application() -> DispatcherMiddleware:
 
 application = create_application()
 
-
 # --- Email Monitor Background Thread ---
 def start_email_monitor():
     """Inicia o monitoramento de email em uma thread separada se configurado."""
@@ -361,25 +360,36 @@ def start_email_monitor():
     except Exception as e:
         print(f"Failed to start email monitor: {e}")
 
-def main():
-
-    # Iniciar keep-alive para evitar que o serviço durma no Render (plano free)
+# --- Inicialização dos serviços de background ---
+# IMPORTANTE: estas chamadas ficam no nível do módulo para que o Gunicorn
+# (que nunca chama main()) também as execute ao importar app:application
+def _start_background_services():
+    """Inicia serviços de background (keep-alive e monitor de email)."""
+    # Keep-alive: evita que o Render free-tier durma
     try:
         from keep_alive import start_keep_alive
         start_keep_alive()
     except Exception as e:
         print(f"⚠️ Keep-alive não iniciado: {e}")
 
-    # Iniciar monitor de email em background
+    # Monitor de email
     start_email_monitor()
-    
-    # Using 8050 as requested to replicate, but if 8050 is busy we might need to kill it first in the terminal.
+
+# Executar apenas uma vez por processo (evita duplicação com múltiplos workers)
+if os.environ.get("_EMAIL_MONITOR_STARTED") != "1":
+    os.environ["_EMAIL_MONITOR_STARTED"] = "1"
+    _start_background_services()
+
+
+def main():
+    # Os serviços de background já foram iniciados no nível do módulo.
+    # main() só é chamada quando rodando localmente com `python app.py`.
     port = int(os.getenv("PORT", "8050"))
     run_simple(
         "0.0.0.0",
         port,
         application,
-        use_reloader=True,
+        use_reloader=False,  # reloader=True conflita com threads daemon
         use_debugger=False,
         threaded=True,
     )
