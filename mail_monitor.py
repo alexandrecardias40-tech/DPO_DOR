@@ -120,17 +120,36 @@ def check_emails():
                 processed = False
                 error_msg = None
 
+                # MIME types de planilhas Excel
+                EXCEL_MIMETYPES = {
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # .xlsx
+                    "application/vnd.ms-excel",   # .xls
+                    "application/octet-stream",   # genérico (alguns servidores usam isso)
+                    "application/zip",            # xlsx é um zip internamente
+                }
+
                 if msg.is_multipart():
                     for part in msg.walk():
                         content_disposition = str(part.get("Content-Disposition", ""))
-                        if "attachment" not in content_disposition:
-                            continue
+                        content_type = str(part.get_content_type() or "").lower()
                         filename = part.get_filename()
-                        if not filename:
+
+                        # Detecta Excel por: 
+                        #  (a) filename termina em .xlsx/.xls  — independente do Content-Disposition
+                        #  (b) MIME type é de planilha + tem filename
+                        is_excel_by_name = filename and filename.lower().endswith((".xlsx", ".xls"))
+                        is_excel_by_mime = content_type in EXCEL_MIMETYPES and filename
+
+                        if not (is_excel_by_name or is_excel_by_mime):
                             continue
-                        if not filename.lower().endswith((".xlsx", ".xls")):
-                            _log(f"Anexo ignorado (não é Excel): {filename}")
-                            continue
+
+                        # Log para diagnóstico: mostra como o SERPRO enviou o arquivo
+                        _log(
+                            f"Anexo Excel detectado: '{filename}' | "
+                            f"Content-Disposition: '{content_disposition.strip()}' | "
+                            f"Content-Type: '{content_type}'"
+                        )
+
                         try:
                             result = process_attachment(part, filename)
                             processed = True
