@@ -365,6 +365,14 @@ def start_email_monitor():
 # (que nunca chama main()) também as execute ao importar app:application
 def _start_background_services():
     """Inicia serviços de background (keep-alive e monitor de email)."""
+    # Recuperação de dados no boot: se o último upload é mais novo que o JSON do Git,
+    # reprocessa automaticamente para não perder dados após redeploy do Render.
+    try:
+        from cpor_data_processing import recover_latest_upload_on_boot
+        recover_latest_upload_on_boot()
+    except Exception as e:
+        print(f"⚠️ Boot recovery falhou: {e}")
+
     # Keep-alive: evita que o Render free-tier durma
     try:
         from keep_alive import start_keep_alive

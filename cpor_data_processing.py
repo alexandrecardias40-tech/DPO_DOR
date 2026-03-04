@@ -288,6 +288,55 @@ def save_dashboard_data(payload: Dict[str, object]) -> None:
     )
 
 
+def recover_latest_upload_on_boot() -> bool:
+    """
+    Chamada no boot do servidor: se o arquivo de upload mais recente em uploads/cpor/
+    for MAIS NOVO que o dashboard_data.json atual, reprocessa esse upload automaticamente.
+
+    Isso garante que, após um redeploy do Render (que reseta o dashboard_data.json
+    para a versão do Git), os dados mais recentes enviados por email sejam restaurados.
+
+    Retorna True se fez reprocessamento, False caso contrário.
+    """
+    upload_dir = BASE_DIR / "uploads" / "cpor"
+    if not upload_dir.exists():
+        return False
+
+    # Encontra o arquivo de upload mais recente
+    candidates = list(upload_dir.glob("*.xlsx")) + list(upload_dir.glob("*.xls"))
+    if not candidates:
+        return False
+
+    latest_upload = max(candidates, key=lambda f: f.stat().st_mtime)
+    upload_mtime = latest_upload.stat().st_mtime
+
+    # Compara com o mtime do dashboard_data.json atual
+    if DATA_PATH.exists():
+        data_mtime = DATA_PATH.stat().st_mtime
+        if data_mtime >= upload_mtime:
+            # JSON já está atualizado, nada a fazer
+            return False
+
+    # O upload é mais novo que o JSON → reprocessar
+    print(
+        f"[Boot Recovery] Upload mais recente ({latest_upload.name}) é mais novo que "
+        f"dashboard_data.json. Reprocessando automaticamente...",
+        flush=True,
+    )
+    try:
+        from data_manager import ingest_dashboard_spreadsheet
+        file_bytes = latest_upload.read_bytes()
+        result = ingest_dashboard_spreadsheet(file_bytes, latest_upload.name)
+        rows = result.get("linhas_processadas", 0)
+        print(f"[Boot Recovery] Reprocessamento concluído. Linhas: {rows}", flush=True)
+        return True
+    except Exception as e:
+        print(f"[Boot Recovery] ERRO ao reprocessar: {e}", flush=True)
+        return False
+
+
+
+
 def _resolve_fixed_path() -> Optional[Path]:
     for name in FIXED_DATA_CANDIDATES:
         path = BASE_DIR / name
@@ -1174,6 +1223,7 @@ __all__ = [
     "load_dashboard_data",
     "save_dashboard_data",
     "process_dashboard_upload",
+    "recover_latest_upload_on_boot",
     "_load_relevant_dataframe",
     "_extract_rows",
 ]
