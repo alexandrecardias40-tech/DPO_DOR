@@ -7,7 +7,7 @@ import smtplib
 import socket
 from email.header import decode_header
 from email.message import EmailMessage
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # ─── Utilitários ──────────────────────────────────────────────────────────────
 
@@ -30,13 +30,11 @@ def format_subject(subject_raw):
             subject += str(decoded_part)
     return subject
 
+
 # ─── Diagnóstico MIME ──────────────────────────────────────────────────────────
 
 def _log_mime_structure(msg, prefix=""):
-    """
-    Loga a estrutura MIME completa de um email.
-    Fundamental para entender como o Tesouro Gerencial/SERPRO envia o arquivo.
-    """
+    """Loga a estrutura MIME completa (útil para diagnosticar formato SERPRO)."""
     content_type = msg.get_content_type()
     filename = msg.get_filename()
     disposition = str(msg.get("Content-Disposition", "")).strip()
@@ -59,25 +57,21 @@ def _log_mime_structure(msg, prefix=""):
 # ─── Detecção de anexos Excel ──────────────────────────────────────────────────
 
 EXCEL_MIMETYPES = {
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # .xlsx
-    "application/vnd.ms-excel",    # .xls
-    "application/octet-stream",    # genérico
-    "application/zip",             # xlsx é internamente um zip
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.ms-excel",
+    "application/octet-stream",
+    "application/zip",
 }
+
 
 def _find_excel_parts(msg):
     """
     Percorre toda a estrutura MIME e retorna lista de (part, filename)
-    para todos os anexos Excel encontrados.
-
-    Funciona com:
-    - Emails multipart (formato padrão com corpo + anexo)
-    - Emails single-part (apenas o anexo, sem corpo de texto)
-    - Emails do Tesouro Gerencial/SERPRO (que podem usar inline ou outros formatos)
+    para todos os anexos Excel. Funciona com emails multipart e single-part.
     """
     results = []
 
-    # Caso: email não-multipart (é direto um único arquivo)
+    # Email não-multipart: pode ser ele mesmo o anexo
     if not msg.is_multipart():
         content_type = str(msg.get_content_type() or "").lower()
         filename = msg.get_filename()
@@ -86,10 +80,10 @@ def _find_excel_parts(msg):
             results.append((msg, filename or "attachment.xlsx"))
         return results
 
-    # Caso: email multipart — percorre TODAS as partes recursivamente
+    # Email multipart: percorre todas as partes
     for part in msg.walk():
         if part.is_multipart():
-            continue  # walk() já desce nos filhos
+            continue
         content_type = str(part.get_content_type() or "").lower()
         filename = part.get_filename()
         is_excel_by_name = filename and filename.lower().endswith((".xlsx", ".xls"))
@@ -146,12 +140,13 @@ def process_attachment(part, filename):
 
 def check_emails():
     """
-    Verifica e-mails recentes e processa planilhas Excel em anexo.
+    Verifica APENAS e-mails NOVOS (não lidos) e processa planilhas Excel.
 
-    Estratégia dupla de busca:
-    1. E-mails NÃO LIDOS (UNSEEN) — captura emails novos
-    2. E-mails das ÚLTIMAS 48h — captura emails que o usuário já leu
-       (ex: abriu o email do Tesouro Gerencial antes do monitor processar)
+    Após processar um email com sucesso, marca-o como LIDO (SEEN) no Gmail.
+    Isso garante que:
+    - Nunca seja reprocessado, mesmo após reinício do servidor
+    - Não haja loop infinito de deploy no Render
+    - O GitHub sempre tenha o dado mais atual (via auto-commit no data_manager)
     """
     email_user = os.environ.get("EMAIL_USER")
     email_pass = os.environ.get("EMAIL_PASSWORD")
@@ -168,28 +163,17 @@ def check_emails():
         _log("Login IMAP bem-sucedido.")
         mail.select("INBOX")
 
-        # Busca 1: não lidos
-        status1, msgs1 = mail.search(None, "UNSEEN")
-        unseen_ids = set(msgs1[0].split()) if status1 == "OK" and msgs1[0] else set()
-
-        # Busca 2: últimas 48h (inclui lidos)
-        since_date = (datetime.utcnow() - timedelta(hours=48)).strftime("%d-%b-%Y")
-        status2, msgs2 = mail.search(None, f'(SINCE "{since_date}")')
-        recent_ids = set(msgs2[0].split()) if status2 == "OK" and msgs2[0] else set()
-
-        all_ids = unseen_ids | recent_ids
-
-        if not all_ids:
-            _log(f"Nenhum e-mail para processar. ({datetime.utcnow().strftime('%H:%M:%S')} UTC)")
+        # Busca APENAS emails não lidos (UNSEEN)
+        # Após processar, marcamos como lido → nunca reprocessa
+        status, messages = mail.search(None, "UNSEEN")
+        if status != "OK" or not messages[0]:
+            _log(f"Nenhum e-mail novo. ({datetime.utcnow().strftime('%H:%M:%S')} UTC)")
             return True
 
-        _log(
-            f"{len(unseen_ids)} não lido(s) + "
-            f"{len(recent_ids - unseen_ids)} lido(s) recentes = "
-            f"{len(all_ids)} e-mail(s) para analisar."
-        )
+        email_ids = messages[0].split()
+        _log(f"{len(email_ids)} e-mail(s) novo(s) encontrado(s).")
 
-        for email_id in sorted(all_ids):
+        for email_id in email_ids:
             res, msg_data = mail.fetch(email_id, "(RFC822)")
             for response_part in msg_data:
                 if not isinstance(response_part, tuple):
@@ -201,14 +185,16 @@ def check_emails():
                 date_header = msg.get("Date", "?")
                 _log(f"--- E-mail de [{from_email}] em {date_header}: '{subject}'")
 
-                # Loga estrutura MIME completa (diagnóstico Tesouro Gerencial)
+                # Loga estrutura MIME completa (diagnóstico)
                 _log_mime_structure(msg)
 
-                # Encontra anexos Excel (funciona com multipart e single-part)
+                # Encontra anexos Excel
                 excel_parts = _find_excel_parts(msg)
 
                 if not excel_parts:
-                    _log("  → Sem anexo Excel neste e-mail. Ignorando.")
+                    _log("  → Sem anexo Excel. Marcando como lido e ignorando.")
+                    # Marca como lido para não processar de novo
+                    mail.store(email_id, "+FLAGS", "\\Seen")
                     continue
 
                 processed = False
@@ -225,7 +211,7 @@ def check_emails():
                         result = process_attachment(part, filename)
                         processed = True
                         count = result.get("linhas_processadas", 0) if result else 0
-                        _log(f"  ✅ Dashboard atualizado! Linhas importadas: {count}")
+                        _log(f"  ✅ Dashboard atualizado! Linhas: {count}")
                         send_reply(
                             from_email, subject,
                             f"Dashboard atualizado com sucesso!\n\n"
@@ -243,6 +229,12 @@ def check_emails():
                             f"Verifique se a planilha está no formato correto."
                         )
 
+                # ── Marca como LIDO após processar ─────────────────────────────
+                # IMPORTANTE: garante que este email NUNCA seja reprocessado,
+                # mesmo após reinício do servidor ou redeploy do Render.
+                mail.store(email_id, "+FLAGS", "\\Seen")
+                _log(f"  → E-mail marcado como lido (não será reprocessado).")
+
         return True
 
     except imaplib.IMAP4.error as e:
@@ -250,11 +242,10 @@ def check_emails():
         if "AUTHENTICATIONFAILED" in err_str or "Invalid credentials" in err_str:
             _log(
                 f"IMAP ERRO DE AUTENTICAÇÃO: {err_str}\n"
-                "  → Gere nova senha em: myaccount.google.com/apppasswords\n"
-                "  → Verifique se IMAP está ativo no Gmail"
+                "  → Gere nova Senha de App em: myaccount.google.com/apppasswords"
             )
         elif "UNAVAILABLE" in err_str or "Too many simultaneous" in err_str:
-            _log(f"IMAP INDISPONÍVEL (bloqueio temporário do Google): {err_str}")
+            _log(f"IMAP INDISPONÍVEL (bloqueio temporário Google): {err_str}")
         else:
             _log(f"IMAP erro: {type(e).__name__}: {err_str}")
         return True
@@ -279,8 +270,8 @@ def check_emails():
 # ─── Loop principal ────────────────────────────────────────────────────────────
 
 def run_email_monitor():
-    """Loop principal com backoff em caso de erros consecutivos."""
-    _log("Monitor de e-mail iniciado. Verificando a cada 60 segundos.")
+    """Loop principal com backoff em caso de erros."""
+    _log("Monitor de e-mail iniciado. Verificando apenas emails NÃO LIDOS a cada 60s.")
     consecutive_failures = 0
 
     while True:
@@ -290,7 +281,7 @@ def run_email_monitor():
                 consecutive_failures = 0
                 time.sleep(60)
             else:
-                _log("Credenciais ausentes. Aguardando 5 minutos para nova tentativa.")
+                _log("Credenciais ausentes. Nova tentativa em 5 minutos.")
                 time.sleep(300)
         except Exception as e:
             consecutive_failures += 1
