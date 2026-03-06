@@ -57,6 +57,8 @@ export type BudgetMetadata = {
   source_file_name?: string;
   source_sheet?: string;
   updated_at?: string;
+  updated_by_email?: string | null;
+  source_file?: string | null;
   workbook_sheets?: string[];
 };
 

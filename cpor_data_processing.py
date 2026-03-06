@@ -465,52 +465,88 @@ def _score_columns(columns: Sequence[str]) -> int:
     return score
 
 
+def _process_raw_dataframe(raw: pd.DataFrame, best_df: Optional[pd.DataFrame], best_score: int) -> Tuple[Optional[pd.DataFrame], int]:
+    if raw.empty:
+        return best_df, best_score
+    limit = min(20, len(raw))
+    for header_idx in range(limit):
+        header_row = raw.iloc[header_idx].fillna("").astype(str).tolist()
+        score = _score_columns(header_row)
+        if score == 0:
+            continue
+        data = raw.iloc[header_idx + 1 :].copy()
+        if data.empty:
+            continue
+        header = []
+        used = {}
+        for i, value in enumerate(header_row):
+            label = value.strip()
+            if not label:
+                prev = header_row[i-1].strip() if i > 0 else ""
+                if prev:
+                    label = f"{prev} Nome"
+                else:
+                    label = f"col_{len(header)+1}"
+            key = sanitize(label)
+            count = used.get(key, 0)
+            used[key] = count + 1
+            if count:
+                label = f"{label}_{count+1}"
+            header.append(label)
+        data.columns = header
+        data = data.dropna(how="all")
+        if data.empty:
+            continue
+        better_len = len(data)
+        current_len = len(best_df) if isinstance(best_df, pd.DataFrame) else -1
+        if score > best_score or (score == best_score and better_len > current_len):
+            best_df = data.copy()
+            best_score = score
+            if score == len(FIELD_ALIASES):
+                break
+    return best_df, best_score
+
+
 def _load_relevant_dataframe(file_bytes: bytes) -> pd.DataFrame:
-    excel = pd.ExcelFile(BytesIO(file_bytes))
     best_df: Optional[pd.DataFrame] = None
     best_score = -1
-    for sheet in excel.sheet_names:
-        raw = excel.parse(sheet, header=None)
-        if raw.empty:
-            continue
-        limit = min(20, len(raw))
-        for header_idx in range(limit):
-            header_row = raw.iloc[header_idx].fillna("").astype(str).tolist()
-            score = _score_columns(header_row)
-            if score == 0:
-                continue
-            data = raw.iloc[header_idx + 1 :].copy()
-            if data.empty:
-                continue
-            header = []
-            used = {}
-            for i, value in enumerate(header_row):
-                label = value.strip()
-                if not label:
-                    prev = header_row[i-1].strip() if i > 0 else ""
-                    if prev:
-                        label = f"{prev} Nome"
-                    else:
-                        label = f"col_{len(header)+1}"
-                key = sanitize(label)
-                count = used.get(key, 0)
-                used[key] = count + 1
-                if count:
-                    label = f"{label}_{count+1}"
-                header.append(label)
-            data.columns = header
-            data = data.dropna(how="all")
-            if data.empty:
-                continue
-            better_len = len(data)
-            current_len = len(best_df) if isinstance(best_df, pd.DataFrame) else -1
-            if score > best_score or (score == best_score and better_len > current_len):
-                best_df = data.copy()
-                best_score = score
-                if score == len(FIELD_ALIASES):
+
+    # Try Excel
+    try:
+        excel = pd.ExcelFile(BytesIO(file_bytes))
+        for sheet in excel.sheet_names:
+            raw = excel.parse(sheet, header=None)
+            best_df, best_score = _process_raw_dataframe(raw, best_df, best_score)
+            if best_score == len(FIELD_ALIASES):
+                break
+    except Exception:
+        pass
+
+    # Try HTML (Tesouro Gerencial frequently exports HTML tables saved with .xls extension)
+    if best_score < 1:
+        for encoding in ["utf-8", "latin1"]:
+            try:
+                dfs = pd.read_html(BytesIO(file_bytes), encoding=encoding)
+                for raw in dfs:
+                    best_df, best_score = _process_raw_dataframe(raw, best_df, best_score)
+                    if best_score == len(FIELD_ALIASES):
+                        break
+                if best_score >= 1:
                     break
-        if best_score == len(FIELD_ALIASES):
-            break
+            except Exception:
+                pass
+
+    # Try CSV
+    if best_score < 1:
+        for encoding in ["utf-8", "latin1"]:
+            try:
+                raw = pd.read_csv(BytesIO(file_bytes), sep=None, engine="python", header=None, encoding=encoding)
+                best_df, best_score = _process_raw_dataframe(raw, best_df, best_score)
+                if best_score >= 1:
+                    break
+            except Exception:
+                pass
+
     if best_df is None:
         raise ValueError(
             "Não foi possível identificar colunas obrigatórias (Despesa, UGR, valores etc.) na planilha enviada."

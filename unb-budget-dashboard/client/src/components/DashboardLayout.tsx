@@ -266,14 +266,12 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
                     {new Date(metadata.updated_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                   </span>
                 </div>
-                {(metadata as any).updated_by_email && (
-                  <div className="flex justify-between gap-4 mt-1 pt-1 border-t border-slate-700">
-                    <span className="text-slate-400">Remetente:</span>
-                    <span className="text-blue-300 font-medium text-right max-w-[160px] break-all">
-                      {(metadata as any).updated_by_email}
-                    </span>
-                  </div>
-                )}
+                <div className="flex justify-between gap-4 mt-1 pt-1 border-t border-slate-700">
+                  <span className="text-slate-400">Remetente:</span>
+                  <span className="text-blue-300 font-medium text-right max-w-[160px] break-all">
+                    {(metadata as any).updated_by_email || 'Sistema (Upload direto)'}
+                  </span>
+                </div>
                 {(metadata as any).source_file && (
                   <div className="flex justify-between gap-4">
                     <span className="text-slate-400">Arquivo:</span>

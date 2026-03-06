@@ -68,7 +68,7 @@ def _find_excel_parts(msg):
     if not msg.is_multipart():
         content_type = str(msg.get_content_type() or "").lower()
         filename = msg.get_filename()
-        if (filename and filename.lower().endswith((".xlsx", ".xls"))) or \
+        if (filename and filename.lower().endswith((".xlsx", ".xls", ".csv"))) or \
            (content_type in EXCEL_MIMETYPES and filename):
             results.append((msg, filename or "attachment.xlsx"))
         return results
@@ -78,7 +78,7 @@ def _find_excel_parts(msg):
             continue
         content_type = str(part.get_content_type() or "").lower()
         filename = part.get_filename()
-        is_excel_by_name = filename and filename.lower().endswith((".xlsx", ".xls"))
+        is_excel_by_name = filename and filename.lower().endswith((".xlsx", ".xls", ".csv"))
         is_excel_by_mime = content_type in EXCEL_MIMETYPES and filename
         if is_excel_by_name or is_excel_by_mime:
             results.append((part, filename or "attachment.xlsx"))
