@@ -120,7 +120,12 @@ def _commit_dashboard_data_to_github(source_name: str) -> bool:
         return False
 
 
-def ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> dict:
+def ingest_dashboard_spreadsheet(
+    file_bytes: bytes,
+    source_name: str,
+    sender_email: str = None,
+    message_id: str = None,
+) -> dict:
     """
     Processa um arquivo Excel de dashboard (CPOR), salva, cria versão e retorna resumo.
 
@@ -130,6 +135,9 @@ def ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> dict:
       mescla apenas campos financeiros sobre a base existente
 
     Após salvar, commita o dashboard_data.json atualizado no GitHub automaticamente.
+    Parâmetros:
+      sender_email  - Email do remetente (exibido no tooltip do dashboard)
+      message_id    - Message-ID do email (para evitar reprocessamento)
     """
     # Backup antes de alterar
     try:
@@ -152,7 +160,7 @@ def ingest_dashboard_spreadsheet(file_bytes: bytes, source_name: str) -> dict:
             print("[Upload] Sem base existente no dashboard. BI tratada como base inicial.")
             existing = None
 
-    payload = process_dashboard_upload(file_bytes, existing)
+    payload = process_dashboard_upload(file_bytes, existing, sender_email=sender_email, source_file=source_name)
     save_dashboard_data(payload)
     upload_path = store_cpor_upload(source_name, file_bytes)
 

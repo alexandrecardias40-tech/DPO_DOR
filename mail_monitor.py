@@ -7,18 +7,16 @@ import smtplib
 import socket
 from email.header import decode_header
 from email.message import EmailMessage
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # ─── Utilitários ──────────────────────────────────────────────────────────────
 
 def _log(msg: str):
-    """Log com timestamp para facilitar diagnóstico nos logs do Render."""
     ts = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
     print(f"[EmailMonitor {ts}] {msg}", flush=True)
 
 
 def format_subject(subject_raw):
-    """Decodifica o assunto do e-mail."""
     if not subject_raw:
         return "(sem assunto)"
     decoded_list = decode_header(subject_raw)
@@ -34,7 +32,6 @@ def format_subject(subject_raw):
 # ─── Diagnóstico MIME ──────────────────────────────────────────────────────────
 
 def _log_mime_structure(msg, prefix=""):
-    """Loga a estrutura MIME completa (útil para diagnosticar formato SERPRO)."""
     content_type = msg.get_content_type()
     filename = msg.get_filename()
     disposition = str(msg.get("Content-Disposition", "")).strip()
@@ -65,13 +62,9 @@ EXCEL_MIMETYPES = {
 
 
 def _find_excel_parts(msg):
-    """
-    Percorre toda a estrutura MIME e retorna lista de (part, filename)
-    para todos os anexos Excel. Funciona com emails multipart e single-part.
-    """
+    """Retorna lista de (part, filename) para todos os anexos Excel no email."""
     results = []
 
-    # Email não-multipart: pode ser ele mesmo o anexo
     if not msg.is_multipart():
         content_type = str(msg.get_content_type() or "").lower()
         filename = msg.get_filename()
@@ -80,7 +73,6 @@ def _find_excel_parts(msg):
             results.append((msg, filename or "attachment.xlsx"))
         return results
 
-    # Email multipart: percorre todas as partes
     for part in msg.walk():
         if part.is_multipart():
             continue
@@ -94,10 +86,42 @@ def _find_excel_parts(msg):
     return results
 
 
+# ─── Rastreio de emails processados ───────────────────────────────────────────
+
+def _get_processed_ids() -> set:
+    """Carrega o conjunto de Message-IDs já processados do dashboard_data.json."""
+    try:
+        from cpor_data_processing import load_dashboard_data
+        data = load_dashboard_data()
+        ids = data.get("metadata", {}).get("processed_email_ids", [])
+        return set(ids)
+    except Exception:
+        return set()
+
+
+def _add_processed_id(message_id: str):
+    """Adiciona um Message-ID ao conjunto de processados e salva."""
+    if not message_id:
+        return
+    try:
+        from cpor_data_processing import load_dashboard_data, save_dashboard_data
+        data = load_dashboard_data()
+        ids = set(data.get("metadata", {}).get("processed_email_ids", []))
+        ids.add(message_id)
+        # Mantém apenas os últimos 200 IDs para não crescer indefinidamente
+        if len(ids) > 200:
+            ids = set(list(ids)[-200:])
+        if "metadata" not in data:
+            data["metadata"] = {}
+        data["metadata"]["processed_email_ids"] = list(ids)
+        save_dashboard_data(data)
+    except Exception as e:
+        _log(f"Aviso: não foi possível salvar processed_email_ids: {e}")
+
+
 # ─── Envio de resposta ─────────────────────────────────────────────────────────
 
 def send_reply(to_email, subject, body):
-    """Envia resposta automática via SMTP."""
     email_user = os.environ.get("EMAIL_USER")
     email_pass = os.environ.get("EMAIL_PASSWORD")
     if not email_user or not email_pass:
@@ -122,7 +146,7 @@ def send_reply(to_email, subject, body):
 
 # ─── Processamento de anexo ────────────────────────────────────────────────────
 
-def process_attachment(part, filename):
+def process_attachment(part, filename, sender_email=None, message_id=None):
     """Lê o anexo e chama a ingestão de dados."""
     from data_manager import ingest_dashboard_spreadsheet
 
@@ -131,8 +155,13 @@ def process_attachment(part, filename):
         _log(f"Anexo '{filename}' vazio, ignorado.")
         return None
 
-    _log(f"Processando anexo: {filename} ({len(file_bytes)} bytes)")
-    result = ingest_dashboard_spreadsheet(file_bytes, filename)
+    _log(f"Processando anexo: {filename} ({len(file_bytes)} bytes) de {sender_email}")
+    result = ingest_dashboard_spreadsheet(
+        file_bytes,
+        filename,
+        sender_email=sender_email,
+        message_id=message_id,
+    )
     return result
 
 
@@ -140,13 +169,14 @@ def process_attachment(part, filename):
 
 def check_emails():
     """
-    Verifica APENAS e-mails NOVOS (não lidos) e processa planilhas Excel.
+    Verifica e-mails e processa planilhas Excel.
 
-    Após processar um email com sucesso, marca-o como LIDO (SEEN) no Gmail.
-    Isso garante que:
-    - Nunca seja reprocessado, mesmo após reinício do servidor
-    - Não haja loop infinito de deploy no Render
-    - O GitHub sempre tenha o dado mais atual (via auto-commit no data_manager)
+    Estratégia:
+    1. Busca e-mails NÃO LIDOS (UNSEEN) — emails novos
+    2. Busca e-mails das ÚLTIMAS 24h — cobre emails que foram lidos antes do monitor
+
+    Para evitar reprocessar o mesmo email duas vezes usamos Message-ID como chave,
+    armazenado em dashboard_data.json (persistido via GitHub auto-commit).
     """
     email_user = os.environ.get("EMAIL_USER")
     email_pass = os.environ.get("EMAIL_PASSWORD")
@@ -163,55 +193,77 @@ def check_emails():
         _log("Login IMAP bem-sucedido.")
         mail.select("INBOX")
 
-        # Busca APENAS emails não lidos (UNSEEN)
-        # Após processar, marcamos como lido → nunca reprocessa
-        status, messages = mail.search(None, "UNSEEN")
-        if status != "OK" or not messages[0]:
-            _log(f"Nenhum e-mail novo. ({datetime.utcnow().strftime('%H:%M:%S')} UTC)")
+        # Busca 1: não lidos
+        status1, msgs1 = mail.search(None, "UNSEEN")
+        unseen_ids = set(msgs1[0].split()) if status1 == "OK" and msgs1[0] else set()
+
+        # Busca 2: últimas 24h (captura emails lidos antes do monitor rodar)
+        since_date = (datetime.utcnow() - timedelta(hours=24)).strftime("%d-%b-%Y")
+        status2, msgs2 = mail.search(None, f'(SINCE "{since_date}")')
+        recent_ids = set(msgs2[0].split()) if status2 == "OK" and msgs2[0] else set()
+
+        all_ids = unseen_ids | recent_ids
+
+        if not all_ids:
+            _log(f"Nenhum e-mail para processar. ({datetime.utcnow().strftime('%H:%M:%S')} UTC)")
             return True
 
-        email_ids = messages[0].split()
-        _log(f"{len(email_ids)} e-mail(s) novo(s) encontrado(s).")
+        _log(
+            f"{len(unseen_ids)} não lido(s) + "
+            f"{len(recent_ids - unseen_ids)} lido(s) recentes = "
+            f"{len(all_ids)} e-mail(s) para analisar."
+        )
 
-        for email_id in email_ids:
+        # IDs já processados (persistidos no dashboard_data.json via GitHub)
+        processed_ids = _get_processed_ids()
+
+        for email_id in sorted(all_ids):
             res, msg_data = mail.fetch(email_id, "(RFC822)")
             for response_part in msg_data:
                 if not isinstance(response_part, tuple):
                     continue
 
                 msg = email.message_from_bytes(response_part[1])
-                subject = format_subject(msg["Subject"])
+                subject    = format_subject(msg["Subject"])
                 from_email = msg.get("From", "desconhecido")
-                date_header = msg.get("Date", "?")
-                _log(f"--- E-mail de [{from_email}] em {date_header}: '{subject}'")
+                date_hdr   = msg.get("Date", "?")
+                message_id = msg.get("Message-ID", "").strip()
 
-                # Loga estrutura MIME completa (diagnóstico)
+                _log(f"--- E-mail de [{from_email}] em {date_hdr}: '{subject}'")
+
+                # Verifica se já foi processado (via Message-ID)
+                if message_id and message_id in processed_ids:
+                    _log(f"  → Já processado anteriormente (Message-ID={message_id}). Ignorando.")
+                    continue
+
+                # Log da estrutura MIME completa (diagnóstico SERPRO)
                 _log_mime_structure(msg)
 
-                # Encontra anexos Excel
                 excel_parts = _find_excel_parts(msg)
 
                 if not excel_parts:
                     _log("  → Sem anexo Excel. Marcando como lido e ignorando.")
-                    # Marca como lido para não processar de novo
                     mail.store(email_id, "+FLAGS", "\\Seen")
+                    # Registra como processado para não verificar de novo
+                    if message_id:
+                        _add_processed_id(message_id)
                     continue
-
-                processed = False
-                error_msg = None
 
                 for part, filename in excel_parts:
                     content_type = str(part.get_content_type() or "").lower()
-                    disposition = str(part.get("Content-Disposition", "")).strip()
+                    disposition  = str(part.get("Content-Disposition", "")).strip()
                     _log(
                         f"  → Processando: '{filename}' | "
                         f"type='{content_type}' | disposition='{disposition}'"
                     )
                     try:
-                        result = process_attachment(part, filename)
-                        processed = True
+                        result = process_attachment(
+                            part, filename,
+                            sender_email=from_email,
+                            message_id=message_id,
+                        )
                         count = result.get("linhas_processadas", 0) if result else 0
-                        _log(f"  ✅ Dashboard atualizado! Linhas: {count}")
+                        _log(f"  ✅ Dashboard atualizado! Linhas: {count} | Remetente: {from_email}")
                         send_reply(
                             from_email, subject,
                             f"Dashboard atualizado com sucesso!\n\n"
@@ -220,32 +272,28 @@ def check_emails():
                             f"Este é um e-mail automático."
                         )
                     except Exception as e:
-                        error_msg = str(e)
-                        _log(f"  ❌ ERRO ao processar '{filename}': {error_msg}")
+                        _log(f"  ❌ ERRO ao processar '{filename}': {e}")
                         send_reply(
                             from_email, subject,
                             f"Erro ao processar o arquivo {filename}.\n\n"
-                            f"Detalhe: {error_msg}\n\n"
+                            f"Detalhe: {e}\n\n"
                             f"Verifique se a planilha está no formato correto."
                         )
 
-                # ── Marca como LIDO após processar ─────────────────────────────
-                # IMPORTANTE: garante que este email NUNCA seja reprocessado,
-                # mesmo após reinício do servidor ou redeploy do Render.
+                # Marca como lido e registra Message-ID como processado
                 mail.store(email_id, "+FLAGS", "\\Seen")
-                _log(f"  → E-mail marcado como lido (não será reprocessado).")
+                if message_id:
+                    _add_processed_id(message_id)
+                _log(f"  → E-mail marcado como lido e registrado como processado.")
 
         return True
 
     except imaplib.IMAP4.error as e:
         err_str = str(e)
         if "AUTHENTICATIONFAILED" in err_str or "Invalid credentials" in err_str:
-            _log(
-                f"IMAP ERRO DE AUTENTICAÇÃO: {err_str}\n"
-                "  → Gere nova Senha de App em: myaccount.google.com/apppasswords"
-            )
+            _log(f"IMAP ERRO DE AUTENTICAÇÃO: {err_str}")
         elif "UNAVAILABLE" in err_str or "Too many simultaneous" in err_str:
-            _log(f"IMAP INDISPONÍVEL (bloqueio temporário Google): {err_str}")
+            _log(f"IMAP INDISPONÍVEL: {err_str}")
         else:
             _log(f"IMAP erro: {type(e).__name__}: {err_str}")
         return True
@@ -270,8 +318,7 @@ def check_emails():
 # ─── Loop principal ────────────────────────────────────────────────────────────
 
 def run_email_monitor():
-    """Loop principal com backoff em caso de erros."""
-    _log("Monitor de e-mail iniciado. Verificando apenas emails NÃO LIDOS a cada 60s.")
+    _log("Monitor de e-mail iniciado. Verificando a cada 60s (UNSEEN + últimas 24h).")
     consecutive_failures = 0
 
     while True:

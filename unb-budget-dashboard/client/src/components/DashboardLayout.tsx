@@ -239,12 +239,55 @@ export default function DashboardLayout({ children, menuConfig }: DashboardLayou
       <main className="flex-1 overflow-auto bg-slate-50 relative">
         <div className="absolute top-4 right-8 z-10 flex flex-col items-end gap-2">
           {metadata?.updated_at && (
-            <div className="text-xs text-slate-500 bg-white/90 px-3 py-1.5 rounded-full border border-slate-200 shadow-sm backdrop-blur-sm flex items-center gap-2 transition-all hover:bg-white hover:shadow-md cursor-help" title={`Última atualização em: ${new Date(metadata.updated_at).toLocaleString('pt-BR')}`}>
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="font-medium">Atualizado:</span>
-              {new Date(metadata.updated_at).toLocaleDateString('pt-BR')}
+            <div className="relative group">
+              <div
+                className="text-xs text-slate-500 bg-white/90 px-3 py-1.5 rounded-full border border-slate-200 shadow-sm backdrop-blur-sm flex items-center gap-2 transition-all hover:bg-white hover:shadow-md cursor-help"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="font-medium">Atualizado:</span>
+                {new Date(metadata.updated_at).toLocaleDateString('pt-BR')}
+              </div>
+
+              {/* Tooltip rico — aparece ao passar o cursor */}
+              <div className="absolute right-0 top-full mt-2 z-50 hidden group-hover:flex flex-col gap-1 bg-slate-900 text-white text-xs rounded-xl shadow-xl p-3 min-w-[240px] border border-slate-700 pointer-events-none">
+                <div className="flex items-center gap-2 font-semibold text-emerald-400 mb-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  Última Atualização
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-400">Data:</span>
+                  <span className="text-white font-medium">
+                    {new Date(metadata.updated_at).toLocaleDateString('pt-BR')}
+                  </span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-slate-400">Hora:</span>
+                  <span className="text-white font-medium">
+                    {new Date(metadata.updated_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                  </span>
+                </div>
+                {(metadata as any).updated_by_email && (
+                  <div className="flex justify-between gap-4 mt-1 pt-1 border-t border-slate-700">
+                    <span className="text-slate-400">Remetente:</span>
+                    <span className="text-blue-300 font-medium text-right max-w-[160px] break-all">
+                      {(metadata as any).updated_by_email}
+                    </span>
+                  </div>
+                )}
+                {(metadata as any).source_file && (
+                  <div className="flex justify-between gap-4">
+                    <span className="text-slate-400">Arquivo:</span>
+                    <span className="text-slate-300 font-medium text-right max-w-[160px] break-all">
+                      {(metadata as any).source_file}
+                    </span>
+                  </div>
+                )}
+                {/* Seta do tooltip */}
+                <div className="absolute -top-1.5 right-6 w-3 h-3 bg-slate-900 border-l border-t border-slate-700 rotate-45"></div>
+              </div>
             </div>
           )}
+
         </div>
         <div className="p-8">
           {children}

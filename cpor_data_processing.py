@@ -1073,6 +1073,8 @@ def _collect_month_keys(rows: List[Dict[str, object]]) -> List[str]:
 def process_dashboard_upload(
     file_bytes: bytes,
     existing_data: Optional[Dict[str, object]] = None,
+    sender_email: Optional[str] = None,
+    source_file: Optional[str] = None,
 ) -> Dict[str, object]:
     """
     Processa um arquivo Excel e mescla com os dados existentes do dashboard.
@@ -1215,6 +1217,8 @@ def process_dashboard_upload(
         "raw_data_for_filters": final_rows,
         "metadata": {
             "updated_at": datetime.utcnow().isoformat() + "Z",
+            "updated_by_email": sender_email or None,
+            "source_file": source_file or None,
         },
     }
 
