@@ -61,13 +61,26 @@ EXCEL_MIMETYPES = {
 }
 
 
+def _get_decoded_filename(filename_raw):
+    if not filename_raw:
+        return None
+    decoded_list = decode_header(filename_raw)
+    decoded_name = ""
+    for decoded_part, encoding in decoded_list:
+        if isinstance(decoded_part, bytes):
+            decoded_name += decoded_part.decode(encoding or "utf-8", errors="ignore")
+        else:
+            decoded_name += str(decoded_part)
+    return decoded_name
+
+
 def _find_excel_parts(msg):
     """Retorna lista de (part, filename) para todos os anexos Excel no email."""
     results = []
 
     if not msg.is_multipart():
         content_type = str(msg.get_content_type() or "").lower()
-        filename = msg.get_filename()
+        filename = _get_decoded_filename(msg.get_filename())
         if (filename and filename.lower().endswith((".xlsx", ".xls", ".csv"))) or \
            (content_type in EXCEL_MIMETYPES and filename):
             results.append((msg, filename or "attachment.xlsx"))
@@ -77,7 +90,7 @@ def _find_excel_parts(msg):
         if part.is_multipart():
             continue
         content_type = str(part.get_content_type() or "").lower()
-        filename = part.get_filename()
+        filename = _get_decoded_filename(part.get_filename())
         is_excel_by_name = filename and filename.lower().endswith((".xlsx", ".xls", ".csv"))
         is_excel_by_mime = content_type in EXCEL_MIMETYPES and filename
         if is_excel_by_name or is_excel_by_mime:
