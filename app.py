@@ -167,7 +167,47 @@ def _create_portal_app() -> Flask:
             })
             
         except Exception as e:
-            # portal.logger.error(f"Error processing API upload: {e}")
+            return jsonify({"error": str(e)}), 500
+
+    @portal.route("/api/webhook/make", methods=["POST"])
+    def api_webhook_make():
+        """
+        Webhook para Make.com enviar a planilha automaticamente.
+        """
+        token = request.args.get("token") or request.headers.get("Authorization")
+        expected_token = os.environ.get("WEBHOOK_TOKEN", "alexandre-unb-2026")
+        
+        # Verify Token
+        if token != expected_token and token != f"Bearer {expected_token}":
+            return jsonify({"error": "Unauthorized"}), 401
+            
+        if "file" not in request.files:
+            return jsonify({"error": "No file part"}), 400
+            
+        file = request.files["file"]
+        if file.filename == "":
+            return jsonify({"error": "No selected file"}), 400
+            
+        if not file.filename.lower().endswith((".xlsx", ".xls", ".csv", ".html")):
+            return jsonify({"error": "Invalid file type"}), 400
+            
+        sender_email = request.form.get("sender_email", "Sistema Automático (Make.com)")
+            
+        try:
+            file_bytes = file.read()
+            filename = secure_filename(file.filename)
+            
+            result = ingest_dashboard_spreadsheet(file_bytes, filename, sender_email=sender_email)
+            
+            return jsonify({
+                "status": "success",
+                "message": "Dashboard updated successfully via Webhook",
+                "filename": filename,
+                "timestamp": datetime.utcnow().isoformat(),
+                "details": result
+            })
+            
+        except Exception as e:
             return jsonify({"error": str(e)}), 500
 
 
@@ -378,8 +418,8 @@ def _start_background_services():
     except Exception as e:
         print(f"⚠️ Keep-alive não iniciado: {e}")
 
-    # Monitor de email
-    start_email_monitor()
+    # Monitor de email desativado para evitar bloqueios do provedor (substituído por Webhook via Make.com)
+    # start_email_monitor()
 
 # Executar apenas uma vez por processo (evita duplicação com múltiplos workers)
 if os.environ.get("_EMAIL_MONITOR_STARTED") != "1":
