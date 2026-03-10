@@ -177,9 +177,11 @@ def ingest_dashboard_spreadsheet(
     # Commita o dashboard_data.json atualizado para que redeploys futuros
     # não percam os dados mais recentes.
     try:
-        _commit_dashboard_data_to_github(source_name)
+        import threading
+        # Executa em background para não travar o timeout de 40s do Webhook (Make.com)
+        threading.Thread(target=_commit_dashboard_data_to_github, args=(source_name,), daemon=True).start()
     except Exception as e:
-        print(f"[GitHub] Erro inesperado no auto-commit: {e}")
+        print(f"[GitHub] Erro inesperado ao iniciar thread de auto-commit: {e}")
     # ──────────────────────────────────────────────────────────────────────────
 
     return {
