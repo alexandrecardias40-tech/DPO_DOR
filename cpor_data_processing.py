@@ -1017,80 +1017,60 @@ def _aggregate_bi_rows(rows: List[Dict[str, object]]) -> List[Dict[str, object]]
 
 
 
-def _build_pi_lookup_multi(rows: List[Dict[str, object]]) -> Dict[str, Dict[str, object]]:
-    """
-    Builds PI-fragment → row mapping.
-    Expects rows to already be aggregated by _aggregate_bi_rows (called upfront).
-    A row with PI_2025 = "ABC DEF" is indexed under both "abc" and "def".
-    """
-    lookup: Dict[str, Dict[str, object]] = {}
-    for row in rows:
-        raw_pi = str(row.get("PI_2025") or "").strip()
-        if not raw_pi:
+def _find_best_base_row_for_bi(bi_row: Dict[str, object], base_rows: List[Dict[str, object]]) -> Optional[int]:
+    import difflib
+    best_id = None
+    best_score = -1
+    
+    bi_contract = _clean_key(bi_row.get("nº  Contrato"))
+    bi_pi = str(bi_row.get("PI_2025") or "").strip().upper()
+    bi_pi_parts = set(re.split(r"[\s\n,;/]+", bi_pi))
+    bi_pi_parts = {sanitize(p) for p in bi_pi_parts if p}
+    bi_full_key = _clean_key(bi_pi)
+    bi_desc = str(bi_row.get("Despesa") or "").strip().lower()
+
+    for base_row in base_rows:
+        score = 0
+        base_contract = _clean_key(base_row.get("nº  Contrato"))
+        
+        # 1. Empate por contrato (Forte)
+        if bi_contract and bi_contract == base_contract:
+            score += 100
+            
+        base_pi = str(base_row.get("PI_2025") or "").strip().upper()
+        base_pi_parts = set(re.split(r"[\s\n,;/]+", base_pi))
+        base_pi_parts = {sanitize(p) for p in base_pi_parts if p}
+        base_full_key = _clean_key(base_pi)
+        
+        # 2. Empate por PI exato e completo
+        if bi_full_key and bi_full_key == base_full_key:
+            score += 50
+            
+        # 3. Compartilhamento de fragmentos de PI
+        common_pis = bi_pi_parts.intersection(base_pi_parts)
+        if common_pis:
+            score += 20 * len(common_pis)
+            
+            # Penalidade se a base tiver PIs extras que a BI não tem 
+            # (Ex: Base = P1 P2, BI = P1. Menos pontos do que Base = P1, BI = P1)
+            extra_base_pis = base_pi_parts - bi_pi_parts
+            score -= 5 * len(extra_base_pis)
+            
+        # Se não tiver match nenhum (contrato nem PI), pula
+        if score <= 0:
             continue
-        parts = re.split(r"[\s\n,;/]+", raw_pi)
-        for part in parts:
-            key = sanitize(part)
-            if key and key not in lookup:
-                lookup[key] = row
-        full_key = _clean_key(raw_pi)
-        if full_key and full_key not in lookup:
-            lookup[full_key] = row
-    return lookup
-
-
-
-def _build_contract_lookup_simple(rows: List[Dict[str, object]]) -> Dict[str, Dict[str, object]]:
-    lookup: Dict[str, Dict[str, object]] = {}
-    for row in rows:
-        key = _clean_key(row.get("nº  Contrato"))
-        if key and key not in lookup:
-            lookup[key] = row
-    return lookup
-
-
-
-
-def _find_all_update_matches(
-    base_row: Dict[str, object],
-    up_contract: Dict[str, Dict[str, object]],
-    up_pi: Dict[str, Dict[str, object]],
-) -> List[Dict[str, object]]:
-    """
-    Localiza todas as linhas da BI que correspondem a uma linha da base.
-    Pode retornar múltiplas se a linha da base tiver vários PIs separados por espaço.
-    """
-    matches: List[Dict[str, object]] = []
-    seen_ids: set = set()
-
-    # 1. Tenta por contrato (maior prioridade)
-    contract_key = _clean_key(base_row.get("nº  Contrato"))
-    if contract_key and contract_key in up_contract:
-        match = up_contract[contract_key]
-        if id(match) not in seen_ids:
-            matches.append(match)
-            seen_ids.add(id(match))
-
-    # 2. Tenta por fragmentos de PI
-    raw_pi = str(base_row.get("PI_2025") or "").strip()
-    parts = re.split(r"[\s\n,;/]+", raw_pi)
-    for part in parts:
-        key = sanitize(part)
-        if key and key in up_pi:
-            match = up_pi[key]
-            if id(match) not in seen_ids:
-                matches.append(match)
-                seen_ids.add(id(match))
-
-    # 3. Tenta por PI completo (sanitizado)
-    full_key = _clean_key(raw_pi)
-    if full_key and full_key in up_pi:
-        match = up_pi[full_key]
-        if id(match) not in seen_ids:
-            matches.append(match)
-            seen_ids.add(id(match))
-
-    return matches
+            
+        # 4. Desempate por Nome / Despesa
+        base_desc = str(base_row.get("Despesa") or "").strip().lower()
+        if bi_desc and base_desc:
+            sim = difflib.SequenceMatcher(None, bi_desc, base_desc).ratio()
+            score += sim * 15  # Adiciona até 15 pontos baseados na similaridade do texto
+            
+        if score > best_score:
+            best_score = score
+            best_id = id(base_row)
+            
+    return best_id
 
 
 
@@ -1183,30 +1163,24 @@ def process_dashboard_upload(
         # Colunas de mês que já existem na base (preservadas sempre)
         month_cols = _collect_month_keys(old_rows)
 
-        # Lookups do arquivo enviado (update source)
-        up_contract = _build_contract_lookup_simple(incoming)
-        up_pi = _build_pi_lookup_multi(incoming)
+        # ── Passo A: Para cada linha do Tesouro (BI), achar a base perfeita ─────
+        # Isso garante que se um arquivo de update tiver uma despesa associada a um PI,
+        # e a base tiver duas despesas compartilhando aquele PI, a inteligência faça
+        # o desempate pelo nome ou quantidade exata de PIs (evitando duplicação/distribuição cega).
+        base_to_matches: Dict[int, List[Dict[str, object]]] = {id(r): [] for r in old_rows}
+        used_bi_ids: set = set()
 
-        # ── Passo A: Mapear N-para-M e contar ocorrências ───────────────────
-        # Precisamos saber quantas vezes cada linha da BI (update) é usada na base,
-        # para podermos dividir o valor financeiro e evitar duplicidade nos totais.
-        base_to_matches: Dict[int, List[Dict[str, object]]] = {}
-        match_counts: Dict[int, int] = {} # id(bi_row) -> total_base_rows_using_it
+        for bi_row in incoming:
+            best_base_id = _find_best_base_row_for_bi(bi_row, old_rows)
+            if best_base_id is not None:
+                base_to_matches[best_base_id].append(bi_row)
+                used_bi_ids.add(id(bi_row))
 
-        for base_row in old_rows:
-            matches = _find_all_update_matches(base_row, up_contract, up_pi)
-            if matches:
-                base_to_matches[id(base_row)] = matches
-                for match in matches:
-                    mid = id(match)
-                    match_counts[mid] = match_counts.get(mid, 0) + 1
-
-        # ── Passo B: Executar o Merge com Distribuição Justa ─────────────────
+        # ── Passo B: Executar o Merge Direto ─────────────────
         final_rows = []
-        used_ids: set = set()
 
         for base_row in old_rows:
-            matches = base_to_matches.get(id(base_row))
+            matches = base_to_matches.get(id(base_row), [])
 
             if matches:
                 merged = base_row.copy()
@@ -1215,10 +1189,7 @@ def process_dashboard_upload(
                     merged[field] = 0.0
 
                 for match in matches:
-                    used_ids.add(id(match))
-                    
-                    # A pedido do usuário, o valor não sofre mais rateio/divisão.
-                    # O montante integral do PI da BI é inserido em cada linha da base.
+                    # O montante integral do PI da BI é inserido na linha base vencedora do desempate.
                     for field in BI_UPDATE_FIELDS:
                         val = _normalize_number(match.get(field))
                         merged[field] = _normalize_number(merged[field]) + val
