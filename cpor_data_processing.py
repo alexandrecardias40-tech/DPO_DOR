@@ -1216,12 +1216,12 @@ def process_dashboard_upload(
 
                 for match in matches:
                     used_ids.add(id(match))
-                    count = match_counts.get(id(match), 1)
                     
-                    # Distribui o valor: se o PI está em 3 linhas da base, cada uma leva 1/3
+                    # A pedido do usuário, o valor não sofre mais rateio/divisão.
+                    # O montante integral do PI da BI é inserido em cada linha da base.
                     for field in BI_UPDATE_FIELDS:
                         val = _normalize_number(match.get(field))
-                        merged[field] = _normalize_number(merged[field]) + (val / count)
+                        merged[field] = _normalize_number(merged[field]) + val
 
                 merged["Origem"] = "Base"
                 final_rows.append(_normalize_row(merged, month_cols))
