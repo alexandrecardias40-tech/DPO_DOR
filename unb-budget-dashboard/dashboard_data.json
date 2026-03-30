@@ -1,16 +1,16 @@
 {
   "kpis": {
     "total_estimado": 238509021.472,
-    "total_empenhado": 99630627.49,
-    "total_comprometido": 23328900.390000008,
-    "total_rap": 5930662.930000002,
-    "total_2025": 17398237.46000001,
-    "saldo_a_empenhar": 138878393.982,
-    "percentual_execucao": 41.77226793146532,
-    "taxa_execucao": 41.77226793146532,
+    "total_empenhado": 99885580.36,
+    "total_comprometido": 23594684.100000005,
+    "total_rap": 5941633.610000001,
+    "total_2025": 17653050.49000001,
+    "saldo_a_empenhar": 138623441.112,
+    "percentual_execucao": 41.87916236607686,
+    "taxa_execucao": 41.87916236607686,
     "count_expiring_contracts": 8,
     "count_expired_contracts": 9,
-    "credito_disponivel": 70771236.33,
+    "credito_disponivel": 71156820.91,
     "media_mensal": 19875751.789333332,
     "total_necessario": 168917233.36916667
   },
@@ -80,14 +80,14 @@
     {
       "UGR": "HUB",
       "Total_Anual_Estimado": 651717.03,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 396415.42,
-      "Comprometido_Total": 0.0,
-      "Saldo_Empenhos_2025": 0.0,
+      "Total_Empenho_RAP": 45758.3,
+      "Executado_Total": 431342.88,
+      "Comprometido_Total": 45758.3,
+      "Saldo_Empenhos_2025": 45758.3,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 60.826309848002595
+      "Percentual_Execucao": 66.18560819256173
     },
     {
       "UGR": "Não informado",
@@ -176,14 +176,14 @@
     {
       "UGR": "PRC",
       "Total_Anual_Estimado": 19148179.139999997,
-      "Total_Empenho_RAP": 2119072.12,
-      "Executado_Total": 8087688.74,
-      "Comprometido_Total": 2119072.12,
-      "Saldo_Empenhos_2025": 1280334.9200000002,
+      "Total_Empenho_RAP": 2269072.12,
+      "Executado_Total": 8237688.74,
+      "Comprometido_Total": 2269072.12,
+      "Saldo_Empenhos_2025": 1430334.9200000002,
       "Saldo_Empenhos_RAP": 838737.2,
       "Contratos_Ativos": 13,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 42.23737766848572
+      "Percentual_Execucao": 43.02074197118672
     },
     {
       "UGR": "SEMA",
@@ -236,14 +236,14 @@
     {
       "UGR": "CESPE",
       "Total_Anual_Estimado": 840000.0,
-      "Total_Empenho_RAP": 12333.21,
-      "Executado_Total": 12333.21,
-      "Comprometido_Total": 12333.21,
-      "Saldo_Empenhos_2025": 5000.0,
-      "Saldo_Empenhos_RAP": 7333.21,
+      "Total_Empenho_RAP": 82358.62,
+      "Executado_Total": 82358.62,
+      "Comprometido_Total": 82358.62,
+      "Saldo_Empenhos_2025": 64054.729999999996,
+      "Saldo_Empenhos_RAP": 18303.89,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 1.4682392857142856
+      "Percentual_Execucao": 9.804597619047618
     },
     {
       "UGR": "DEG",
@@ -1016,14 +1016,14 @@
       "Valor_Mensal_Medio_Contrato": 49000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 651717.03,
-      "Saldo_Empenhos_2025": 0.0,
+      "Saldo_Empenhos_2025": 45758.3,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 396415.42,
+      "Total_Empenho_RAP": 431342.88,
+      "Executado_Total": 431342.88,
       "Total_Necessario": 396415.42,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000335",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 385584.58,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1036,7 +1036,7 @@
       "2026-10-01 00:00:00": 49000.0,
       "2026-11-01 00:00:00": 49000.0,
       "2026-12-01 00:00:00": 49000.0,
-      "Taxa_Execucao": 60.826309848002595,
+      "Taxa_Execucao": 66.18560819256173,
       "Origem": "Base"
     },
     {
@@ -1978,10 +1978,10 @@
       "Valor_Mensal_Medio_Contrato": 10000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 120000.0,
-      "Saldo_Empenhos_2025": 10000.0,
+      "Saldo_Empenhos_2025": 160000.0,
       "Saldo_Empenhos_RAP": 2119.19,
-      "Total_Empenho_RAP": 12119.19,
-      "Executado_Total": 12119.19,
+      "Total_Empenho_RAP": 162119.19,
+      "Executado_Total": 162119.19,
       "Total_Necessario": 95616.15,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -1998,7 +1998,7 @@
       "2026-10-01 00:00:00": 10000.0,
       "2026-11-01 00:00:00": 10000.0,
       "2026-12-01 00:00:00": 10000.0,
-      "Taxa_Execucao": 10.099325,
+      "Taxa_Execucao": 135.099325,
       "Origem": "Base"
     },
     {
@@ -3569,10 +3569,10 @@
       "Valor_Mensal_Medio_Contrato": 70000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 840000.0,
-      "Saldo_Empenhos_2025": 5000.0,
-      "Saldo_Empenhos_RAP": 7333.21,
-      "Total_Empenho_RAP": 12333.21,
-      "Executado_Total": 12333.21,
+      "Saldo_Empenhos_2025": 64054.729999999996,
+      "Saldo_Empenhos_RAP": 18303.89,
+      "Total_Empenho_RAP": 82358.62,
+      "Executado_Total": 82358.62,
       "Total_Necessario": 665242.65,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -3589,7 +3589,7 @@
       "2026-10-01 00:00:00": 70000.0,
       "2026-11-01 00:00:00": 70000.0,
       "2026-12-01 00:00:00": 70000.0,
-      "Taxa_Execucao": 1.4682392857142856,
+      "Taxa_Execucao": 9.804597619047618,
       "Origem": "Base"
     },
     {
@@ -4075,7 +4075,7 @@
     }
   ],
   "metadata": {
-    "updated_at": "2026-03-30T13:51:49.037399Z",
+    "updated_at": "2026-03-30T13:57:30.326011Z",
     "updated_by_email": "{\"address\":\"naoresponda@serpro.gov.br\",\"name\":\"\\\"SERPRO\\\"\"}",
     "source_file": "BI_Alexandre.xlsx"
   }
