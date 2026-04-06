@@ -460,11 +460,48 @@ export default function Home() {
                     <PopoverContent className="w-48 p-0">
                       <Command shouldFilter={true}>
                         <CommandInput placeholder="Buscar..." />
+                        {descriptionOptions.length > 0 && (
+                          <div className="px-3 py-2 border-b border-slate-100 bg-slate-50 flex items-center space-x-2 sticky top-0 z-10 shadow-sm transition-colors hover:bg-slate-100 cursor-pointer"
+                               onClick={() => {
+                                 if (selectedDescription.length === descriptionOptions.length) {
+                                   setSelectedDescription([]);
+                                 } else {
+                                   setSelectedDescription([...descriptionOptions]);
+                                 }
+                               }}>
+                            <Checkbox
+                              id="select-all-desc"
+                              checked={selectedDescription.length === descriptionOptions.length && descriptionOptions.length > 0}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setSelectedDescription([...descriptionOptions]);
+                                } else {
+                                  setSelectedDescription([]);
+                                }
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                            <label htmlFor="select-all-desc" className="text-sm font-bold text-blue-700 cursor-pointer pointer-events-none select-none">
+                              Selecionar Todas as Descrições
+                            </label>
+                          </div>
+                        )}
                         <CommandList>
                           <CommandEmpty>Nenhuma descrição encontrada.</CommandEmpty>
                           <CommandGroup>
                             {descriptionOptions.map((desc) => (
-                              <CommandItem key={desc} value={desc} className="flex items-center space-x-2">
+                              <CommandItem 
+                                key={desc} 
+                                value={desc} 
+                                onSelect={() => {
+                                  if (selectedDescription.includes(desc)) {
+                                    setSelectedDescription(selectedDescription.filter((d) => d !== desc));
+                                  } else {
+                                    setSelectedDescription([...selectedDescription, desc]);
+                                  }
+                                }}
+                                className="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <Checkbox
                                   checked={selectedDescription.includes(desc)}
                                   onCheckedChange={(checked) => {
@@ -474,6 +511,7 @@ export default function Home() {
                                       setSelectedDescription(selectedDescription.filter((d) => d !== desc));
                                     }
                                   }}
+                                  onClick={(e) => e.stopPropagation()}
                                 />
                                 <span>{desc}</span>
                               </CommandItem>
@@ -501,11 +539,48 @@ export default function Home() {
                     <PopoverContent className="w-48 p-0">
                       <Command shouldFilter={true}>
                         <CommandInput placeholder="Buscar..." />
+                        {piOptions.length > 0 && (
+                          <div className="px-3 py-2 border-b border-slate-100 bg-slate-50 flex items-center space-x-2 sticky top-0 z-10 shadow-sm transition-colors hover:bg-slate-100 cursor-pointer"
+                               onClick={() => {
+                                 if (selectedPi.length === piOptions.length) {
+                                   setSelectedPi([]);
+                                 } else {
+                                   setSelectedPi([...piOptions]);
+                                 }
+                               }}>
+                            <Checkbox
+                              id="select-all-pis"
+                              checked={selectedPi.length === piOptions.length && piOptions.length > 0}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setSelectedPi([...piOptions]);
+                                } else {
+                                  setSelectedPi([]);
+                                }
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                            <label htmlFor="select-all-pis" className="text-sm font-bold text-blue-700 cursor-pointer pointer-events-none select-none">
+                              Selecionar Todos os PIs
+                            </label>
+                          </div>
+                        )}
                         <CommandList>
                           <CommandEmpty>Nenhum PI encontrado.</CommandEmpty>
                           <CommandGroup>
                             {piOptions.map((pi) => (
-                              <CommandItem key={pi} value={pi} className="flex items-center space-x-2">
+                              <CommandItem 
+                                key={pi} 
+                                value={pi} 
+                                onSelect={() => {
+                                  if (selectedPi.includes(pi)) {
+                                    setSelectedPi(selectedPi.filter((p) => p !== pi));
+                                  } else {
+                                    setSelectedPi([...selectedPi, pi]);
+                                  }
+                                }}
+                                className="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <Checkbox
                                   checked={selectedPi.includes(pi)}
                                   onCheckedChange={(checked) => {
@@ -515,6 +590,7 @@ export default function Home() {
                                       setSelectedPi(selectedPi.filter((p) => p !== pi));
                                     }
                                   }}
+                                  onClick={(e) => e.stopPropagation()}
                                 />
                                 <span>{pi}</span>
                               </CommandItem>
