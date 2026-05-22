@@ -29,6 +29,7 @@ from data_manager import ingest_dashboard_spreadsheet, store_cpor_upload
 BASE_DIR = Path(__file__).resolve().parent
 # CPOR Static files copied to static/cpor/public
 UNB_PUBLIC_DIR = BASE_DIR / "static" / "cpor" / "public"
+CI_PUBLIC_DIR = BASE_DIR / "static" / "ci" / "public"
 CPOR_UPLOAD_DIR = BASE_DIR / "uploads" / "cpor"
 # Saiku Lite copied to saiku_lite/
 SAIKU_LITE_DIR = Path(os.environ.get("SAIKU_LITE_PATH", str(BASE_DIR / "saiku_lite"))).resolve()
@@ -61,6 +62,13 @@ def _portal_entries() -> List[Dict[str, str]]:
             "description": "Análise de despesas e execução orçamentária.",
             "href": "/dashboard/",
             "accent": "#f97316",
+        },
+        {
+            "slug": "cpor",
+            "title": "Dashboard Custos Indiretos",
+            "description": "Análise de Custos Indiretos",
+            "href": "/custos-indiretos/",
+            "accent": "#3b82f6",
         },
     ]
 
@@ -104,6 +112,20 @@ def _create_portal_app() -> Flask:
         if not UNB_PUBLIC_DIR.exists():
              return "Dashboard build not found. Please run build.", 404
         return send_from_directory(UNB_PUBLIC_DIR, "index.html")
+
+    # --- Serving React App (Custos Indiretos) ---
+    @portal.route("/custos-indiretos/")
+    def serve_ci_index():
+        if not CI_PUBLIC_DIR.exists():
+             return "CI Dashboard build not found. Please run build.", 404
+        return send_from_directory(CI_PUBLIC_DIR, "index.html")
+
+    @portal.route("/custos-indiretos/<path:asset_path>")
+    def serve_ci_assets(asset_path: str):
+        target = CI_PUBLIC_DIR / asset_path
+        if target.exists() and target.is_file():
+            return send_from_directory(CI_PUBLIC_DIR, asset_path)
+        return send_from_directory(CI_PUBLIC_DIR, "index.html")
 
     @portal.route("/dashboard/<path:asset_path>")
     def serve_dashboard_assets(asset_path: str):
