@@ -1,17 +1,17 @@
 {
   "kpis": {
-    "total_estimado": 240845301.21599996,
-    "total_empenhado": 271381723.3359999,
-    "total_comprometido": 28089688.65000001,
-    "total_rap": 6804951.2,
-    "total_2025": 21284737.450000003,
-    "saldo_a_empenhar": 0.0,
-    "percentual_execucao": 112.67885317497377,
-    "taxa_execucao": 112.67885317497377,
+    "total_estimado": 240845301.216,
+    "total_empenhado": 92946531.98,
+    "total_comprometido": 21344761.580000006,
+    "total_rap": 4921694.670000001,
+    "total_2025": 16423066.909999998,
+    "saldo_a_empenhar": 147898769.236,
+    "percentual_execucao": 38.591797934493115,
+    "taxa_execucao": 38.591797934493115,
     "count_expiring_contracts": 5,
     "count_expired_contracts": 4,
-    "credito_disponivel": 92807877.36,
-    "media_mensal": 20070441.767999995,
+    "credito_disponivel": 68755388.13,
+    "media_mensal": 20070441.768,
     "total_necessario": 100253441.2175
   },
   "monthly_consumption": [
@@ -65,133 +65,133 @@
       "UGR": "DGP/ folha",
       "Total_Anual_Estimado": 13348500.0,
       "Total_Empenho_RAP": 2200175.9,
-      "Executado_Total": 13348500.0,
+      "Executado_Total": 7028810.8,
       "Comprometido_Total": 2200175.9,
       "Saldo_Empenhos_2025": 2200175.9,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 3,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 52.65618459002884
     },
     {
       "UGR": "HUB",
       "Total_Anual_Estimado": 651717.03,
       "Total_Empenho_RAP": 323608.22,
-      "Executado_Total": 651717.03,
+      "Executado_Total": 323608.22,
       "Comprometido_Total": 323608.22,
       "Saldo_Empenhos_2025": 323608.22,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 49.654712874389666
     },
     {
       "UGR": "Não informado",
       "Total_Anual_Estimado": 16493130.600000001,
-      "Total_Empenho_RAP": 3629978.5500000003,
-      "Executado_Total": 16493130.600000001,
-      "Comprometido_Total": 3629978.5500000003,
-      "Saldo_Empenhos_2025": 2263350.0000000005,
-      "Saldo_Empenhos_RAP": 1366628.55,
+      "Total_Empenho_RAP": 49300.17,
+      "Executado_Total": 129300.17,
+      "Comprometido_Total": 49300.17,
+      "Saldo_Empenhos_2025": 15977.98,
+      "Saldo_Empenhos_RAP": 33322.19,
       "Contratos_Ativos": 2,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 0.7839637794416057
     },
     {
       "UGR": "INFRA",
       "Total_Anual_Estimado": 8400000.0,
-      "Total_Empenho_RAP": 3277466.2800000003,
-      "Executado_Total": 8400000.0,
-      "Comprometido_Total": 3277466.2800000003,
-      "Saldo_Empenhos_2025": 2223279.5300000003,
-      "Saldo_Empenhos_RAP": 1054186.75,
+      "Total_Empenho_RAP": 797710.96,
+      "Executado_Total": 797710.9600000001,
+      "Comprometido_Total": 797710.96,
+      "Saldo_Empenhos_2025": 659406.53,
+      "Saldo_Empenhos_RAP": 138304.43,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 9.49655904761905
     },
     {
       "UGR": "UnB Cerrado",
       "Total_Anual_Estimado": 469184.76,
-      "Total_Empenho_RAP": 139094.75,
-      "Executado_Total": 469184.76,
-      "Comprometido_Total": 139094.75,
-      "Saldo_Empenhos_2025": 101689.45,
-      "Saldo_Empenhos_RAP": 37405.3,
+      "Total_Empenho_RAP": 172720.0,
+      "Executado_Total": 191668.65999999997,
+      "Comprometido_Total": 172720.0,
+      "Saldo_Empenhos_2025": 138145.7,
+      "Saldo_Empenhos_RAP": 34574.3,
       "Contratos_Ativos": 5,
       "Contratos_Expirados": 1,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 40.8514249269307
     },
     {
       "UGR": "STI",
       "Total_Anual_Estimado": 4789571.33,
-      "Total_Empenho_RAP": 364576.42,
-      "Executado_Total": 4789571.33,
-      "Comprometido_Total": 364576.42,
+      "Total_Empenho_RAP": 382144.08999999997,
+      "Executado_Total": 3456842.3,
+      "Comprometido_Total": 382144.08999999997,
       "Saldo_Empenhos_2025": 364576.42,
-      "Saldo_Empenhos_RAP": 0.0,
+      "Saldo_Empenhos_RAP": 17567.67,
       "Contratos_Ativos": 4,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 72.17435678111093
     },
     {
       "UGR": "Contratos DCO",
       "Total_Anual_Estimado": 102000.0,
-      "Total_Empenho_RAP": 99749.07,
-      "Executado_Total": 102000.0,
-      "Comprometido_Total": 99749.07,
-      "Saldo_Empenhos_2025": 99141.08,
-      "Saldo_Empenhos_RAP": 607.99,
+      "Total_Empenho_RAP": 99852.03,
+      "Executado_Total": 99856.26000000001,
+      "Comprometido_Total": 99852.03,
+      "Saldo_Empenhos_2025": 99141.64,
+      "Saldo_Empenhos_RAP": 710.39,
       "Contratos_Ativos": 3,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 97.89829411764707
     },
     {
       "UGR": "Contratos DCO/ DIMEX",
       "Total_Anual_Estimado": 225342.0,
-      "Total_Empenho_RAP": 25607.4,
-      "Executado_Total": 273342.0,
-      "Comprometido_Total": 25607.4,
-      "Saldo_Empenhos_2025": 25505.0,
-      "Saldo_Empenhos_RAP": 102.4,
+      "Total_Empenho_RAP": 25505.75,
+      "Executado_Total": 25505.75,
+      "Comprometido_Total": 25505.75,
+      "Saldo_Empenhos_2025": 25505.75,
+      "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 0,
       "Contratos_Expirados": 1,
-      "Percentual_Execucao": 121.30095588039514
+      "Percentual_Execucao": 11.31868448846642
     },
     {
       "UGR": "Contratos DCA",
       "Total_Anual_Estimado": 131497874.22,
-      "Total_Empenho_RAP": 4047252.0100000002,
-      "Executado_Total": 157656260.57999998,
-      "Comprometido_Total": 4047252.0100000002,
-      "Saldo_Empenhos_2025": 3654980.9,
-      "Saldo_Empenhos_RAP": 392271.11,
+      "Total_Empenho_RAP": 3112126.1300000004,
+      "Executado_Total": 54466354.690000005,
+      "Comprometido_Total": 3112126.1300000004,
+      "Saldo_Empenhos_2025": 2457475.85,
+      "Saldo_Empenhos_RAP": 654650.28,
       "Contratos_Ativos": 18,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 119.89263059586514
+      "Percentual_Execucao": 41.41995071256902
     },
     {
       "UGR": "PRC",
       "Total_Anual_Estimado": 18936362.13,
-      "Total_Empenho_RAP": 2186318.6899999995,
-      "Executado_Total": 18944362.13,
-      "Comprometido_Total": 2186318.6899999995,
-      "Saldo_Empenhos_2025": 1759646.79,
-      "Saldo_Empenhos_RAP": 426671.89999999997,
+      "Total_Empenho_RAP": 2184819.11,
+      "Executado_Total": 6807076.790000001,
+      "Comprometido_Total": 2184819.11,
+      "Saldo_Empenhos_2025": 1757647.2,
+      "Saldo_Empenhos_RAP": 427171.91,
       "Contratos_Ativos": 13,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0422467628422
+      "Percentual_Execucao": 35.94711984946605
     },
     {
       "UGR": "7089410",
       "Total_Anual_Estimado": 1173817.01,
       "Total_Empenho_RAP": 55595.65,
-      "Executado_Total": 1173817.01,
+      "Executado_Total": 88954.61,
       "Comprometido_Total": 55595.65,
       "Saldo_Empenhos_2025": 55595.65,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 7.57823487325337
     },
     {
       "UGR": "SEMA",
@@ -208,98 +208,98 @@
     {
       "UGR": "Contratos SPI",
       "Total_Anual_Estimado": 15168219.296,
-      "Total_Empenho_RAP": 8865513.66,
-      "Executado_Total": 19244355.296,
-      "Comprometido_Total": 8865513.66,
-      "Saldo_Empenhos_2025": 5805973.25,
-      "Saldo_Empenhos_RAP": 3059540.41,
+      "Total_Empenho_RAP": 8883677.790000001,
+      "Executado_Total": 8918246.6,
+      "Comprometido_Total": 8883677.790000001,
+      "Saldo_Empenhos_2025": 5836973.25,
+      "Saldo_Empenhos_RAP": 3046704.54,
       "Contratos_Ativos": 10,
       "Contratos_Expirados": 1,
-      "Percentual_Execucao": 126.87287097091821
+      "Percentual_Execucao": 58.795606959294325
     },
     {
       "UGR": "Contrato DAC/RU",
       "Total_Anual_Estimado": 18011202.81,
       "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 18011202.81,
+      "Executado_Total": 6287620.28,
       "Comprometido_Total": 0.0,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 34.9094968633025
     },
     {
       "UGR": "Contratos Diversos",
       "Total_Anual_Estimado": 5374494.820000001,
       "Total_Empenho_RAP": 1630437.98,
-      "Executado_Total": 5374494.820000001,
+      "Executado_Total": 2771715.4,
       "Comprometido_Total": 1630437.98,
       "Saldo_Empenhos_2025": 1630437.98,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 10,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 51.571645202553185
     },
     {
       "UGR": "CESPE",
       "Total_Anual_Estimado": 840000.0,
-      "Total_Empenho_RAP": 24998.72,
-      "Executado_Total": 840000.0,
-      "Comprometido_Total": 24998.72,
-      "Saldo_Empenhos_2025": 9450.48,
-      "Saldo_Empenhos_RAP": 15548.24,
+      "Total_Empenho_RAP": 24018.53,
+      "Executado_Total": 34441.509999999995,
+      "Comprometido_Total": 24018.53,
+      "Saldo_Empenhos_2025": 8470.29,
+      "Saldo_Empenhos_RAP": 15548.239999999998,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 4.100179761904761
     },
     {
       "UGR": "DEG",
       "Total_Anual_Estimado": 4125149.21,
       "Total_Empenho_RAP": 958109.55,
-      "Executado_Total": 4126148.9699999997,
+      "Executado_Total": 958118.86,
       "Comprometido_Total": 958109.55,
       "Saldo_Empenhos_2025": 511526.48,
       "Saldo_Empenhos_RAP": 446583.07,
       "Contratos_Ativos": 4,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.02423572940286
+      "Percentual_Execucao": 23.226283734837317
     },
     {
       "UGR": "Comunicação",
       "Total_Anual_Estimado": 60000.0,
       "Total_Empenho_RAP": 46733.82,
-      "Executado_Total": 60000.0,
+      "Executado_Total": 46734.18,
       "Comprometido_Total": 46733.82,
       "Saldo_Empenhos_2025": 46733.82,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 2,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 77.8903
     },
     {
       "UGR": "Cerimonial",
       "Total_Anual_Estimado": 402000.0,
-      "Total_Empenho_RAP": 87869.71999999999,
-      "Executado_Total": 646800.0,
-      "Comprometido_Total": 87869.71999999999,
-      "Saldo_Empenhos_2025": 82464.23999999999,
-      "Saldo_Empenhos_RAP": 5405.48,
+      "Total_Empenho_RAP": 271623.64,
+      "Executado_Total": 271723.63999999996,
+      "Comprometido_Total": 271623.64,
+      "Saldo_Empenhos_2025": 165065.99,
+      "Saldo_Empenhos_RAP": 106557.65,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 1,
-      "Percentual_Execucao": 160.8955223880597
+      "Percentual_Execucao": 67.59294527363183
     },
     {
       "UGR": "Contratos custeados pelas Unidades (STI)",
       "Total_Anual_Estimado": 776736.0,
       "Total_Empenho_RAP": 126502.26,
-      "Executado_Total": 776736.0,
+      "Executado_Total": 242142.3,
       "Comprometido_Total": 126502.26,
       "Saldo_Empenhos_2025": 126502.26,
       "Saldo_Empenhos_RAP": 0.0,
       "Contratos_Ativos": 1,
       "Contratos_Expirados": 0,
-      "Percentual_Execucao": 100.0
+      "Percentual_Execucao": 31.174337226548015
     }
   ],
   "expiring_contracts_list": [
@@ -318,13 +318,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 3119907.74,
       "Saldo_Empenhos_2025": 120235.99,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 120235.99,
-      "Executado_Total": 3119907.74,
+      "Saldo_Empenhos_RAP": 500.0,
+      "Total_Empenho_RAP": 387034.33,
+      "Executado_Total": 387034.33,
       "Total_Necessario": 2079764.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000338",
-      "Saldo_Disponivel_NC": 1766298.32,
+      "Saldo_Disponivel_NC": 266298.34,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -336,7 +336,8 @@
       "2026-10-01 00:00:00": 400000.0,
       "2026-11-01 00:00:00": 400000.0,
       "2026-12-01 00:00:00": 400000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 12.405313305835126,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- taxigov (demanda) - vip service prc vgm01n01a4n 02605452000122 23106.010532/2020-24 2026-06-14 00:00:00 em breve nan 036/2020 10000 nan 120000 nan nan 1000 10000 1096.86 11096.86 nan nan nan nan nan 10000 10000 10000 10000 10000 10000 60000 1.109686",
@@ -352,10 +353,10 @@
       "Valor_Mensal_Medio_Contrato": 10000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 120000.0,
-      "Saldo_Empenhos_2025": 157024.0,
+      "Saldo_Empenhos_2025": 157024.41,
       "Saldo_Empenhos_RAP": 1096.86,
-      "Total_Empenho_RAP": 158120.86,
-      "Executado_Total": 120000.0,
+      "Total_Empenho_RAP": 158121.27000000002,
+      "Executado_Total": 158121.27000000002,
       "Total_Necessario": 60000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -371,7 +372,8 @@
       "2026-10-01 00:00:00": 10000.0,
       "2026-11-01 00:00:00": 10000.0,
       "2026-12-01 00:00:00": 10000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 131.767725,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "3p hgm solução visual (serviços de comunicação visual)  prc vgm01n01o7n 34.998.513/0001-55 23106.089249/2019-91 2026-07-21 00:00:00 em breve nan 1217/2022 500000 nan 6000000 nan nan 1000 341719.8 0 341719.8 nan nan nan nan nan 108280 450000 450000 450000 450000 450000 2358280 0.6834395999999999",
@@ -389,12 +391,12 @@
       "Total_Anual_Estimado": 6000000.0,
       "Saldo_Empenhos_2025": 341719.8,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 341719.8,
-      "Executado_Total": 6000000.0,
+      "Total_Empenho_RAP": 342730.26,
+      "Executado_Total": 342730.26,
       "Total_Necessario": 2358280.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 1010.46,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -406,7 +408,8 @@
       "2026-10-01 00:00:00": 450000.0,
       "2026-11-01 00:00:00": 450000.0,
       "2026-12-01 00:00:00": 450000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 5.712171,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "elyon brasil - esplanada servicos terceirizados eireli - serviços continuados de pessoal - coletores de resíduos de serviços de saúde contratos dca vgm01n01r4n 01099686000182 23106.031888/2020-00  2026-07-16 00:00:00 em breve nan 111/2020 nan 24500.929999999997 294011.16 2026nc000350 126662.85 1000 0 0 0 nan nan nan 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 196007.43999999997 0.0",
@@ -424,12 +427,12 @@
       "Total_Anual_Estimado": 294011.16,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 294011.16,
+      "Total_Empenho_RAP": 112392.26,
+      "Executado_Total": 112392.26,
       "Total_Necessario": 196007.43999999997,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000350",
-      "Saldo_Disponivel_NC": 126662.85,
+      "Saldo_Disponivel_NC": 112392.26,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -441,7 +444,8 @@
       "2026-10-01 00:00:00": 24500.929999999997,
       "2026-11-01 00:00:00": 24500.929999999997,
       "2026-12-01 00:00:00": 24500.929999999997,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 38.22720879030578,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "griffo (recepcionista)  contratos dca vgm01n01b3n 26.426.650/0001-97 23106.127519/2018-99; 23106.069857/2019-80 23106.070409/2023-13 2026-07-18 00:00:00 em breve nan 071/2024 nan 197023.69 2364284.2800000003 2026nc000357 653987.2 1000 138390.55 0 138390.55 nan nan nan 58633.140000000014 58632.69 197023.69 197023.69 197023.69 197023.69 197023.69 197023.69 1299407.97 0.7024056345711522",
@@ -457,14 +461,14 @@
       "Valor_Mensal_Medio_Contrato": 0.0,
       "Valor_Mensal_Continuado": 197023.69,
       "Total_Anual_Estimado": 2364284.2800000003,
-      "Saldo_Empenhos_2025": 138390.55,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 138390.55,
-      "Executado_Total": 2364284.2800000003,
+      "Saldo_Empenhos_2025": 0.0,
+      "Saldo_Empenhos_RAP": 34574.3,
+      "Total_Empenho_RAP": 34598.89,
+      "Executado_Total": 34598.89,
       "Total_Necessario": 1299407.97,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000357",
-      "Saldo_Disponivel_NC": 653987.2,
+      "Saldo_Disponivel_NC": 24.59,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -476,7 +480,8 @@
       "2026-10-01 00:00:00": 197023.69,
       "2026-11-01 00:00:00": 197023.69,
       "2026-12-01 00:00:00": 197023.69,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 1.4633980478861872,
+      "Origem": "Base"
     }
   ],
   "expired_contracts_list": [
@@ -494,10 +499,10 @@
       "Valor_Mensal_Medio_Contrato": 0.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 225342.0,
-      "Saldo_Empenhos_2025": 25505.0,
-      "Saldo_Empenhos_RAP": 102.4,
-      "Total_Empenho_RAP": 25607.4,
-      "Executado_Total": 273342.0,
+      "Saldo_Empenhos_2025": 25505.75,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 25505.75,
+      "Executado_Total": 25505.75,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -513,7 +518,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 121.30095588039514
+      "Taxa_Execucao": 11.31868448846642,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "recepcionista – amr limpeza e locacao de automoveis ltda unb cerrado vgm01n01b3n vgm01n01r7n 10.258.826/0001-09 23106.100112/2023-81 2026-02-15 00:00:00 expirado contrato encerrado / ver saldo de empenho 12/2024 nan 4290.91 51490.92 nan nan 1000 nan 34574.3 34574.3 nan nan nan nan nan nan nan nan nan nan nan 0 8.05756820814233",
@@ -548,7 +554,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "honix (elevadores) (01 de um mês a 30 do mesmo mês) contratos spi vgm01n01i7n 21051130000123 23106.053280/2018-11 2025-09-20 00:00:00 expirado não será renovado 090/2019 nan nan nan nan nan 1050 nan 11583.35 11583.35 nan nan nan nan nan nan nan nan nan nan nan 0 nan",
@@ -567,7 +574,7 @@
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 3007418.35,
       "Total_Empenho_RAP": 3007418.35,
-      "Executado_Total": 4076136.0,
+      "Executado_Total": 3007418.35,
       "Total_Necessario": 0.0,
       "Fonte": "1050",
       "Nota_Empenho": "",
@@ -583,7 +590,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 0.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- andromeda (serviços de becário e brigadista nas cerimônias de colação de grau) cerimonial vgm01n01b9n 20.882.119/0001-42 23106.072605/2019-38 2024-12-12 00:00:00 expirado não pode ser renovado 10809034 verificar saldo de empenho 135/2019 33000 nan 396000 nan nan 1000 nan 4308.48 4308.48 nan nan nan 28691.52 nan nan nan nan nan nan nan 28691.52 0.13055999999999998",
@@ -599,14 +607,14 @@
       "Valor_Mensal_Medio_Contrato": 33000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 396000.0,
-      "Saldo_Empenhos_2025": 82464.23999999999,
-      "Saldo_Empenhos_RAP": 5405.48,
-      "Total_Empenho_RAP": 87869.72,
-      "Executado_Total": 640800.0,
+      "Saldo_Empenhos_2025": 165041.25,
+      "Saldo_Empenhos_RAP": 106557.65,
+      "Total_Empenho_RAP": 271698.89999999997,
+      "Executado_Total": 271698.89999999997,
       "Total_Necessario": 28691.52,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 100.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -618,7 +626,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 161.8181818181818
+      "Taxa_Execucao": 68.61083333333332,
+      "Origem": "Base"
     }
   ],
   "raw_data_for_filters": [
@@ -638,12 +647,12 @@
       "Total_Anual_Estimado": 1932000.0,
       "Saldo_Empenhos_2025": 1177049.52,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 1177049.52,
-      "Executado_Total": 1932000.0,
+      "Total_Empenho_RAP": 1190498.9,
+      "Executado_Total": 1190498.9,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000345",
-      "Saldo_Disponivel_NC": 1480179.9,
+      "Saldo_Disponivel_NC": 13449.38,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -655,7 +664,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 61.620025879917186,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "estagiários - auxílio transporte dgp/ folha vgm01n01n7n nan nan nan nan nan nan 36375 nan 436500 2026nc000347 252771.47 1000 113406.47 0 113406.47 nan nan nan nan nan nan nan 68468.53 36375 36375 36375 177593.53 3.117703642611684",
@@ -673,8 +683,8 @@
       "Total_Anual_Estimado": 436500.0,
       "Saldo_Empenhos_2025": 113406.47,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 113406.47,
-      "Executado_Total": 436500.0,
+      "Total_Empenho_RAP": 366177.94,
+      "Executado_Total": 366177.94,
       "Total_Necessario": 177593.53,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000347",
@@ -690,7 +700,8 @@
       "2026-10-01 00:00:00": 36375.0,
       "2026-11-01 00:00:00": 36375.0,
       "2026-12-01 00:00:00": 36375.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 83.8895624284078,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "pasep - hub hub vgm01n01n1n nan nan nan nan nan nan 55000 nan 651717.03 2026nc000335 490000 1000 323608.22 0 323608.22 nan nan nan nan nan nan nan nan nan 6392 55000 61392 5.883785818181818",
@@ -709,11 +720,11 @@
       "Saldo_Empenhos_2025": 323608.22,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 323608.22,
-      "Executado_Total": 651717.03,
+      "Executado_Total": 323608.22,
       "Total_Necessario": 61392.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000335",
-      "Saldo_Disponivel_NC": 490000.0,
+      "Saldo_Disponivel_NC": 0.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -725,7 +736,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 6392.0,
       "2026-12-01 00:00:00": 55000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 49.654712874389666,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "pasep - unb dgp/ folha vgm01n01r3n nan nan nan nan nan nan 915000 nan 10980000 2026nc000336 8910000 1000 909719.91 nan 909719.91 nan nan nan nan 5280.089999999967 915000 915000 915000 915000 915000 915000 5495280.09 0.9942294098360656",
@@ -743,12 +755,12 @@
       "Total_Anual_Estimado": 10980000.0,
       "Saldo_Empenhos_2025": 909719.91,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 909719.91,
-      "Executado_Total": 10980000.0,
+      "Total_Empenho_RAP": 5472133.96,
+      "Executado_Total": 5472133.96,
       "Total_Necessario": 5495280.09,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000336",
-      "Saldo_Disponivel_NC": 8910000.0,
+      "Saldo_Disponivel_NC": 4562414.05,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -760,7 +772,8 @@
       "2026-10-01 00:00:00": 915000.0,
       "2026-11-01 00:00:00": 915000.0,
       "2026-12-01 00:00:00": 915000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 49.83728561020037,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- serviços de energia elétrica (prc) – já com ci nan vgm01n01i2n 07.522.669/0001-92 nan nan nan nan nan 1361927.55 nan 16343130.600000001 nan nan 1000 2247372.0200000005 1366628.55 3614000.5700000003 nan nan nan nan nan nan 471783 1361927.55 1361927.55 1361927.55 1361927.55 5919493.2 2.6535923808869275",
@@ -776,10 +789,10 @@
       "Valor_Mensal_Medio_Contrato": 1361927.55,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 16343130.600000001,
-      "Saldo_Empenhos_2025": 2247372.0200000005,
-      "Saldo_Empenhos_RAP": 1366628.55,
-      "Total_Empenho_RAP": 3614000.5700000003,
-      "Executado_Total": 16343130.600000001,
+      "Saldo_Empenhos_2025": 0.0,
+      "Saldo_Empenhos_RAP": 33322.19,
+      "Total_Empenho_RAP": 33322.19,
+      "Executado_Total": 33322.19,
       "Total_Necessario": 5919493.2,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -795,7 +808,8 @@
       "2026-10-01 00:00:00": 1361927.55,
       "2026-11-01 00:00:00": 1361927.55,
       "2026-12-01 00:00:00": 1361927.55,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 0.20389110761924648,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "taxa de iluminação pública neoenergia nan vgm01n01s6n nan nan nan nan nan nan 12500 nan 150000 2026nc000348 150000 1000 15977.98 nan 15977.98 nan nan nan nan nan 12500 12500 12500 12500 12500 12500 75000 1.2782384",
@@ -813,12 +827,12 @@
       "Total_Anual_Estimado": 150000.0,
       "Saldo_Empenhos_2025": 15977.98,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 15977.98,
-      "Executado_Total": 150000.0,
+      "Total_Empenho_RAP": 95977.98,
+      "Executado_Total": 95977.98,
       "Total_Necessario": 75000.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000348",
-      "Saldo_Disponivel_NC": 150000.0,
+      "Saldo_Disponivel_NC": 80000.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -830,7 +844,8 @@
       "2026-10-01 00:00:00": 12500.0,
       "2026-11-01 00:00:00": 12500.0,
       "2026-12-01 00:00:00": 12500.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 63.98532,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- serviços de água e esgoto (prc)  infra vgm01n01i3n  00.082.024/0001-37 nan nan nan nan nan 700000 nan 8400000 nan nan 1000 2223279.5300000003 1054186.75 3277466.2800000003 nan nan nan nan nan nan 241035 700000 700000 700000 700000 3041035 4.682094685714286",
@@ -846,10 +861,10 @@
       "Valor_Mensal_Medio_Contrato": 700000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 8400000.0,
-      "Saldo_Empenhos_2025": 2223279.5300000003,
-      "Saldo_Empenhos_RAP": 1054186.75,
-      "Total_Empenho_RAP": 3277466.2800000003,
-      "Executado_Total": 8400000.0,
+      "Saldo_Empenhos_2025": 659406.53,
+      "Saldo_Empenhos_RAP": 138304.43,
+      "Total_Empenho_RAP": 797710.9600000001,
+      "Executado_Total": 797710.9600000001,
       "Total_Necessario": 3041035.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -865,7 +880,8 @@
       "2026-10-01 00:00:00": 700000.0,
       "2026-11-01 00:00:00": 700000.0,
       "2026-12-01 00:00:00": 700000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 9.49655904761905,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": " saneago - água e esgoto unb cerrado (corrigir a média) unb cerrado vgm01n01i3n vgm01n01q8n 01616929000102 nan nan nan nan nan 333 nan 3996 2026nc000349 1665 1000 nan 2331 2331 nan nan nan nan nan nan nan nan nan nan nan 0 7.0",
@@ -882,9 +898,9 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 3996.0,
       "Saldo_Empenhos_2025": 0.0,
-      "Saldo_Empenhos_RAP": 2331.0,
-      "Total_Empenho_RAP": 2331.0,
-      "Executado_Total": 3996.0,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 1665.0,
+      "Executado_Total": 1665.0,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000349",
@@ -900,7 +916,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 41.66666666666667,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "energia elétrica unb cerrado - contrato ccer - enel n. 36/2020 e celg distribuição s.a - celg d,  equatorial goiás distribuidora de energia s/a unb cerrado  vgm01n01r1n 1543032000104 23106.044802/2020-09 23106.083937/2023-24 nan nan nan 36/2020 1585.03 nan 19020.36 2026nc000351 17066.89 1000 13366.92 0 13366.92 nan nan nan nan nan nan nan nan nan nan nan 0 8.433228393153442",
@@ -918,12 +935,12 @@
       "Total_Anual_Estimado": 19020.36,
       "Saldo_Empenhos_2025": 13366.92,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 13366.92,
-      "Executado_Total": 19020.36,
+      "Total_Empenho_RAP": 13733.81,
+      "Executado_Total": 13733.81,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000351",
-      "Saldo_Disponivel_NC": 17066.89,
+      "Saldo_Disponivel_NC": 366.89,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -935,7 +952,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 72.20583627228928,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "oi sa recuperação judicial sti vgm01n01i4n 76535764000143 23106.012727/2018-94 2026-08-13 00:00:00 no prazo será efetuada nova contratação 515/2021 60000 nan 720000 2026nc000353 654196.34 1000 0 0 0 nan nan nan 60000 60000 60000 60000 60000 60000 60000 60000 480000 0.0",
@@ -953,12 +971,12 @@
       "Total_Anual_Estimado": 720000.0,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 720000.0,
+      "Total_Empenho_RAP": 400590.84,
+      "Executado_Total": 400590.84,
       "Total_Necessario": 480000.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000353",
-      "Saldo_Disponivel_NC": 654196.34,
+      "Saldo_Disponivel_NC": 400590.84,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -970,7 +988,8 @@
       "2026-10-01 00:00:00": 60000.0,
       "2026-11-01 00:00:00": 60000.0,
       "2026-12-01 00:00:00": 60000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 55.637616666666666,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "orion engenharia e tecnologia s/a (serviço de manutenção preventiva programada e corretiva da sala cofre instalada na sti/unb) sti vgm01n01a2n 01.011.976/0001-22 23106.020472/2024-81 2026-10-24 00:00:00 no prazo nan 518/2025 94099.11083333334 nan 1129189.33  2026nc001478 564595 1000 0.42 0 0.42 nan nan nan nan nan nan nan nan nan 658693.3558333333 94099.11083333334 752792.4666666667 4.463379050880688e-06",
@@ -987,13 +1006,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 1129189.33,
       "Saldo_Empenhos_2025": 0.42,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.42,
-      "Executado_Total": 1129189.33,
+      "Saldo_Empenhos_RAP": 17567.67,
+      "Total_Empenho_RAP": 17568.949999999997,
+      "Executado_Total": 17568.949999999997,
       "Total_Necessario": 752792.4666666667,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC001478",
-      "Saldo_Disponivel_NC": 564595.0,
+      "Saldo_Disponivel_NC": 0.86,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1005,7 +1024,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 658693.3558333333,
       "2026-12-01 00:00:00": 94099.11083333334,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 1.5558905431740127,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "qualificar - suporte ti (serviços de manutenção dos computadores da unb) sti vgm01n01a3n 04.752.792/0001-01 23106.016945/2023-65 2027-05-05 00:00:00 no prazo nan 512/2025 nan 182288 2187456 2026nc000354 2140102.39 1000 364576 0 364576 nan nan nan -182288 nan nan 182288 182288 182288 182288 182288 729152 2.0",
@@ -1023,12 +1043,12 @@
       "Total_Anual_Estimado": 2187456.0,
       "Saldo_Empenhos_2025": 364576.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 364576.0,
-      "Executado_Total": 2187456.0,
+      "Total_Empenho_RAP": 2285756.51,
+      "Executado_Total": 2285756.51,
       "Total_Necessario": 729152.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000354",
-      "Saldo_Disponivel_NC": 2140102.39,
+      "Saldo_Disponivel_NC": 1921180.51,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1040,7 +1060,8 @@
       "2026-10-01 00:00:00": 182288.0,
       "2026-11-01 00:00:00": 182288.0,
       "2026-12-01 00:00:00": 182288.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 104.49382799014013,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- rede gigacandanga - convênio fub/ rnt  sti vgm01n01k8n 30814920000104 23106.032698/2019-68\n23106.108762/2019-99\n23106.027099/2024-90 2029-12-05 00:00:00 no prazo nan nan nan nan 752926 nan nan 1000 0 0 0 nan nan nan 0 0 0 752926 0 0 0 0 752926 nan",
@@ -1075,7 +1096,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "inframérica - prestação de serviços de armazenagem e capatazia de cargas importadas (conforme demanda) contratos dco vgm01n01l3n  15.559.082/0001-86 23106.010064/2025-01 2030-07-18 00:00:00 no prazo nan 1203/2025 4000 nan 48000 nan nan 1000 27506.08 0 27506.08 nan nan nan nan nan nan nan nan nan nan 4493.919999999998 4493.919999999998 6.87652",
@@ -1092,13 +1114,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 48000.0,
       "Saldo_Empenhos_2025": 27506.08,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 27506.08,
-      "Executado_Total": 48000.0,
+      "Saldo_Empenhos_RAP": 102.4,
+      "Total_Empenho_RAP": 27612.710000000003,
+      "Executado_Total": 27612.710000000003,
       "Total_Necessario": 4493.919999999998,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 4.23,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1110,7 +1132,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 4493.919999999998,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 57.526479166666675,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "agenciamento de transportes de cargas internacionais weghlogística (aéreos e marítimos)   (conforme demanda) não será prorrogado, licitação em andamento contratos dco/ dimex vgm01n01l3n vgm01n01r9n 65494742000166 23106.099324/2016-80 2023-06-29 00:00:00 expirado nan 081/2017 nan nan 225342 nan nan 1000 nan 102.4 102.4 nan nan nan 0 0 0 0 0 0 0 0 0 nan",
@@ -1126,10 +1149,10 @@
       "Valor_Mensal_Medio_Contrato": 0.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 225342.0,
-      "Saldo_Empenhos_2025": 25505.0,
-      "Saldo_Empenhos_RAP": 102.4,
-      "Total_Empenho_RAP": 25607.4,
-      "Executado_Total": 273342.0,
+      "Saldo_Empenhos_2025": 25505.75,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 25505.75,
+      "Executado_Total": 25505.75,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -1145,7 +1168,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 121.30095588039514
+      "Taxa_Execucao": 11.31868448846642,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "nk logistica e transportes ltda (serviços de transporte de cargas por via aérea) contratos dco vgm01n01p2n 32270711000172 23106.068904/2022-73 2026-11-28 00:00:00 no prazo nan 130/2022 500 nan 6000 nan nan 1000 nan 607.99 607.99 nan nan nan nan nan 892.01 500 500 500 500 500 3392.01 1.21598",
@@ -1164,7 +1188,7 @@
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 607.99,
       "Total_Empenho_RAP": 607.99,
-      "Executado_Total": 6000.0,
+      "Executado_Total": 607.99,
       "Total_Necessario": 3392.01,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -1180,7 +1204,8 @@
       "2026-10-01 00:00:00": 500.0,
       "2026-11-01 00:00:00": 500.0,
       "2026-12-01 00:00:00": 500.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 10.133166666666666,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "seguro de aluno/ estagiário (sabemi seguradora sa) contratos dco vgm01n01r5n 87.163.234/0001-38 23106.122193/2024-51 2028-03-19 00:00:00 no prazo nan 015/2026 3870 nan 48000 nan nan 1000 71635 0 71635 nan nan nan nan nan nan nan nan nan nan nan 0 18.510335917312663",
@@ -1196,10 +1221,10 @@
       "Valor_Mensal_Medio_Contrato": 3870.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 48000.0,
-      "Saldo_Empenhos_2025": 71635.0,
+      "Saldo_Empenhos_2025": 71635.56,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 71635.0,
-      "Executado_Total": 48000.0,
+      "Total_Empenho_RAP": 71635.56,
+      "Executado_Total": 71635.56,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -1215,7 +1240,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 149.24075,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "belfort gerenciamento de residuos ltda - empresa especializada nos serviços continuados de coleta, transporte, tratamento e disposição final de resíduos de serviços de saúde (rss) contratos dca vgm01n01e4n 10865146000153 23106.065223/2022-53 2027-01-17 00:00:00 no prazo nan 1204/2023 4000 nan 48000 2026nc000720 nan 1000 34.24 0 34.24 nan nan nan nan 4000 4000 4000 4000 4000 4000 4000 28000 0.00856",
@@ -1233,12 +1259,12 @@
       "Total_Anual_Estimado": 48000.0,
       "Saldo_Empenhos_2025": 34.24,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 34.24,
-      "Executado_Total": 48000.0,
+      "Total_Empenho_RAP": 2574.2799999999997,
+      "Executado_Total": 2574.2799999999997,
       "Total_Necessario": 28000.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000720",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 2540.04,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1250,7 +1276,8 @@
       "2026-10-01 00:00:00": 4000.0,
       "2026-11-01 00:00:00": 4000.0,
       "2026-12-01 00:00:00": 4000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 5.363083333333333,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "megavolt energia manutencoes, servicos, instalacoes de grupos geradores ltda prc vgm01n01g7n 19.316.591/0001-39 23106.127437/2023-10 2026-12-04 00:00:00 no prazo verificar liquidação p/ ajustar média 1209/2025 153000 nan 1836000 2026nc000721 nan 1000 79416.87 78736.05 158152.91999999998 nan nan nan nan nan 99847 129000 129000 129000 129000 129000 744847 1.0336792156862744",
@@ -1268,12 +1295,12 @@
       "Total_Anual_Estimado": 1836000.0,
       "Saldo_Empenhos_2025": 79416.87,
       "Saldo_Empenhos_RAP": 78736.05,
-      "Total_Empenho_RAP": 158152.91999999998,
-      "Executado_Total": 1836000.0,
+      "Total_Empenho_RAP": 1224079.71,
+      "Executado_Total": 1224079.71,
       "Total_Necessario": 744847.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000721",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 1065926.79,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1285,7 +1312,8 @@
       "2026-10-01 00:00:00": 129000.0,
       "2026-11-01 00:00:00": 129000.0,
       "2026-12-01 00:00:00": 129000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 66.67100816993464,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "qfrotas sistemas ltda prc vgm01n01d1n 44.220.921/0001-35 23106.005379/2025-28 2026-12-10 00:00:00 no prazo verificar liquidação p/ ajustar média 682/2025 247122.885 nan 2965474.62 2026nc000723 nan 1000 620877.99 266367.8 887245.79 nan nan nan nan nan nan nan nan 113000 200000 200000 513000 3.590302007035892",
@@ -1302,13 +1330,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 2965474.62,
       "Saldo_Empenhos_2025": 620877.99,
-      "Saldo_Empenhos_RAP": 266367.8,
-      "Total_Empenho_RAP": 887245.79,
-      "Executado_Total": 2965474.62,
+      "Saldo_Empenhos_RAP": 266367.81,
+      "Total_Empenho_RAP": 2487245.8,
+      "Executado_Total": 2487245.8,
       "Total_Necessario": 513000.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000723",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 1600000.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1320,7 +1348,8 @@
       "2026-10-01 00:00:00": 113000.0,
       "2026-11-01 00:00:00": 200000.0,
       "2026-12-01 00:00:00": 200000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 83.87344754951907,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "prime extintores eireli – me – recarga de extintores prc vgm01n01i6n 09.098.197/0001-18 23106.101317/2023-84 2027-04-25 00:00:00 no prazo nan 618/2024 10000 nan 187401.54 nan nan 1000 1000 43199.14 44199.14 nan nan nan nan nan nan nan nan 5801 10000 10000 25801 4.419914",
@@ -1338,12 +1367,12 @@
       "Total_Anual_Estimado": 187401.54,
       "Saldo_Empenhos_2025": 1000.0,
       "Saldo_Empenhos_RAP": 43199.14,
-      "Total_Empenho_RAP": 44199.14,
-      "Executado_Total": 187401.54,
+      "Total_Empenho_RAP": 44199.39,
+      "Executado_Total": 44199.39,
       "Total_Necessario": 25801.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 0.25,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1355,7 +1384,8 @@
       "2026-10-01 00:00:00": 5801.0,
       "2026-11-01 00:00:00": 10000.0,
       "2026-12-01 00:00:00": 10000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 23.58539316165705,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- fornecimento de combustível\n(novo fornecer para 2019 - ticket soluções hdfgt s/a) (não deve ser anulado) prc vgm01n01i5n 03.506.307/0001-57 23106.116807/2021-13 2026-09-05 00:00:00 no prazo nan 1222/2022 80000 nan 960000 2026nc000355 336351.44 1000 58386.67 37272.05 95658.72 nan nan nan nan nan 64341 87500 87500 87500 87500 87500 501841 1.195734",
@@ -1371,14 +1401,14 @@
       "Valor_Mensal_Medio_Contrato": 80000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 960000.0,
-      "Saldo_Empenhos_2025": 58386.67,
+      "Saldo_Empenhos_2025": 56386.67,
       "Saldo_Empenhos_RAP": 37272.05,
-      "Total_Empenho_RAP": 95658.72,
-      "Executado_Total": 960000.0,
+      "Total_Empenho_RAP": 98658.72,
+      "Executado_Total": 98658.72,
       "Total_Necessario": 501841.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000355",
-      "Saldo_Disponivel_NC": 336351.44,
+      "Saldo_Disponivel_NC": 5000.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1390,7 +1420,8 @@
       "2026-10-01 00:00:00": 87500.0,
       "2026-11-01 00:00:00": 87500.0,
       "2026-12-01 00:00:00": 87500.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 10.27695,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "cruzeiro controle de pragas e desentupimento  prc vgm01n01d3n  22.575.793/0001-00 23106.058637/2021-45 2027-11-19 00:00:00 no prazo nan 1222/2024 65625.02 nan 787500.24 2026nc000337 351439.72 1000 58827.4 0 58827.4 nan nan nan nan nan nan 7173 22000 22000 22000 22000 95173 0.896417250615695",
@@ -1408,12 +1439,12 @@
       "Total_Anual_Estimado": 787500.24,
       "Saldo_Empenhos_2025": 58827.4,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 58827.4,
-      "Executado_Total": 787500.24,
+      "Total_Empenho_RAP": 199267.12,
+      "Executado_Total": 199267.12,
       "Total_Necessario": 95173.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000337",
-      "Saldo_Disponivel_NC": 351439.72,
+      "Saldo_Disponivel_NC": 140439.72,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1425,7 +1456,8 @@
       "2026-10-01 00:00:00": 22000.0,
       "2026-11-01 00:00:00": 22000.0,
       "2026-12-01 00:00:00": 22000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 25.303753558221135,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "vilela serviço de paisagismo, parques e jardins ltda (jardinagem) prc vgm01n01a5n 32.751.565/0001-05 23106.028705/2019-27 2026-07-28 00:00:00 em breve nan 1217/2023 298000 nan 3119907.74 2026nc000338 1766298.32 1000 120235.99 0 120235.99 nan nan nan nan 129764 250000 250000 250000 400000 400000 400000 2079764 0.40347647651006713",
@@ -1442,13 +1474,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 3119907.74,
       "Saldo_Empenhos_2025": 120235.99,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 120235.99,
-      "Executado_Total": 3119907.74,
+      "Saldo_Empenhos_RAP": 500.0,
+      "Total_Empenho_RAP": 387034.33,
+      "Executado_Total": 387034.33,
       "Total_Necessario": 2079764.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000338",
-      "Saldo_Disponivel_NC": 1766298.32,
+      "Saldo_Disponivel_NC": 266298.34,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1460,7 +1492,8 @@
       "2026-10-01 00:00:00": 400000.0,
       "2026-11-01 00:00:00": 400000.0,
       "2026-12-01 00:00:00": 400000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 12.405313305835126,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- transmonici transporte e turismo  (ônibus rodoviário executivo) prc vgm01n01k1n 9169349000126 23106.000890/2021-18 2027-02-09 00:00:00 no prazo nan 604/2022 153000 nan 1836000 2026nc000719 nan 1000 163592.84 nan 163592.84 nan nan nan nan nan 153000 153000 153000 153000 153000 153000 918000 1.069234248366013",
@@ -1478,12 +1511,12 @@
       "Total_Anual_Estimado": 1836000.0,
       "Saldo_Empenhos_2025": 163592.84,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 163592.84,
-      "Executado_Total": 1836000.0,
+      "Total_Empenho_RAP": 1377313.4600000002,
+      "Executado_Total": 1377313.4600000002,
       "Total_Necessario": 918000.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000719",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 1213720.62,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1495,7 +1528,8 @@
       "2026-10-01 00:00:00": 153000.0,
       "2026-11-01 00:00:00": 153000.0,
       "2026-12-01 00:00:00": 153000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 75.01707298474946,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "rbr transporte e locadora ltda prc vgm01n01s9n 10.932.538/0001-98 23106.110475/2023-25 2027-03-24 00:00:00 no prazo nan 602/2026 80166.66666666667 nan 962000 nan nan nan 150000 nan 150000 nan nan nan nan nan nan 80166.66666666667 80166.66666666667 80166.66666666667 80166.66666666667 80166.66666666667 400833.3333333334 1.871101871101871",
@@ -1514,7 +1548,7 @@
       "Saldo_Empenhos_2025": 150000.0,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 150000.0,
-      "Executado_Total": 962000.0,
+      "Executado_Total": 150000.0,
       "Total_Necessario": 400833.3333333334,
       "Fonte": "",
       "Nota_Empenho": "",
@@ -1530,7 +1564,8 @@
       "2026-10-01 00:00:00": 80166.66666666667,
       "2026-11-01 00:00:00": 80166.66666666667,
       "2026-12-01 00:00:00": 80166.66666666667,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 15.592515592515593,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "tafa engenharia (serviços continuados de manutenção preventiva e corretiva de equipamentos e sistemas de ar condicionado, com fornecimento de peças e materiais) 7089410 vgm01n01f1n 12859652000165 23106.056117/2023-60 2027-04-11 00:00:00 no prazo nan 616/2024 nan 95000 1173817.01 2026nc000339 234826.16 1000 55595.65 0 55595.65 nan nan nan nan nan 94404.35 50000 50000 50000 50000 50000 344404.35 0.5852173684210527",
@@ -1548,12 +1583,12 @@
       "Total_Anual_Estimado": 1173817.01,
       "Saldo_Empenhos_2025": 55595.65,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 55595.65,
-      "Executado_Total": 1173817.01,
+      "Total_Empenho_RAP": 88954.61,
+      "Executado_Total": 88954.61,
       "Total_Necessario": 344404.35,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000339",
-      "Saldo_Disponivel_NC": 234826.16,
+      "Saldo_Disponivel_NC": 33358.96,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1565,7 +1600,8 @@
       "2026-10-01 00:00:00": 50000.0,
       "2026-11-01 00:00:00": 50000.0,
       "2026-12-01 00:00:00": 50000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 7.57823487325337,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- taxigov (demanda) - vip service prc vgm01n01a4n 02605452000122 23106.010532/2020-24 2026-06-14 00:00:00 em breve nan 036/2020 10000 nan 120000 nan nan 1000 10000 1096.86 11096.86 nan nan nan nan nan 10000 10000 10000 10000 10000 10000 60000 1.109686",
@@ -1581,10 +1617,10 @@
       "Valor_Mensal_Medio_Contrato": 10000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 120000.0,
-      "Saldo_Empenhos_2025": 157024.0,
+      "Saldo_Empenhos_2025": 157024.41,
       "Saldo_Empenhos_RAP": 1096.86,
-      "Total_Empenho_RAP": 158120.86,
-      "Executado_Total": 120000.0,
+      "Total_Empenho_RAP": 158121.27000000002,
+      "Executado_Total": 158121.27000000002,
       "Total_Necessario": 60000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -1600,7 +1636,8 @@
       "2026-10-01 00:00:00": 10000.0,
       "2026-11-01 00:00:00": 10000.0,
       "2026-12-01 00:00:00": 10000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 131.767725,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "contrata + brasil prc vgm01n01t3n nan 23106.030767/2026-28 nan nan nan nan nan nan nan 2026nc001288 nan nan 8000 nan 8000 nan nan nan nan nan nan nan nan nan nan nan 0 nan",
@@ -1618,12 +1655,12 @@
       "Total_Anual_Estimado": 0.0,
       "Saldo_Empenhos_2025": 8000.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 8000.0,
-      "Executado_Total": 8000.0,
+      "Total_Empenho_RAP": 250000.0,
+      "Executado_Total": 250000.0,
       "Total_Necessario": 0.0,
       "Fonte": "",
       "Nota_Empenho": "2026NC001288",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 242000.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1635,7 +1672,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 0.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "3p hgm solução visual (serviços de comunicação visual)  prc vgm01n01o7n 34.998.513/0001-55 23106.089249/2019-91 2026-07-21 00:00:00 em breve nan 1217/2022 500000 nan 6000000 nan nan 1000 341719.8 0 341719.8 nan nan nan nan nan 108280 450000 450000 450000 450000 450000 2358280 0.6834395999999999",
@@ -1653,12 +1691,12 @@
       "Total_Anual_Estimado": 6000000.0,
       "Saldo_Empenhos_2025": 341719.8,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 341719.8,
-      "Executado_Total": 6000000.0,
+      "Total_Empenho_RAP": 342730.26,
+      "Executado_Total": 342730.26,
       "Total_Necessario": 2358280.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 1010.46,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1670,7 +1708,8 @@
       "2026-10-01 00:00:00": 450000.0,
       "2026-11-01 00:00:00": 450000.0,
       "2026-12-01 00:00:00": 450000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 5.712171,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "np tecnologia e gestao de dados ltda - ferramenta de pesquisa e comparação de preços praticados pela administração pública prc vgm01n01p6n 07.797.967/0001-95  23106.108257/2021-69 2027-03-17 00:00:00 no prazo nan 605/2022 nan nan 11456.99 nan nan 1000 0 0 0 nan nan nan 0 0 0 0 0 0 0 0 0 nan",
@@ -1689,7 +1728,7 @@
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 11456.99,
+      "Executado_Total": 0.0,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -1705,7 +1744,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "slu - resíduos sólidos prc vgm01n01s8n  01.567.525/0001-76 23106.004730/2025-63 nan nan nan 677/2025 12551.75 nan 150621 2026nc000722 nan 1000 565.23 0 565.23 nan nan nan nan 11987 12551.75 12551.75 12551.75 12551.75 12551.75 12551.75 87297.5 0.045031967653912805",
@@ -1723,12 +1763,12 @@
       "Total_Anual_Estimado": 150621.0,
       "Saldo_Empenhos_2025": 565.23,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 565.23,
-      "Executado_Total": 150621.0,
+      "Total_Empenho_RAP": 88426.73,
+      "Executado_Total": 88426.73,
       "Total_Necessario": 87297.5,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000722",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 87861.5,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1740,7 +1780,8 @@
       "2026-10-01 00:00:00": 12551.75,
       "2026-11-01 00:00:00": 12551.75,
       "2026-12-01 00:00:00": 12551.75,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 58.7081017919148,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "saniplan engenharia e serviços ambientais ltda, serviços de acondicionamento, coleta, transporte, tratamento e disposição final de resíduos químicos perigosos sema vgm01n01b8n 42.168.781/0001-78 23106.043884/2024-90 2027-03-04 00:00:00 no prazo nan nan nan nan nan 2026nc000647 nan 1000 100 nan nan nan nan nan 0 0 0 0 0 0 0 0 0 nan",
@@ -1775,7 +1816,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 0.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "artes gráfica comércio e representações eireli (serviços continuados de designer gráfico) - foi solicitada prorrogação por 20 meses contratos dca vgm01n01p4n 05606994000108 23106.148085/2022-47 2027-12-15 00:00:00 no prazo nan 147/2022 nan 12640.77 151689.24  2026nc001479 100000 1000 0 0 0 nan nan nan 12640.77 12640.77 12640.77 12640.77 12640.77 12640.77 12640.77 12640.77 101126.16000000002 0.0",
@@ -1793,12 +1835,12 @@
       "Total_Anual_Estimado": 151689.24,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 151689.24,
+      "Total_Empenho_RAP": 73476.93,
+      "Executado_Total": 73476.93,
       "Total_Necessario": 101126.16000000002,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC001479",
-      "Saldo_Disponivel_NC": 100000.0,
+      "Saldo_Disponivel_NC": 73476.93,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1810,7 +1852,8 @@
       "2026-10-01 00:00:00": 12640.77,
       "2026-11-01 00:00:00": 12640.77,
       "2026-12-01 00:00:00": 12640.77,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 48.439118028411244,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "elyon brasil - esplanada servicos terceirizados eireli - serviços continuados de pessoal - coletores de resíduos de serviços de saúde contratos dca vgm01n01r4n 01099686000182 23106.031888/2020-00  2026-07-16 00:00:00 em breve nan 111/2020 nan 24500.929999999997 294011.16 2026nc000350 126662.85 1000 0 0 0 nan nan nan 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 24500.929999999997 196007.43999999997 0.0",
@@ -1828,12 +1871,12 @@
       "Total_Anual_Estimado": 294011.16,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 294011.16,
+      "Total_Empenho_RAP": 112392.26,
+      "Executado_Total": 112392.26,
       "Total_Necessario": 196007.43999999997,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000350",
-      "Saldo_Disponivel_NC": 126662.85,
+      "Saldo_Disponivel_NC": 112392.26,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1845,7 +1888,8 @@
       "2026-10-01 00:00:00": 24500.929999999997,
       "2026-11-01 00:00:00": 24500.929999999997,
       "2026-12-01 00:00:00": 24500.929999999997,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 38.22720879030578,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- alfa e omega apoio técnico edu  contratos dca vgm01n01d5n 16650774000106 23106.011967/2019-52 2027-04-19 00:00:00 no prazo nan 022/2021 nan 25772.2 309266.4 nan nan 1000 0 0 0 nan nan nan 25772.2 25772.2 25772.2 25772.2 25772.2 25772.2 25772.2 25772.2 206177.60000000003 0.0",
@@ -1863,12 +1907,12 @@
       "Total_Anual_Estimado": 309266.4,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 309266.4,
+      "Total_Empenho_RAP": 23606.99,
+      "Executado_Total": 23606.99,
       "Total_Necessario": 206177.60000000003,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 23606.99,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1880,7 +1924,8 @@
       "2026-10-01 00:00:00": 25772.2,
       "2026-11-01 00:00:00": 25772.2,
       "2026-12-01 00:00:00": 25772.2,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 7.633221714353709,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "objetiva serviços terceirizados ltda - copeiragem contratos dca vgm01n01o2n 10.874.523/0001-10 23106.030343/2024-00 23106.093628/2025-24 2027-09-30 00:00:00 no prazo nan 24/2025 nan 155277.21 1863326.52 2026nc000340 1552772.1 1000 334.34 0 334.34 nan nan nan 154942.87 155277.21 155277.21 155277.21 155277.21 155277.21 155277.21 155277.21 1241883.3399999999 0.0021531813973216032",
@@ -1898,12 +1943,12 @@
       "Total_Anual_Estimado": 1863326.52,
       "Saldo_Empenhos_2025": 334.34,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 334.34,
-      "Executado_Total": 1863326.52,
+      "Total_Empenho_RAP": 1253968.0,
+      "Executado_Total": 1253968.0,
       "Total_Necessario": 1241883.3399999999,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000340",
-      "Saldo_Disponivel_NC": 1552772.1,
+      "Saldo_Disponivel_NC": 1253633.66,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1915,7 +1960,8 @@
       "2026-10-01 00:00:00": 155277.21,
       "2026-11-01 00:00:00": 155277.21,
       "2026-12-01 00:00:00": 155277.21,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 67.2972764859269,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "objetiva serviços terceirizados ltda - contínuo contratos dca vgm01n01b7n 10.874.523/0001-10 23106.030343/2024-00 23106.093627/2025-80 2027-09-30 00:00:00 no prazo nan 23/2025 nan 258893.8 3106725.5999999996 2026nc000341 2588938 1000 10747.98 nan 10747.98 nan nan nan 248145.81999999998 258893.8 258893.8 258893.8 258893.8 258893.8 258893.8 258893.8 2060402.4200000002 0.04151501503705381",
@@ -1933,12 +1979,12 @@
       "Total_Anual_Estimado": 3106725.5999999996,
       "Saldo_Empenhos_2025": 10747.98,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 10747.98,
-      "Executado_Total": 3106725.5999999996,
+      "Total_Empenho_RAP": 2081898.42,
+      "Executado_Total": 2081898.42,
       "Total_Necessario": 2060402.4200000002,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000341",
-      "Saldo_Disponivel_NC": 2588938.0,
+      "Saldo_Disponivel_NC": 2071150.44,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1950,7 +1996,8 @@
       "2026-10-01 00:00:00": 258893.8,
       "2026-11-01 00:00:00": 258893.8,
       "2026-12-01 00:00:00": 258893.8,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 67.012626412838,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "phoenix comércio e serviços de limpeza ltda - almoxarifado e de transporte interno de móveis e materiais contratos dca vgm01n01f7n 12978051000171\n 23106.001099/2022-06 2026-09-02 00:00:00 no prazo nan 111/2022 nan 116248.37 1394980.44 2026nc000342 713738.59 1000 343164.68 nan 343164.68 nan nan nan nan nan nan nan 116248.37 116248.37 116248.37 116248.37 464993.48 2.9519956279817086",
@@ -1968,12 +2015,12 @@
       "Total_Anual_Estimado": 1394980.44,
       "Saldo_Empenhos_2025": 343164.68,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 343164.68,
-      "Executado_Total": 1394980.44,
+      "Total_Empenho_RAP": 343164.7,
+      "Executado_Total": 343164.7,
       "Total_Necessario": 464993.48,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000342",
-      "Saldo_Disponivel_NC": 713738.59,
+      "Saldo_Disponivel_NC": 0.02,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -1985,7 +2032,8 @@
       "2026-10-01 00:00:00": 116248.37,
       "2026-11-01 00:00:00": 116248.37,
       "2026-12-01 00:00:00": 116248.37,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 24.5999650002261,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- rca (limpeza e conservação)  contratos dca vgm01n01s7n   69.207.850/0001-61 23106.057738/2021-07 2027-01-15 00:00:00 no prazo nan 02/2022 nan 2038488.09 24461857.080000002 2026nc000352 18559366.2 1000 1061114.5 86794.12 1147908.62 nan nan nan nan 890579.0900000001 2038488.09 2038488.09 2038488.09 2038488.09 2038488.09 2038488.09 13121507.63 0.5631176486294801",
@@ -2001,14 +2049,14 @@
       "Valor_Mensal_Medio_Contrato": 0.0,
       "Valor_Mensal_Continuado": 2038488.09,
       "Total_Anual_Estimado": 24461857.080000002,
-      "Saldo_Empenhos_2025": 1061114.5,
-      "Saldo_Empenhos_RAP": 86794.12,
-      "Total_Empenho_RAP": 1147908.62,
-      "Executado_Total": 24461857.080000002,
+      "Saldo_Empenhos_2025": 1000.0,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 15687366.2,
+      "Executado_Total": 15687366.2,
       "Total_Necessario": 13121507.63,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000352",
-      "Saldo_Disponivel_NC": 18559366.2,
+      "Saldo_Disponivel_NC": 15686366.2,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2020,7 +2068,8 @@
       "2026-10-01 00:00:00": 2038488.09,
       "2026-11-01 00:00:00": 2038488.09,
       "2026-12-01 00:00:00": 2038488.09,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 64.12990701685514,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "life defense (segurança)  contratos dca vgm01n01a8n 02674687000176 23106.016977/2013-99\n23106.083943/2018-14\n23106.047642/2024-75  2027-03-17 00:00:00 no prazo nan 011/2020 nan 2179865.53 26158386.36 2026nc000343 2942345.63 1000 93690.69 0 93690.69 nan nan nan nan nan nan nan nan nan nan nan 0 0.04298003189215071",
@@ -2038,12 +2087,12 @@
       "Total_Anual_Estimado": 26158386.36,
       "Saldo_Empenhos_2025": 93690.69,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 93690.69,
-      "Executado_Total": 52316772.72,
+      "Total_Empenho_RAP": 17532069.76,
+      "Executado_Total": 17532069.76,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000343",
-      "Saldo_Disponivel_NC": 5122211.16,
+      "Saldo_Disponivel_NC": 17438379.07,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2055,7 +2104,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 200.0
+      "Taxa_Execucao": 67.02274948736556,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "g&e servicos terceirizados ltda (portaria)  contratos dca vgm01n01a9n 08.744.139/0001-51 23106.085840/2022-75\n23106.005560/2022-91\n23106.046596/2024-97 2027-08-29 00:00:00 no prazo nan 081/2022 nan 1499535.48 17994425.759999998 2026nc000344 16946534.88 1000 1002697.17 0 1002697.17 nan nan nan nan 496838.30999999994 1499535.48 1499535.48 1499535.48 1499535.48 1499535.48 1499535.48 9494051.190000001 0.6686718542998397",
@@ -2073,12 +2123,12 @@
       "Total_Anual_Estimado": 17994425.759999998,
       "Saldo_Empenhos_2025": 1002697.17,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 1002697.17,
-      "Executado_Total": 17994425.759999998,
+      "Total_Empenho_RAP": 10655261.97,
+      "Executado_Total": 10655261.97,
       "Total_Necessario": 9494051.190000001,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000344",
-      "Saldo_Disponivel_NC": 16946534.88,
+      "Saldo_Disponivel_NC": 9652564.8,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2090,7 +2140,8 @@
       "2026-10-01 00:00:00": 1499535.48,
       "2026-11-01 00:00:00": 1499535.48,
       "2026-12-01 00:00:00": 1499535.48,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 59.21423729833989,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "g&e servicos terceirizados ltda - serviços continuados de motorista contratos dca vgm01n01p5n 08.744.139/0001-51 23106.038810/2022-70 2027-05-24 00:00:00 no prazo nan 001/2023 nan 253200.62 3038407.44 2026nc000356 709314.99 1000 17552.23 0 17552.23 nan nan nan 235648.38999999998 238648.62 253200.62 253200.62 253200.62 253200.62 253200.62 253200.62 1993500.7300000004 0.06932143373108644",
@@ -2108,12 +2159,12 @@
       "Total_Anual_Estimado": 3038407.44,
       "Saldo_Empenhos_2025": 17552.23,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 17552.23,
-      "Executado_Total": 3038407.44,
+      "Total_Empenho_RAP": 273144.71,
+      "Executado_Total": 273144.71,
       "Total_Necessario": 1993500.7300000004,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000356",
-      "Saldo_Disponivel_NC": 709314.99,
+      "Saldo_Disponivel_NC": 255592.48,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2125,7 +2176,8 @@
       "2026-10-01 00:00:00": 253200.62,
       "2026-11-01 00:00:00": 253200.62,
       "2026-12-01 00:00:00": 253200.62,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 8.989732792386791,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "griffo (recepcionista)  contratos dca vgm01n01b3n 26.426.650/0001-97 23106.127519/2018-99; 23106.069857/2019-80 23106.070409/2023-13 2026-07-18 00:00:00 em breve nan 071/2024 nan 197023.69 2364284.2800000003 2026nc000357 653987.2 1000 138390.55 0 138390.55 nan nan nan 58633.140000000014 58632.69 197023.69 197023.69 197023.69 197023.69 197023.69 197023.69 1299407.97 0.7024056345711522",
@@ -2141,14 +2193,14 @@
       "Valor_Mensal_Medio_Contrato": 0.0,
       "Valor_Mensal_Continuado": 197023.69,
       "Total_Anual_Estimado": 2364284.2800000003,
-      "Saldo_Empenhos_2025": 138390.55,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 138390.55,
-      "Executado_Total": 2364284.2800000003,
+      "Saldo_Empenhos_2025": 0.0,
+      "Saldo_Empenhos_RAP": 34574.3,
+      "Total_Empenho_RAP": 34598.89,
+      "Executado_Total": 34598.89,
       "Total_Necessario": 1299407.97,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000357",
-      "Saldo_Disponivel_NC": 653987.2,
+      "Saldo_Disponivel_NC": 24.59,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2160,7 +2212,8 @@
       "2026-10-01 00:00:00": 197023.69,
       "2026-11-01 00:00:00": 197023.69,
       "2026-12-01 00:00:00": 197023.69,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 1.4633980478861872,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "mpe engenharia e servicos s/a (serviços comuns de engenharia, incluindo manutenção, conservação, adaptação, reparação e instalação de infraestruturas prediais e imobiliárias) - (exceto dac) contratos dca vgm01n01h3n 47.438.580/001-05 23106.149436/2022-37 2027-07-23 00:00:00 no prazo nan 1201/2023 1600000 nan 19200000 nan nan 1000 132.45 0 132.45 nan nan nan nan 1600000 1600000 1600000 1600000 1600000 1600000 1600000 11200000 8.278125e-05",
@@ -2177,9 +2230,9 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 19200000.0,
       "Saldo_Empenhos_2025": 132.45,
-      "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 132.45,
-      "Executado_Total": 19200000.0,
+      "Saldo_Empenhos_RAP": 271906.49,
+      "Total_Empenho_RAP": 272038.94,
+      "Executado_Total": 272038.94,
       "Total_Necessario": 11200000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -2195,7 +2248,8 @@
       "2026-10-01 00:00:00": 1600000.0,
       "2026-11-01 00:00:00": 1600000.0,
       "2026-12-01 00:00:00": 1600000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 1.4168694791666667,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "mpe - adequação e impermeabilização  contratos dca vga02n43e3n 04.743.858/0001-05 23106.149228/2022-38 2026-12-31 00:00:00 no prazo nan 1110/2024 1924342.125 nan 23092105.5 nan nan 1000 66886.01 0 66886.01 nan nan nan nan 1857456.115 1924342.125 1924342.125 1924342.125 1924342.125 1924342.125 1924342.125 13403508.865 0.03475785783154334",
@@ -2213,12 +2267,12 @@
       "Total_Anual_Estimado": 23092105.5,
       "Saldo_Empenhos_2025": 66886.01,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 66886.01,
-      "Executado_Total": 23092105.5,
+      "Total_Empenho_RAP": 318241.01,
+      "Executado_Total": 318241.01,
       "Total_Necessario": 13403508.865,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 251355.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2230,7 +2284,8 @@
       "2026-10-01 00:00:00": 1924342.125,
       "2026-11-01 00:00:00": 1924342.125,
       "2026-12-01 00:00:00": 1924342.125,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 1.3781376929877616,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "poli engenharia ltda (serviços comuns de engenharia, incluindo manutenção, conservação, adaptação, reparação e instalação de infraestruturas prediais e imobiliárias) contratos dca vgm01n01s5n 00.700.518/0001-38 23106.117479/2022-53 2028-01-08 00:00:00 no prazo nan 1226/2022 145000 nan 1740000 nan nan 1000 nan 271906.49 271906.49 nan nan nan nan nan 163093.51 145000 145000 145000 145000 145000 888093.51 1.875217172413793",
@@ -2265,7 +2320,8 @@
       "2026-10-01 00:00:00": 145000.0,
       "2026-11-01 00:00:00": 145000.0,
       "2026-12-01 00:00:00": 145000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "ágil (serviços agropecuários)  contratos dca vgm01n01c5n 72.620.735/0001-29 23106.076196/2018-68\n23106.030688/2022-93 23106.019497/2026-02 2027-03-17 00:00:00 no prazo nan 1207/2026\ndispensa 218/2026 nan 508267.37 6099208.4399999995 2026nc000358 5810425.8 1000 920236.06 nan 920236.06 nan nan nan nan nan nan nan 508267.37 508267.37 508267.37 508267.37 2033069.48 1.8105353880970168",
@@ -2283,12 +2339,12 @@
       "Total_Anual_Estimado": 6099208.4399999995,
       "Saldo_Empenhos_2025": 920236.06,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 920236.06,
-      "Executado_Total": 6099208.4399999995,
+      "Total_Empenho_RAP": 3836288.63,
+      "Executado_Total": 3836288.63,
       "Total_Necessario": 2033069.48,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000358",
-      "Saldo_Disponivel_NC": 5810425.8,
+      "Saldo_Disponivel_NC": 2916052.57,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2300,7 +2356,8 @@
       "2026-10-01 00:00:00": 508267.37,
       "2026-11-01 00:00:00": 508267.37,
       "2026-12-01 00:00:00": 508267.37,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 62.89813945102687,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "rb gráfica digital ltda contratos dca vgm01n01q1n 16.951.665/0001-10 23106.041918/2022-40 2026-09-01 00:00:00 no prazo nan 104/2023 100 nan 1200 nan nan 1000 0 2570.5 2570.5 nan nan nan nan nan nan nan nan nan nan nan 0 25.705",
@@ -2316,10 +2373,10 @@
       "Valor_Mensal_Medio_Contrato": 100.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 1200.0,
-      "Saldo_Empenhos_2025": 0.0,
-      "Saldo_Empenhos_RAP": 2570.5,
-      "Total_Empenho_RAP": 2570.5,
-      "Executado_Total": 1200.0,
+      "Saldo_Empenhos_2025": 1000.0,
+      "Saldo_Empenhos_RAP": 45263.0,
+      "Total_Empenho_RAP": 46263.0,
+      "Executado_Total": 46263.0,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -2335,7 +2392,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 3855.25,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "artecor gráfico e editora ltda contratos dca vgm01n01q1n vgm01n01s1n 38.013.991/0001-10 23106.041918/2022-40 2026-09-01 00:00:00 no prazo nan 105/2023 15000 nan 180000 nan nan 1000 nan 31000 31000 nan nan nan nan nan 14000 15000 15000 15000 15000 15000 89000 2.066666666666667",
@@ -2370,7 +2428,8 @@
       "2026-10-01 00:00:00": 15000.0,
       "2026-11-01 00:00:00": 15000.0,
       "2026-12-01 00:00:00": 15000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "contrato de limpeza -  unb cerrado (ap piscinas eireli) unb cerrado vgm01n01a7n 08.475.822/0001-30 23106.116355/2019-55 2026-08-20 00:00:00 no prazo nan 112/2020 nan 5954.2 63975.84 nan nan 1000 11908.25 0 11908.25 nan nan nan nan nan 5954.2 5954.2 5954.2 5954.2 5954.2 5954.2 35725.2 1.9999748076987673",
@@ -2388,12 +2447,12 @@
       "Total_Anual_Estimado": 63975.84,
       "Saldo_Empenhos_2025": 11908.25,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 11908.25,
-      "Executado_Total": 63975.84,
+      "Total_Empenho_RAP": 11908.4,
+      "Executado_Total": 11908.4,
       "Total_Necessario": 35725.2,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 0.15,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2405,7 +2464,8 @@
       "2026-10-01 00:00:00": 5954.2,
       "2026-11-01 00:00:00": 5954.2,
       "2026-12-01 00:00:00": 5954.2,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 18.613901747909836,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- segurança - ultraseg segurança patrimonial ltda unb cerrado vgm01n01r8n 09.151.154/0001-59 23106.020717/2022-17 2026-10-08 00:00:00 no prazo nan 1207/2022 nan 23452.22 281426.64 nan nan 1000 76414.28 0 76414.28 nan nan nan nan nan nan nan 40846.82000000001 23452.22 23452.22 23452.22 111203.48000000001 3.258296229525392",
@@ -2424,7 +2484,7 @@
       "Saldo_Empenhos_2025": 76414.28,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 76414.28,
-      "Executado_Total": 281426.64,
+      "Executado_Total": 76414.28,
       "Total_Necessario": 111203.48000000001,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -2440,7 +2500,8 @@
       "2026-10-01 00:00:00": 23452.22,
       "2026-11-01 00:00:00": 23452.22,
       "2026-12-01 00:00:00": 23452.22,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 27.15246857937827,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "jardinagem - unb cerrado - ambiental do brasil estudos e projetos ambientais ltda unb cerrado vgm01n01a5n vgm01n01r6n 09.150.575/0001-65 23106.092536/2018-06 2026-10-14 00:00:00 no prazo nan 659/2020 4106.25 nan 49275 nan nan 1000 0 500 500 nan nan nan nan nan nan nan nan nan nan nan 0 0.121765601217656",
@@ -2456,10 +2517,10 @@
       "Valor_Mensal_Medio_Contrato": 4106.25,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 49275.0,
-      "Saldo_Empenhos_2025": 0.0,
-      "Saldo_Empenhos_RAP": 500.0,
-      "Total_Empenho_RAP": 500.0,
-      "Executado_Total": 49275.0,
+      "Saldo_Empenhos_2025": 36456.25,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 36456.25,
+      "Executado_Total": 36456.25,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -2475,7 +2536,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 73.98528665651953,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "recepcionista – amr limpeza e locacao de automoveis ltda unb cerrado vgm01n01b3n vgm01n01r7n 10.258.826/0001-09 23106.100112/2023-81 2026-02-15 00:00:00 expirado contrato encerrado / ver saldo de empenho 12/2024 nan 4290.91 51490.92 nan nan 1000 nan 34574.3 34574.3 nan nan nan nan nan nan nan nan nan nan nan 0 8.05756820814233",
@@ -2510,7 +2572,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "'- gestor servicos empresariais (portaria - spi) contratos spi vgm01n01e8n 02.685.728/0001-20 23106.047067/2021-68 2027-02-16 00:00:00 no prazo nan 001/2022 nan 382896.8 4594761.6 2026nc000368 4211864.8 1050 2670151.4 3924.89 2674076.29 nan nan nan nan nan nan nan nan nan nan nan 0 6.983804226099566",
@@ -2528,12 +2591,12 @@
       "Total_Anual_Estimado": 4594761.6,
       "Saldo_Empenhos_2025": 2670151.4,
       "Saldo_Empenhos_RAP": 3924.89,
-      "Total_Empenho_RAP": 2674076.29,
-      "Executado_Total": 4594761.6,
+      "Total_Empenho_RAP": 2677869.89,
+      "Executado_Total": 2677869.89,
       "Total_Necessario": 0.0,
       "Fonte": "1050",
       "Nota_Empenho": "2026NC000368",
-      "Saldo_Disponivel_NC": 4211864.8,
+      "Saldo_Disponivel_NC": 3793.6,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2545,7 +2608,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 58.28093213802432,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- sefix (limpeza e conservação - spi) contratos spi vgm01n01e9n 13.258.899/0001-99 23106.047036/2021-15 2027-03-16 00:00:00 no prazo nan 033/2022 nan 193823.77 2325885.2399999998 2026nc000369 2150358.63 1050 1242041.28 0 1242041.28 nan nan nan nan nan nan nan nan nan nan 308548.8799999999 308548.8799999999 6.40809576658219",
@@ -2564,11 +2628,11 @@
       "Saldo_Empenhos_2025": 1242041.28,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 1242041.28,
-      "Executado_Total": 2325885.2399999998,
+      "Executado_Total": 1242041.28,
       "Total_Necessario": 308548.8799999999,
       "Fonte": "1050",
       "Nota_Empenho": "2026NC000369",
-      "Saldo_Disponivel_NC": 2150358.63,
+      "Saldo_Disponivel_NC": 0.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2580,7 +2644,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 308548.8799999999,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 53.400798054851585,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "poli engenharia ltda (contratação de serviços de engenharia contínuos de manutenção predial dos imóveis de propriedade da universidade de brasília) contratos spi vgm01n01t4n 00.700.518/0001-38 23106.071924/2025-74 2028-01-08 00:00:00 no prazo nan 20/2026 nan 206855.53800000003 2482266.4560000002 nan nan nan nan nan 0 nan nan nan nan 206855.53800000003 206855.53800000003 206855.53800000003 206855.53800000003 206855.53800000003 206855.53800000003 206855.53800000003 nan nan",
@@ -2596,10 +2661,10 @@
       "Valor_Mensal_Medio_Contrato": 0.0,
       "Valor_Mensal_Continuado": 206855.53800000003,
       "Total_Anual_Estimado": 2482266.4560000002,
-      "Saldo_Empenhos_2025": 0.0,
+      "Saldo_Empenhos_2025": 1000.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 2482266.4560000002,
+      "Total_Empenho_RAP": 1000.0,
+      "Executado_Total": 1000.0,
       "Total_Necessario": 0.0,
       "Fonte": "",
       "Nota_Empenho": "",
@@ -2615,7 +2680,8 @@
       "2026-10-01 00:00:00": 206855.53800000003,
       "2026-11-01 00:00:00": 206855.53800000003,
       "2026-12-01 00:00:00": 206855.53800000003,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 0.040285763745582355,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "formiga engenharia e arquitetura ltda, especializada na prestação de serviços continuados, sem dedicação exclusiva de mão de obra, para realização de vistorias de entrada e saída nos imóveis de propriedade da universidade de brasília contratos spi vgm01n01d2n 22.352.353/0001-93 23106.013588/2024-64 2026-11-14 00:00:00 no prazo nan 93/2024 7018 nan 84216 nan nan 1050 999.99 29998.3 30998.29 nan nan nan nan nan nan nan nan 11109.71 nan 7018 18127.71 4.41696922200057",
@@ -2633,12 +2699,12 @@
       "Total_Anual_Estimado": 84216.0,
       "Saldo_Empenhos_2025": 999.99,
       "Saldo_Empenhos_RAP": 29998.3,
-      "Total_Empenho_RAP": 30998.29,
-      "Executado_Total": 84216.0,
+      "Total_Empenho_RAP": 30998.3,
+      "Executado_Total": 30998.3,
       "Total_Necessario": 18127.71,
       "Fonte": "1050",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 0.01,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2650,7 +2716,8 @@
       "2026-10-01 00:00:00": 11109.71,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 7018.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 36.808088724232924,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "quantum soluções e inovações ltda - emissão de laudos técnicos de avaliação de valores imobiliários contratos spi vgm01n01q7n 43.946.228/0001-81 23106.019008/2024-42 2026-11-05 00:00:00 no prazo nan 1221/2024 1241.6666666666667 nan 14900 nan nan 1050 nan 3725 3725 nan nan nan nan nan nan nan 1241.6666666666667 1241.6666666666667 1241.6666666666667 1241.6666666666667 4966.666666666667 3.0",
@@ -2667,9 +2734,9 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 14900.0,
       "Saldo_Empenhos_2025": 0.0,
-      "Saldo_Empenhos_RAP": 3725.0,
-      "Total_Empenho_RAP": 3725.0,
-      "Executado_Total": 14900.0,
+      "Saldo_Empenhos_RAP": 5363.0,
+      "Total_Empenho_RAP": 5363.0,
+      "Executado_Total": 5363.0,
       "Total_Necessario": 4966.666666666667,
       "Fonte": "1050",
       "Nota_Empenho": "",
@@ -2685,7 +2752,8 @@
       "2026-10-01 00:00:00": 1241.6666666666667,
       "2026-11-01 00:00:00": 1241.6666666666667,
       "2026-12-01 00:00:00": 1241.6666666666667,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 35.99328859060403,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "silva edificações ltda - emissão de laudos técnicos de avaliação de valores imobiliários contratos spi vgm01n01q7n vgm01n01s2n 44.532.592/0001-68 23106.103034/2024-58 2026-11-01 00:00:00 no prazo nan 1220/2024 832.5 nan 9990 nan nan 1050 nan 1638 1638 nan nan nan nan nan nan 832.5 832.5 832.5 832.5 832.5 4162.5 1.9675675675675677",
@@ -2701,10 +2769,10 @@
       "Valor_Mensal_Medio_Contrato": 832.5,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 9990.0,
-      "Saldo_Empenhos_2025": 0.0,
-      "Saldo_Empenhos_RAP": 1638.0,
-      "Total_Empenho_RAP": 1638.0,
-      "Executado_Total": 9990.0,
+      "Saldo_Empenhos_2025": 30000.0,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 30000.0,
+      "Executado_Total": 30000.0,
       "Total_Necessario": 4162.5,
       "Fonte": "1050",
       "Nota_Empenho": "",
@@ -2720,7 +2788,8 @@
       "2026-10-01 00:00:00": 832.5,
       "2026-11-01 00:00:00": 832.5,
       "2026-12-01 00:00:00": 832.5,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 300.3003003003003,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "honix (elevadores) (01 de um mês a 30 do mesmo mês) contratos spi vgm01n01i7n 21051130000123 23106.053280/2018-11 2025-09-20 00:00:00 expirado não será renovado 090/2019 nan nan nan nan nan 1050 nan 11583.35 11583.35 nan nan nan nan nan nan nan nan nan nan nan 0 nan",
@@ -2739,7 +2808,7 @@
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 3007418.35,
       "Total_Empenho_RAP": 3007418.35,
-      "Executado_Total": 4076136.0,
+      "Executado_Total": 3007418.35,
       "Total_Necessario": 0.0,
       "Fonte": "1050",
       "Nota_Empenho": "",
@@ -2755,7 +2824,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 0.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "modulo consultoria e gerencia predial ltda contratos spi vgm01n01t2n 05.926.726/0001-73 23106.075502/2025-78 2026-09-19 00:00:00 no prazo nan 1206/2025 50000 nan 600000 2026nc000904 nan nan 0 0 0 nan nan nan 50000 50000 50000 50000 50000 50000 50000 50000 400000 0.0",
@@ -2773,12 +2843,12 @@
       "Total_Anual_Estimado": 600000.0,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 600000.0,
+      "Total_Empenho_RAP": 30775.2,
+      "Executado_Total": 30775.2,
       "Total_Necessario": 400000.0,
       "Fonte": "",
       "Nota_Empenho": "2026NC000904",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 30775.2,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2790,7 +2860,8 @@
       "2026-10-01 00:00:00": 50000.0,
       "2026-11-01 00:00:00": 50000.0,
       "2026-12-01 00:00:00": 50000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 5.129200000000001,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- energia elétrica - spi contratos spi vgm01n01r2n 07.522.669/0001-92 nan nan nan nan nan 40000 nan 480000 2026nc000560 468161.73 1050 287078.47 3322.19 290400.66 nan nan nan nan nan nan nan nan nan nan nan 0 7.260016499999999",
@@ -2807,13 +2878,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 480000.0,
       "Saldo_Empenhos_2025": 287078.47,
-      "Saldo_Empenhos_RAP": 3322.19,
-      "Total_Empenho_RAP": 290400.66,
-      "Executado_Total": 480000.0,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 287078.47,
+      "Executado_Total": 287078.47,
       "Total_Necessario": 0.0,
       "Fonte": "1050",
       "Nota_Empenho": "2026NC000560",
-      "Saldo_Disponivel_NC": 468161.73,
+      "Saldo_Disponivel_NC": 0.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2825,7 +2896,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 59.808014583333325,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- caesb - spi  contratos spi vgm01n01q9n 00.082.024/0001-37 nan nan nan nan nan 136350 nan 1636200 2026nc000371 1626686.32 1050 859023.34 9513.68 868537.02 nan nan nan nan nan nan nan nan nan nan 85913 85913 6.369908470847085",
@@ -2842,13 +2914,13 @@
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 1636200.0,
       "Saldo_Empenhos_2025": 859023.34,
-      "Saldo_Empenhos_RAP": 9513.68,
-      "Total_Empenho_RAP": 868537.02,
-      "Executado_Total": 1636200.0,
+      "Saldo_Empenhos_RAP": 0.0,
+      "Total_Empenho_RAP": 859023.34,
+      "Executado_Total": 859023.34,
       "Total_Necessario": 85913.0,
       "Fonte": "1050",
       "Nota_Empenho": "2026NC000371",
-      "Saldo_Disponivel_NC": 1626686.32,
+      "Saldo_Disponivel_NC": 0.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2860,7 +2932,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 85913.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 52.50112088986676,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- despesas de condomínio  contratos spi vgm01n01k6n nan 23106.134844/2020-22 nan nan nan nan 245000 nan 2940000 2026nc000372 2673965.34 1050 746678.77 0 746678.77 nan nan nan nan nan nan nan 233321 245000 245000 245000 968321 3.047668448979592",
@@ -2879,11 +2952,11 @@
       "Saldo_Empenhos_2025": 746678.77,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 746678.77,
-      "Executado_Total": 2940000.0,
+      "Executado_Total": 746678.77,
       "Total_Necessario": 968321.0,
       "Fonte": "1050",
       "Nota_Empenho": "2026NC000372",
-      "Saldo_Disponivel_NC": 2673965.34,
+      "Saldo_Disponivel_NC": 0.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2895,7 +2968,8 @@
       "2026-10-01 00:00:00": 245000.0,
       "2026-11-01 00:00:00": 245000.0,
       "2026-12-01 00:00:00": 245000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 25.39723707482993,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "restaurante ism eireli (diretoria ru) - ação 20rk planilha dru  contrato dac/ru vgm01n01b5n 04.228.626/0012-63 23106.013653/2020-28 2026-09-09 00:00:00 no prazo nan 31/2021 1500933.5675 nan 18011202.81 2026nc000364 11420396.14 1000 nan nan 0 nan nan nan nan 1500933.5675 1500933.5675 1500933.5675 1500933.5675 1500933.5675 1500933.5675 1500933.5675 10506534.9725 0.0",
@@ -2913,12 +2987,12 @@
       "Total_Anual_Estimado": 18011202.81,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 18011202.81,
+      "Total_Empenho_RAP": 6287620.28,
+      "Executado_Total": 6287620.28,
       "Total_Necessario": 10506534.9725,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000364",
-      "Saldo_Disponivel_NC": 11420396.14,
+      "Saldo_Disponivel_NC": 6287620.28,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -2930,7 +3004,8 @@
       "2026-10-01 00:00:00": 1500933.5675,
       "2026-11-01 00:00:00": 1500933.5675,
       "2026-12-01 00:00:00": 1500933.5675,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 34.9094968633025,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- serviço manutenção piscinas casa niemeyer contratos diversos vgm01n01n5n nan nan nan nan nan nan nan nan nan nan nan 1000 nan nan 0 nan nan nan 0 0 0 0 0 0 0 0 0 nan",
@@ -2965,7 +3040,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 0.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "auxílio moradia - processos judiciais residentes médicos contratos diversos vep01s19a1n nan  00424.086713/2023-76 00424.187663/2022-62 00424.084224/2023-80 00424.158540/2022-14 00424.092166/2023-68\n00424.081691/2024-39\n00424.126909/2024-91 00424.190315/2023-53 00424.124332/2024-83 nan nan nan nan 73000 nan 71446.14 nan nan 1000 nan nan 0 nan nan nan 73000 73000 73000 73000 73000 73000 73000 73000 584000 0.0",
@@ -3000,7 +3076,8 @@
       "2026-10-01 00:00:00": 73000.0,
       "2026-11-01 00:00:00": 73000.0,
       "2026-12-01 00:00:00": 73000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "pgfn: 1° ati, negociação conta n°: 7300348 ( consulta acordo n°1 - conta da negociação 7300348 (sei nº 10575553)\nsei origem: 23106.094258/2021-19\nsei pagamento em 2023: 23106.005996/2023-61\ndespacho que contém explicação: 10567234 do sei 23106.132563/2023-88\nacordo de transação individual (ati), referente à dívida ativa tributária junto à pgfn -débitos previdenciários\nempenho atual: 2024ne000285 contratos diversos vgh01n0112n nan 23106.094258/2021-19\n23106.001775/2022-33 23106.005996/2023-61\n23106.044758/2024-52\n23106.132563/2023-88 60 parcelas\n(já pagou 20/60) nan nan nan 285000 nan 3420000 2026nc000724 nan 1000 1477223.22 0 1477223.22 nan nan nan nan nan nan nan nan nan 517776.78 285000 802776.78 5.183239368421052",
@@ -3019,7 +3096,7 @@
       "Saldo_Empenhos_2025": 1477223.22,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 1477223.22,
-      "Executado_Total": 3420000.0,
+      "Executado_Total": 1477223.22,
       "Total_Necessario": 802776.78,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000724",
@@ -3035,7 +3112,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 517776.78,
       "2026-12-01 00:00:00": 285000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 43.19366140350877,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "pgfn: 2° ati, negociação conta n°: 8815031 (consulta acordo n°2 - conta da negociação 8815031 (sei nº 10576277))\nsei origem: 23106.059565/2023-15\nsei pagamento 2023:23106.123083/2023-26 que foi realizado o pagamento da entrada e no  23106.128684/2023-25 constará os demais pagamentos.\ndespacho que contém explicação: 10567234 do sei 23106.132563/2023-88\nguias de recolhimento de fgts e informações à previdência social (gfip) das competências de janeiro/2011, fevereiro/2011, abril/2011, junho/2011 e novembro/2011\nempenho atual: 2023ne003705; 2024ne000487 contratos diversos vgh01n0114n nan 23106.059565/2023-15\n23106.128684/2023-25 \n23106.044758/2024-52\n23106.132563/2023-88 60 parcelas\n(já pagou 10/60) nan nan nan 28500 nan 342000 2026nc000716 nan 1000 0 0 0 nan nan nan 28500 28500 28500 28500 28500 28500 28500 28500 228000 0.0",
@@ -3054,7 +3132,7 @@
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 342000.0,
+      "Executado_Total": 228000.0,
       "Total_Necessario": 228000.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000716",
@@ -3070,7 +3148,8 @@
       "2026-10-01 00:00:00": 28500.0,
       "2026-11-01 00:00:00": 28500.0,
       "2026-12-01 00:00:00": 28500.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 66.66666666666666,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "rfb: conta da negociação 0211000120 (consulta parcelamento n°1 - conta da negociação 0211000120 (sei nº 10580261))\nsei origem: 23106.059634/2023-91\nsei pagamento em 2023: 23106.087581/2023-06\ndespacho que contém explicação: 10567234 do sei 23106.132563/2023-88\natraso das guias de recolhimento de fgts e informações à previdência social (gfip) das competências de julho/2010, outubro/2010, novembro/2010, dezembro/2011 e 13°/2011\nempenho atual: 2023ne003850 e 2024ne000284 contratos diversos vgh01n0115n nan 23106.059634/2023-91\n23106.087581/2023-06\n23106.044758/2024-52\n23106.132563/2023-88 60 parcelas\n(já pagou 13/60) nan nan nan 22500 nan 270000 2026nc000717 nan 1000 20233.04 0 20233.04 nan nan nan nan 2267 22500 22500 22500 22500 22500 22500 137267 0.8992462222222223",
@@ -3089,7 +3168,7 @@
       "Saldo_Empenhos_2025": 20233.04,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 20233.04,
-      "Executado_Total": 270000.0,
+      "Executado_Total": 20233.04,
       "Total_Necessario": 137267.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000717",
@@ -3105,7 +3184,8 @@
       "2026-10-01 00:00:00": 22500.0,
       "2026-11-01 00:00:00": 22500.0,
       "2026-12-01 00:00:00": 22500.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 7.493718518518519,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- ajuda de custo (redistribuição de servidores)  contratos diversos vgh01n0111n nan nan nan nan nan nan 20000 nan 240000 nan nan 1000 nan 0 0 nan nan nan 20000 20000 20000 20000 20000 20000 20000 20000 160000 0.0",
@@ -3124,7 +3204,7 @@
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 240000.0,
+      "Executado_Total": 160000.0,
       "Total_Necessario": 160000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -3140,7 +3220,8 @@
       "2026-10-01 00:00:00": 20000.0,
       "2026-11-01 00:00:00": 20000.0,
       "2026-12-01 00:00:00": 20000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 66.66666666666666,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "cespe (despesas diversas) cespe vgr02n01a1n nan 23106.019902/2017-93 nan nan nan nan 70000 nan 840000 nan nan 1000 9450.48 15548.24 24998.72 nan nan nan 45001.28 70000 70000 70000 70000 70000 70000 70000 535001.28 0.35712457142857146",
@@ -3156,14 +3237,14 @@
       "Valor_Mensal_Medio_Contrato": 70000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 840000.0,
-      "Saldo_Empenhos_2025": 9450.48,
-      "Saldo_Empenhos_RAP": 15548.24,
-      "Total_Empenho_RAP": 24998.72,
-      "Executado_Total": 840000.0,
+      "Saldo_Empenhos_2025": 8470.29,
+      "Saldo_Empenhos_RAP": 15548.239999999998,
+      "Total_Empenho_RAP": 34441.509999999995,
+      "Executado_Total": 34441.509999999995,
       "Total_Necessario": 535001.28,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 10422.98,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3175,7 +3256,8 @@
       "2026-10-01 00:00:00": 70000.0,
       "2026-11-01 00:00:00": 70000.0,
       "2026-12-01 00:00:00": 70000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 4.100179761904761,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "contrato de serviços especializados com vistas à realização de estudos técnicos, de planejamentos, projetos básicos ou executivos, assessoria técnica e apoio técnico nas áreas de tecnologia da informação (ti) e logística, entre a unb e o cebraspe deg vgr02n01a2n 18284407000153 23106.040707/2022-90\n(60 parcelas) 2027-02-23 00:00:00 no prazo nan 1205/2022 44033.82 nan 528405.84 nan nan 1000 12500 115759.67 128259.67 nan nan nan nan nan nan nan 44033.82 44033.82 44033.82 44033.82 176135.28 2.9127536516250463",
@@ -3193,12 +3275,12 @@
       "Total_Anual_Estimado": 528405.84,
       "Saldo_Empenhos_2025": 12500.0,
       "Saldo_Empenhos_RAP": 115759.67,
-      "Total_Empenho_RAP": 128259.67,
-      "Executado_Total": 528405.84,
+      "Total_Empenho_RAP": 128268.25,
+      "Executado_Total": 128268.25,
       "Total_Necessario": 176135.28,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 8.58,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3210,7 +3292,8 @@
       "2026-10-01 00:00:00": 44033.82,
       "2026-11-01 00:00:00": 44033.82,
       "2026-12-01 00:00:00": 44033.82,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 24.274570848800614,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "cebraspe (processos seletivos unb)  deg vgm01n01j5n 18284407000153 23106.098851/2020-53\n23106.018871/2022-11\n23106.093468/2021-90 23106.065413/2023-51 23106.065557/2023-16 \n23106.035963/2024-27 2027-12-13 00:00:00 no prazo nan diversos 280000 nan 3360000 nan nan 1000 497026.72 330823.4 827850.12 nan nan nan nan nan nan nan 280000 280000 280000 280000 1120000 2.9566075714285716",
@@ -3228,12 +3311,12 @@
       "Total_Anual_Estimado": 3360000.0,
       "Saldo_Empenhos_2025": 497026.72,
       "Saldo_Empenhos_RAP": 330823.4,
-      "Total_Empenho_RAP": 827850.12,
-      "Executado_Total": 3360000.0,
+      "Total_Empenho_RAP": 827850.61,
+      "Executado_Total": 827850.61,
       "Total_Necessario": 1120000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 0.49,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3245,7 +3328,8 @@
       "2026-10-01 00:00:00": 280000.0,
       "2026-11-01 00:00:00": 280000.0,
       "2026-12-01 00:00:00": 280000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 24.63841101190476,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "cebraspe (sisu/mec) deg vgr02n01a3n 18.284.407/0001-53 23106.108529/2025-54 2028-01-13 00:00:00 no prazo nan 1201/2026 nan nan nan nan nan 1000 999.76 nan nan nan nan nan nan nan nan nan nan nan nan nan 0 nan",
@@ -3263,12 +3347,12 @@
       "Total_Anual_Estimado": 0.0,
       "Saldo_Empenhos_2025": 999.76,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 999.76,
-      "Executado_Total": 999.76,
+      "Total_Empenho_RAP": 1000.0,
+      "Executado_Total": 1000.0,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 0.24,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3280,7 +3364,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 0.0
+      "Taxa_Execucao": 0.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "cebraspe (exame nacional do ensino médio - enem) deg vgm01n01t1n 18.284.407/0001-53 23106.085242/2025-49 2027-03-09 00:00:00 no prazo nan 1205/2026 19728.614166666666 nan 236743.37 nan nan nan 1000 nan 1000 nan nan nan 18728.614166666666 19728.614166666666 19728.614166666666 19728.614166666666 19728.614166666666 19728.614166666666 19728.614166666666 19728.614166666666 156828.91333333333 0.05068779750833149",
@@ -3299,7 +3384,7 @@
       "Saldo_Empenhos_2025": 1000.0,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 1000.0,
-      "Executado_Total": 236743.37,
+      "Executado_Total": 1000.0,
       "Total_Necessario": 156828.91333333333,
       "Fonte": "",
       "Nota_Empenho": "",
@@ -3315,7 +3400,8 @@
       "2026-10-01 00:00:00": 19728.614166666666,
       "2026-11-01 00:00:00": 19728.614166666666,
       "2026-12-01 00:00:00": 19728.614166666666,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 0.42239831256942906,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "conceição aparecida braga 67186920691 me (análise e levantamento de conjuntos documentais do arquivo do cespe/unb) contratos diversos vgm01n01p1n 41.423.145/0001-82 23106.059346/2020-93  2026-11-01 00:00:00 no prazo nan 1230/2022  17000 nan 204000 nan nan 1000 38745.94 0 38745.94 nan nan nan nan nan nan 17000 17000 17000 17000 17000 85000 2.2791729411764705",
@@ -3334,7 +3420,7 @@
       "Saldo_Empenhos_2025": 38745.94,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 38745.94,
-      "Executado_Total": 204000.0,
+      "Executado_Total": 38745.94,
       "Total_Necessario": 85000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -3350,7 +3436,8 @@
       "2026-10-01 00:00:00": 17000.0,
       "2026-11-01 00:00:00": 17000.0,
       "2026-12-01 00:00:00": 17000.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 18.993107843137256,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- prisma sys/ dcf (licença de uso e suporte técnico consiafi) - parcela única contratos diversos vgm01n01l7n 38.068.664/0001-65 23106.017284/2025-57 2027-07-10 00:00:00 no prazo nan 513/2025 nan nan 70500 nan nan 1000 70500 0 70500 nan nan nan 0 nan nan nan nan nan nan nan 0 nan",
@@ -3385,7 +3472,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "plus terceirizacao ltda (serviços continuados de tratador de piscina) contratos diversos vgm01n01e2n 27.072.369/0001-66 23106.062907/2024-65 2026-11-05 00:00:00 no prazo nan 25/2025 nan 6226.45 74717.4 nan nan 1000 23735.78 0 23735.78 nan nan nan nan nan nan nan nan 13622.919999999998 6226.45 6226.45 26075.82 3.812088750411551",
@@ -3404,7 +3492,7 @@
       "Saldo_Empenhos_2025": 23735.78,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 23735.78,
-      "Executado_Total": 74717.4,
+      "Executado_Total": 23735.78,
       "Total_Necessario": 26075.82,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -3420,7 +3508,8 @@
       "2026-10-01 00:00:00": 13622.919999999998,
       "2026-11-01 00:00:00": 6226.45,
       "2026-12-01 00:00:00": 6226.45,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 31.76740625342959,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "sti ufrn/ gre (5 parcelas de r$ 681.831,28) contratos diversos vgm01n01m5n nan 23106.073966/2017-30\n23106.091209/2020-43\n23106.003643/2026-70 2030-04-13 00:00:00 no prazo nan ted nº  12428.11.0826 nan nan 681831.28 nan nan 1000 nan nan 0 nan nan nan 0 nan nan nan nan nan nan nan 0 nan",
@@ -3438,12 +3527,12 @@
       "Total_Anual_Estimado": 681831.28,
       "Saldo_Empenhos_2025": 0.0,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
+      "Total_Empenho_RAP": 681831.28,
       "Executado_Total": 681831.28,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 681831.28,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3455,7 +3544,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 100.0,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- correios - ect -reduziu porque não temos mais contrato de encomendas comunicação vgm01n01j1n 34.028.316/0007-07 23106.137850/2017-36; 23106.070712/2018-41\n23106.015565/2023-11 2027-03-22 00:00:00 no prazo nan 1207/2023 3000 nan 36000 nan nan 1000 31341.87 0 31341.87 nan nan nan nan nan nan nan nan nan nan nan 0 10.447289999999999",
@@ -3473,12 +3563,12 @@
       "Total_Anual_Estimado": 36000.0,
       "Saldo_Empenhos_2025": 31341.87,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 31341.87,
-      "Executado_Total": 36000.0,
+      "Total_Empenho_RAP": 31342.23,
+      "Executado_Total": 31342.23,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 0.36,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3490,7 +3580,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 87.06174999999999,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- empresa brasil de comunicação (ebc) comunicação vgm01n01i9n nan 23106.064124/2025-05 2031-01-28 00:00:00 no prazo nan 1202/2026 2000 nan 24000 2026nc000365 23000 1000 15391.95 0 15391.95 nan nan nan nan nan nan nan nan nan nan nan 0 7.695975000000001",
@@ -3509,11 +3600,11 @@
       "Saldo_Empenhos_2025": 15391.95,
       "Saldo_Empenhos_RAP": 0.0,
       "Total_Empenho_RAP": 15391.95,
-      "Executado_Total": 24000.0,
+      "Executado_Total": 15391.95,
       "Total_Necessario": 0.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000365",
-      "Saldo_Disponivel_NC": 23000.0,
+      "Saldo_Disponivel_NC": 0.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3525,7 +3616,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 64.133125,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- andromeda (serviços de becário e brigadista nas cerimônias de colação de grau) cerimonial vgm01n01b9n 20.882.119/0001-42 23106.072605/2019-38 2024-12-12 00:00:00 expirado não pode ser renovado 10809034 verificar saldo de empenho 135/2019 33000 nan 396000 nan nan 1000 nan 4308.48 4308.48 nan nan nan 28691.52 nan nan nan nan nan nan nan 28691.52 0.13055999999999998",
@@ -3541,14 +3633,14 @@
       "Valor_Mensal_Medio_Contrato": 33000.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 396000.0,
-      "Saldo_Empenhos_2025": 82464.23999999999,
-      "Saldo_Empenhos_RAP": 5405.48,
-      "Total_Empenho_RAP": 87869.72,
-      "Executado_Total": 640800.0,
+      "Saldo_Empenhos_2025": 165041.25,
+      "Saldo_Empenhos_RAP": 106557.65,
+      "Total_Empenho_RAP": 271698.89999999997,
+      "Executado_Total": 271698.89999999997,
       "Total_Necessario": 28691.52,
       "Fonte": "1000",
       "Nota_Empenho": "",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 100.0,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3560,7 +3652,8 @@
       "2026-10-01 00:00:00": 0.0,
       "2026-11-01 00:00:00": 0.0,
       "2026-12-01 00:00:00": 0.0,
-      "Taxa_Execucao": 161.8181818181818
+      "Taxa_Execucao": 68.61083333333332,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "lavanderia cristal serviços expressos ltda (higienização e passadoria de becas) cerimonial  vgm01n01s3n 01.319.181/0001-86 23106.001918/2023-98 2027-04-24 00:00:00 no prazo em fase de renovação dispensa. nº 10002/2023 500 nan 6000 nan nan 1000 nan 0 0 nan nan nan 500 500 500 500 500 500 500 500 4000 0.0",
@@ -3576,10 +3669,10 @@
       "Valor_Mensal_Medio_Contrato": 500.0,
       "Valor_Mensal_Continuado": 0.0,
       "Total_Anual_Estimado": 6000.0,
-      "Saldo_Empenhos_2025": 0.0,
+      "Saldo_Empenhos_2025": 24.74,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 0.0,
-      "Executado_Total": 6000.0,
+      "Total_Empenho_RAP": 24.74,
+      "Executado_Total": 24.74,
       "Total_Necessario": 4000.0,
       "Fonte": "1000",
       "Nota_Empenho": "",
@@ -3595,7 +3688,8 @@
       "2026-10-01 00:00:00": 500.0,
       "2026-11-01 00:00:00": 500.0,
       "2026-12-01 00:00:00": 500.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 0.41233333333333333,
+      "Origem": "Base"
     },
     {
       "_raw_full_text": "- simpress - outsourcing de serviços de impressão contratos custeados pelas unidades (sti) vgm01n01m8n 07.432.517/0001-07 23106.000978/2016-64\n23106.010988/2019-51 2026-09-03 00:00:00 no prazo nan 512/2021 64728 nan 776736 2026nc000718 nan 1000 126502.26 0 126502.26 nan nan nan nan nan nan 64728 64728 64728 64728 64728 323640 1.954366889136077",
@@ -3613,12 +3707,12 @@
       "Total_Anual_Estimado": 776736.0,
       "Saldo_Empenhos_2025": 126502.26,
       "Saldo_Empenhos_RAP": 0.0,
-      "Total_Empenho_RAP": 126502.26,
-      "Executado_Total": 776736.0,
+      "Total_Empenho_RAP": 242142.3,
+      "Executado_Total": 242142.3,
       "Total_Necessario": 323640.0,
       "Fonte": "1000",
       "Nota_Empenho": "2026NC000718",
-      "Saldo_Disponivel_NC": 0.0,
+      "Saldo_Disponivel_NC": 115640.04,
       "2026-01-01 00:00:00": 0.0,
       "2026-02-01 00:00:00": 0.0,
       "2026-03-01 00:00:00": 0.0,
@@ -3630,12 +3724,13 @@
       "2026-10-01 00:00:00": 64728.0,
       "2026-11-01 00:00:00": 64728.0,
       "2026-12-01 00:00:00": 64728.0,
-      "Taxa_Execucao": 100.0
+      "Taxa_Execucao": 31.174337226548015,
+      "Origem": "Base"
     }
   ],
   "metadata": {
-    "updated_at": "2026-06-08T16:38:59.303848Z",
-    "updated_by_email": "alexandre.cardias (manual via AI)",
-    "source_file": "Planilha de Despesas.xlsx"
+    "updated_at": "2026-06-08T17:01:23.750637Z",
+    "updated_by_email": "{\"address\":\"naoresponda@serpro.gov.br\",\"name\":\"\\\"SERPRO\\\"\"}",
+    "source_file": "BI_Alexandre.xlsx"
   }
 }
