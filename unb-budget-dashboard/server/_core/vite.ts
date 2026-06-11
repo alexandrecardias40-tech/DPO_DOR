@@ -20,6 +20,17 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
+  // ── Serve CI build in dev mode too ───────────────────────────
+  const ciDistPath = path.resolve(import.meta.dirname, "../..", "dist", "custos-indiretos");
+  if (fs.existsSync(ciDistPath)) {
+    app.use("/custos-indiretos", express.static(ciDistPath));
+    app.get("/custos-indiretos/*", (_req, res) => {
+      res.sendFile(path.resolve(ciDistPath, "index.html"));
+    });
+    console.log("✅ [dev] CI dashboard served at /custos-indiretos/");
+  }
+  // ─────────────────────────────────────────────────────────────
+
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
@@ -47,6 +58,7 @@ export async function setupVite(app: Express, server: Server) {
   });
 }
 
+
 export function serveStatic(app: Express) {
   const distPath =
     process.env.NODE_ENV === "development"
@@ -57,6 +69,19 @@ export function serveStatic(app: Express) {
       `Could not find the build directory: ${distPath}, make sure to build the client first`
     );
   }
+
+  // ── Custos Indiretos sub-app ──────────────────────────────────
+  const ciDistPath = path.resolve(import.meta.dirname, "../..", "dist", "custos-indiretos");
+  if (fs.existsSync(ciDistPath)) {
+    app.use("/custos-indiretos", express.static(ciDistPath));
+    app.get("/custos-indiretos/*", (_req, res) => {
+      res.sendFile(path.resolve(ciDistPath, "index.html"));
+    });
+    console.log("✅ Custos Indiretos dashboard served at /custos-indiretos/");
+  } else {
+    console.warn("⚠️  CI build not found at", ciDistPath);
+  }
+  // ─────────────────────────────────────────────────────────────
 
   app.use(express.static(distPath));
 

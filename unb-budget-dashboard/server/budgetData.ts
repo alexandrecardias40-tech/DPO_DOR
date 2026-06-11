@@ -896,8 +896,18 @@ export const mergeDashboardData = (currentData: any, newData: any): any => {
       const mergedRow = { ...oldRow, ...newRow };
 
       // Preserve "Fixed" variables from Old Row if New Row is empty
-      // Fixed: Despesa, UGR, CNPJ, Processo, Contrato, Fonte
-      const fixedFields = ['Despesa', 'UGR', 'CNPJ', 'Processo', 'nº  Contrato', 'Fonte', 'Status_Contrato'];
+      // Fixed: Cadastro, Vigencia e Contrato
+      const fixedFields = [
+        'Despesa',
+        'UGR',
+        'CNPJ',
+        'Processo',
+        'nº  Contrato',
+        'Fonte',
+        'Status_Contrato',
+        'Data_Vigencia_Fim',
+        'Situacao_Prorrogacao',
+      ];
 
       fixedFields.forEach(field => {
         // If new row has empty/null value for this field, revert to old row value
