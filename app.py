@@ -67,7 +67,7 @@ def _portal_entries() -> List[Dict[str, str]]:
             "slug": "cpor",
             "title": "Dashboard Custos Indiretos",
             "description": "Análise de Custos Indiretos",
-            "href": "/custos-indiretos/#/dashboard",
+            "href": "/custos-indiretos/",
             "accent": "#3b82f6",
         },
     ]
