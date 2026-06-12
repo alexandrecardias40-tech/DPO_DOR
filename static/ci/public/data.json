@@ -33267,7 +33267,7 @@
     "valor_unb": 31814.56,
     "valor_unidade": 31814.56,
     "total_ci": 63629.12,
-    "ressarcido": 63629.13,
+    "ressarcido": 63629.12,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33437,7 +33437,7 @@
     "valor_unb": 15942.86,
     "valor_unidade": 15942.86,
     "total_ci": 31885.72,
-    "ressarcido": 31885.73,
+    "ressarcido": 31885.72,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33471,7 +33471,7 @@
     "valor_unb": 20828.22,
     "valor_unidade": 20828.22,
     "total_ci": 41656.44,
-    "ressarcido": 41656.45,
+    "ressarcido": 41656.44,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33505,7 +33505,7 @@
     "valor_unb": 21970.65,
     "valor_unidade": 21970.65,
     "total_ci": 43941.3,
-    "ressarcido": 43941.29,
+    "ressarcido": 43941.3,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33539,7 +33539,7 @@
     "valor_unb": 1746.28,
     "valor_unidade": 1746.28,
     "total_ci": 3492.56,
-    "ressarcido": 3492.55,
+    "ressarcido": 3492.56,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33607,7 +33607,7 @@
     "valor_unb": 32787.54,
     "valor_unidade": 32787.54,
     "total_ci": 65575.08,
-    "ressarcido": 65575.07,
+    "ressarcido": 65575.08,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33641,7 +33641,7 @@
     "valor_unb": 24545.83,
     "valor_unidade": 24545.83,
     "total_ci": 49091.66,
-    "ressarcido": 49091.67,
+    "ressarcido": 49091.66,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33675,7 +33675,7 @@
     "valor_unb": 21797.28,
     "valor_unidade": 21797.28,
     "total_ci": 43594.56,
-    "ressarcido": 43594.55,
+    "ressarcido": 43594.56,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33743,7 +33743,7 @@
     "valor_unb": 36228.69,
     "valor_unidade": 36228.69,
     "total_ci": 72457.38,
-    "ressarcido": 72457.39,
+    "ressarcido": 72457.38,
     "a_ressarcir": 0.0,
     "tem_nd": true,
     "ug": "154040",
@@ -33947,8 +33947,8 @@
     "valor_unb": 108332.91,
     "valor_unidade": 108332.91,
     "total_ci": 216665.82,
-    "ressarcido": 216665.83,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 216665.82,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -33963,7 +33963,7 @@
     "rap_pago": 216665.83,
     "total_pago_tg": 216665.83,
     "total_rap": 433331.66,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004508",
@@ -33981,8 +33981,8 @@
     "valor_unb": 6952.41,
     "valor_unidade": 6952.41,
     "total_ci": 13904.82,
-    "ressarcido": 13904.83,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 13904.82,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -33997,7 +33997,7 @@
     "rap_pago": 13904.83,
     "total_pago_tg": 13904.83,
     "total_rap": 27809.66,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004467",
@@ -34015,8 +34015,8 @@
     "valor_unb": 11265.51,
     "valor_unidade": 11265.51,
     "total_ci": 22531.02,
-    "ressarcido": 22531.03,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 22531.02,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34031,7 +34031,7 @@
     "rap_pago": 22531.03,
     "total_pago_tg": 22531.03,
     "total_rap": 45062.06,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004139",
@@ -34049,8 +34049,8 @@
     "valor_unb": 12501.07,
     "valor_unidade": 12501.07,
     "total_ci": 25002.14,
-    "ressarcido": 25002.13,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 25002.14,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34065,7 +34065,7 @@
     "rap_pago": 25002.13,
     "total_pago_tg": 25002.13,
     "total_rap": 50004.26,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004500",
@@ -34083,8 +34083,8 @@
     "valor_unb": 29095.25,
     "valor_unidade": 29095.25,
     "total_ci": 58190.5,
-    "ressarcido": 58190.5,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 58190.5,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34099,7 +34099,7 @@
     "rap_pago": 58190.5,
     "total_pago_tg": 58190.5,
     "total_rap": 116381.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004572",
@@ -34117,8 +34117,8 @@
     "valor_unb": 7344.76,
     "valor_unidade": 7344.76,
     "total_ci": 14689.52,
-    "ressarcido": 14689.51,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 14689.52,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34133,7 +34133,7 @@
     "rap_pago": 14689.51,
     "total_pago_tg": 14689.51,
     "total_rap": 29379.02,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004510",
@@ -34151,8 +34151,8 @@
     "valor_unb": 12424.0,
     "valor_unidade": 12424.0,
     "total_ci": 24848.0,
-    "ressarcido": 24848.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 24848.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34167,7 +34167,7 @@
     "rap_pago": 24848.0,
     "total_pago_tg": 24848.0,
     "total_rap": 49696.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004427",
@@ -34185,8 +34185,8 @@
     "valor_unb": 71555.95,
     "valor_unidade": 71555.95,
     "total_ci": 143111.9,
-    "ressarcido": 143111.9,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 143111.9,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34201,7 +34201,7 @@
     "rap_pago": 143111.9,
     "total_pago_tg": 143111.9,
     "total_rap": 286223.8,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004494",
@@ -34219,8 +34219,8 @@
     "valor_unb": 20000.0,
     "valor_unidade": 20000.0,
     "total_ci": 40000.0,
-    "ressarcido": 40000.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 40000.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34235,7 +34235,7 @@
     "rap_pago": 40000.0,
     "total_pago_tg": 40000.0,
     "total_rap": 80000.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004461",
@@ -34253,8 +34253,8 @@
     "valor_unb": 275623.4,
     "valor_unidade": 275623.4,
     "total_ci": 551246.8,
-    "ressarcido": 551246.8,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 551246.8,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34269,7 +34269,7 @@
     "rap_pago": 551246.8,
     "total_pago_tg": 551246.8,
     "total_rap": 1102493.6,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004288",
@@ -34287,8 +34287,8 @@
     "valor_unb": 19577.76,
     "valor_unidade": 19577.76,
     "total_ci": 39155.52,
-    "ressarcido": 39155.52,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 39155.52,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34303,7 +34303,7 @@
     "rap_pago": 39155.52,
     "total_pago_tg": 39155.52,
     "total_rap": 78311.04,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004254",
@@ -34321,8 +34321,8 @@
     "valor_unb": 20516.5,
     "valor_unidade": 20516.5,
     "total_ci": 41033.0,
-    "ressarcido": 41033.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 41033.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34337,7 +34337,7 @@
     "rap_pago": 41033.0,
     "total_pago_tg": 41033.0,
     "total_rap": 82066.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004647",
@@ -34355,8 +34355,8 @@
     "valor_unb": 8363.81,
     "valor_unidade": 8363.81,
     "total_ci": 16727.62,
-    "ressarcido": 16727.62,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 16727.62,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34371,7 +34371,7 @@
     "rap_pago": 16727.62,
     "total_pago_tg": 16727.62,
     "total_rap": 33455.24,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004502",
@@ -34389,8 +34389,8 @@
     "valor_unb": 11009.97,
     "valor_unidade": 11009.97,
     "total_ci": 22019.94,
-    "ressarcido": 22019.94,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 22019.94,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34405,7 +34405,7 @@
     "rap_pago": 22019.94,
     "total_pago_tg": 22019.94,
     "total_rap": 44039.88,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004250",
@@ -34423,8 +34423,8 @@
     "valor_unb": 42577.89,
     "valor_unidade": 42577.89,
     "total_ci": 85155.78,
-    "ressarcido": 85155.78,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 85155.78,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34439,7 +34439,7 @@
     "rap_pago": 85155.78,
     "total_pago_tg": 85155.78,
     "total_rap": 170311.56,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004237",
@@ -34457,8 +34457,8 @@
     "valor_unb": 11062.45,
     "valor_unidade": 11062.45,
     "total_ci": 22124.9,
-    "ressarcido": 22124.91,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 22124.9,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34473,7 +34473,7 @@
     "rap_pago": 22124.91,
     "total_pago_tg": 22124.91,
     "total_rap": 44249.82,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004226",
@@ -34491,8 +34491,8 @@
     "valor_unb": 59340.0,
     "valor_unidade": 59340.0,
     "total_ci": 118680.0,
-    "ressarcido": 118680.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 118680.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34507,7 +34507,7 @@
     "rap_pago": 118680.0,
     "total_pago_tg": 118680.0,
     "total_rap": 237360.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004488",
@@ -34525,8 +34525,8 @@
     "valor_unb": 16063.6,
     "valor_unidade": 16063.6,
     "total_ci": 32127.2,
-    "ressarcido": 32127.21,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 32127.2,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34541,7 +34541,7 @@
     "rap_pago": 32127.21,
     "total_pago_tg": 32127.21,
     "total_rap": 64254.42,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004472",
@@ -34559,8 +34559,8 @@
     "valor_unb": 16000.0,
     "valor_unidade": 16000.0,
     "total_ci": 32000.0,
-    "ressarcido": 32000.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 32000.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34575,7 +34575,7 @@
     "rap_pago": 32000.0,
     "total_pago_tg": 32000.0,
     "total_rap": 64000.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004239",
@@ -34593,8 +34593,8 @@
     "valor_unb": 14972.73,
     "valor_unidade": 14972.73,
     "total_ci": 29945.46,
-    "ressarcido": 29945.45,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 29945.46,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34609,7 +34609,7 @@
     "rap_pago": 29945.45,
     "total_pago_tg": 29945.45,
     "total_rap": 59890.9,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004274",
@@ -34627,8 +34627,8 @@
     "valor_unb": 53787.38,
     "valor_unidade": 53787.38,
     "total_ci": 107574.76,
-    "ressarcido": 107574.76,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 107574.76,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34643,7 +34643,7 @@
     "rap_pago": 107574.76,
     "total_pago_tg": 107574.76,
     "total_rap": 215149.52,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004332",
@@ -34661,8 +34661,8 @@
     "valor_unb": 37500.0,
     "valor_unidade": 37500.0,
     "total_ci": 75000.0,
-    "ressarcido": 75000.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 75000.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34677,7 +34677,7 @@
     "rap_pago": 75000.0,
     "total_pago_tg": 75000.0,
     "total_rap": 150000.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004272",
@@ -34695,8 +34695,8 @@
     "valor_unb": 20325.0,
     "valor_unidade": 20325.0,
     "total_ci": 40650.0,
-    "ressarcido": 40650.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 40650.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34711,7 +34711,7 @@
     "rap_pago": 40650.0,
     "total_pago_tg": 40650.0,
     "total_rap": 81300.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004224",
@@ -34729,8 +34729,8 @@
     "valor_unb": 50289.79,
     "valor_unidade": 50289.79,
     "total_ci": 100579.58,
-    "ressarcido": 100579.59,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 100579.58,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34745,7 +34745,7 @@
     "rap_pago": 100579.59,
     "total_pago_tg": 100579.59,
     "total_rap": 201159.18,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004455",
@@ -34763,8 +34763,8 @@
     "valor_unb": 1250.0,
     "valor_unidade": 1250.0,
     "total_ci": 2500.0,
-    "ressarcido": 2500.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 2500.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34779,7 +34779,7 @@
     "rap_pago": 2500.0,
     "total_pago_tg": 2500.0,
     "total_rap": 5000.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004571",
@@ -34797,8 +34797,8 @@
     "valor_unb": 8667.7,
     "valor_unidade": 8667.7,
     "total_ci": 17335.4,
-    "ressarcido": 17335.41,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 17335.4,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34813,7 +34813,7 @@
     "rap_pago": 17335.41,
     "total_pago_tg": 17335.41,
     "total_rap": 34670.82,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004299",
@@ -34831,8 +34831,8 @@
     "valor_unb": 3370.36,
     "valor_unidade": 3370.36,
     "total_ci": 6740.72,
-    "ressarcido": 6740.71,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 6740.72,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34847,7 +34847,7 @@
     "rap_pago": 6740.71,
     "total_pago_tg": 6740.71,
     "total_rap": 13481.42,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004276",
@@ -34865,8 +34865,8 @@
     "valor_unb": 16117.91,
     "valor_unidade": 16117.91,
     "total_ci": 32235.82,
-    "ressarcido": 32235.82,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 32235.82,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34881,7 +34881,7 @@
     "rap_pago": 32235.82,
     "total_pago_tg": 32235.82,
     "total_rap": 64471.64,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004573",
@@ -34899,8 +34899,8 @@
     "valor_unb": 23209.7,
     "valor_unidade": 23209.7,
     "total_ci": 46419.4,
-    "ressarcido": 46419.4,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 46419.4,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34915,7 +34915,7 @@
     "rap_pago": 46419.4,
     "total_pago_tg": 46419.4,
     "total_rap": 92838.8,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE003124",
@@ -34933,8 +34933,8 @@
     "valor_unb": 6939.13,
     "valor_unidade": 6939.13,
     "total_ci": 13878.26,
-    "ressarcido": 13878.26,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 13878.26,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34949,7 +34949,7 @@
     "rap_pago": 13878.26,
     "total_pago_tg": 104347.83,
     "total_rap": 27756.52,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004313",
@@ -34967,8 +34967,8 @@
     "valor_unb": 3195.1,
     "valor_unidade": 3195.1,
     "total_ci": 6390.2,
-    "ressarcido": 6390.2,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 6390.2,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -34983,7 +34983,7 @@
     "rap_pago": 6390.2,
     "total_pago_tg": 6390.2,
     "total_rap": 12780.4,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004280",
@@ -35001,8 +35001,8 @@
     "valor_unb": 5568.72,
     "valor_unidade": 5568.72,
     "total_ci": 11137.44,
-    "ressarcido": 11137.43,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 11137.44,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35017,7 +35017,7 @@
     "rap_pago": 11137.43,
     "total_pago_tg": 11137.43,
     "total_rap": 22274.86,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004267",
@@ -35035,8 +35035,8 @@
     "valor_unb": 19565.2,
     "valor_unidade": 19565.2,
     "total_ci": 39130.4,
-    "ressarcido": 39130.4,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 39130.4,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35051,7 +35051,7 @@
     "rap_pago": 39130.4,
     "total_pago_tg": 39130.4,
     "total_rap": 78260.8,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004282",
@@ -35069,8 +35069,8 @@
     "valor_unb": 36301.31,
     "valor_unidade": 36301.31,
     "total_ci": 72602.62,
-    "ressarcido": 72602.62,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 72602.62,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35085,7 +35085,7 @@
     "rap_pago": 72602.62,
     "total_pago_tg": 72602.62,
     "total_rap": 145205.24,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004286",
@@ -35103,8 +35103,8 @@
     "valor_unb": 67852.18,
     "valor_unidade": 67852.18,
     "total_ci": 135704.36,
-    "ressarcido": 135704.35,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 135704.36,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35119,7 +35119,7 @@
     "rap_pago": 135704.35,
     "total_pago_tg": 135704.35,
     "total_rap": 271408.7,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004561",
@@ -35137,8 +35137,8 @@
     "valor_unb": 9005.17,
     "valor_unidade": 9005.17,
     "total_ci": 18010.34,
-    "ressarcido": 18010.35,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 18010.34,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35153,7 +35153,7 @@
     "rap_pago": 18010.35,
     "total_pago_tg": 18010.35,
     "total_rap": 36020.7,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004309",
@@ -35171,8 +35171,8 @@
     "valor_unb": 12833.93,
     "valor_unidade": 12833.93,
     "total_ci": 25667.86,
-    "ressarcido": 25667.87,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 25667.86,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35187,7 +35187,7 @@
     "rap_pago": 25667.87,
     "total_pago_tg": 25667.87,
     "total_rap": 51335.74,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004278",
@@ -35205,8 +35205,8 @@
     "valor_unb": 12000.0,
     "valor_unidade": 12000.0,
     "total_ci": 24000.0,
-    "ressarcido": 24000.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 24000.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35221,7 +35221,7 @@
     "rap_pago": 24000.0,
     "total_pago_tg": 24000.0,
     "total_rap": 48000.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004408",
@@ -35239,8 +35239,8 @@
     "valor_unb": 14693.13,
     "valor_unidade": 14693.13,
     "total_ci": 29386.26,
-    "ressarcido": 29386.26,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 29386.26,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35255,7 +35255,7 @@
     "rap_pago": 29386.26,
     "total_pago_tg": 29386.26,
     "total_rap": 58772.52,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004410",
@@ -35273,8 +35273,8 @@
     "valor_unb": 18872.94,
     "valor_unidade": 18872.94,
     "total_ci": 37745.88,
-    "ressarcido": 37745.89,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 37745.88,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35289,7 +35289,7 @@
     "rap_pago": 37745.89,
     "total_pago_tg": 37745.89,
     "total_rap": 75491.78,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004260",
@@ -35307,8 +35307,8 @@
     "valor_unb": 16572.76,
     "valor_unidade": 16572.76,
     "total_ci": 33145.52,
-    "ressarcido": 33145.51,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 33145.52,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35323,7 +35323,7 @@
     "rap_pago": 33145.51,
     "total_pago_tg": 33145.51,
     "total_rap": 66291.02,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004265",
@@ -35341,8 +35341,8 @@
     "valor_unb": 1146.26,
     "valor_unidade": 1146.26,
     "total_ci": 2292.52,
-    "ressarcido": 2292.51,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 2292.52,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35357,7 +35357,7 @@
     "rap_pago": 22292.51,
     "total_pago_tg": 22292.51,
     "total_rap": 44585.02,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004421",
@@ -35375,8 +35375,8 @@
     "valor_unb": 15591.25,
     "valor_unidade": 15591.25,
     "total_ci": 31182.5,
-    "ressarcido": 31182.49,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 31182.5,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35391,7 +35391,7 @@
     "rap_pago": 31182.49,
     "total_pago_tg": 31182.49,
     "total_rap": 62364.98,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004437",
@@ -35409,8 +35409,8 @@
     "valor_unb": 60131.67,
     "valor_unidade": 60131.67,
     "total_ci": 120263.34,
-    "ressarcido": 120263.34,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 120263.34,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35425,7 +35425,7 @@
     "rap_pago": 120263.34,
     "total_pago_tg": 120263.34,
     "total_rap": 240526.68,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004242",
@@ -35443,8 +35443,8 @@
     "valor_unb": 19355.78,
     "valor_unidade": 19355.78,
     "total_ci": 38711.56,
-    "ressarcido": 38711.55,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 38711.56,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35459,7 +35459,7 @@
     "rap_pago": 38711.55,
     "total_pago_tg": 38711.55,
     "total_rap": 77423.1,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004256",
@@ -35477,8 +35477,8 @@
     "valor_unb": 16198.75,
     "valor_unidade": 16198.75,
     "total_ci": 32397.5,
-    "ressarcido": 32397.49,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 32397.5,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35493,7 +35493,7 @@
     "rap_pago": 32397.49,
     "total_pago_tg": 32397.49,
     "total_rap": 64794.98,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004228",
@@ -35511,8 +35511,8 @@
     "valor_unb": 10000.0,
     "valor_unidade": 10000.0,
     "total_ci": 20000.0,
-    "ressarcido": 20000.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 20000.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35527,7 +35527,7 @@
     "rap_pago": 20000.0,
     "total_pago_tg": 20000.0,
     "total_rap": 40000.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004246",
@@ -35545,8 +35545,8 @@
     "valor_unb": 13043.48,
     "valor_unidade": 13043.48,
     "total_ci": 26086.96,
-    "ressarcido": 26086.95,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 26086.96,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35561,7 +35561,7 @@
     "rap_pago": 26086.95,
     "total_pago_tg": 26086.95,
     "total_rap": 52173.9,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004576",
@@ -35579,8 +35579,8 @@
     "valor_unb": 64434.17,
     "valor_unidade": 64434.17,
     "total_ci": 128868.34,
-    "ressarcido": 128868.33,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 128868.34,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35595,7 +35595,7 @@
     "rap_pago": 128868.33,
     "total_pago_tg": 128868.33,
     "total_rap": 257736.66,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004291",
@@ -35613,8 +35613,8 @@
     "valor_unb": 17503.81,
     "valor_unidade": 17503.81,
     "total_ci": 35007.62,
-    "ressarcido": 35007.63,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 35007.62,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35629,7 +35629,7 @@
     "rap_pago": 35007.63,
     "total_pago_tg": 35007.63,
     "total_rap": 70015.26,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004403",
@@ -35647,8 +35647,8 @@
     "valor_unb": 28602.5,
     "valor_unidade": 28602.5,
     "total_ci": 57205.0,
-    "ressarcido": 57205.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 57205.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35663,7 +35663,7 @@
     "rap_pago": 57205.0,
     "total_pago_tg": 57205.0,
     "total_rap": 114410.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004497",
@@ -35681,8 +35681,8 @@
     "valor_unb": 58243.39,
     "valor_unidade": 58243.39,
     "total_ci": 116486.78,
-    "ressarcido": 116486.77,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 116486.78,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35697,7 +35697,7 @@
     "rap_pago": 116486.77,
     "total_pago_tg": 116486.77,
     "total_rap": 232973.54,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004296",
@@ -35715,8 +35715,8 @@
     "valor_unb": 20228.82,
     "valor_unidade": 20228.82,
     "total_ci": 40457.64,
-    "ressarcido": 40457.64,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 40457.64,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35731,7 +35731,7 @@
     "rap_pago": 40457.64,
     "total_pago_tg": 40457.64,
     "total_rap": 80915.28,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004528",
@@ -35749,8 +35749,8 @@
     "valor_unb": 59541.05,
     "valor_unidade": 59541.05,
     "total_ci": 119082.1,
-    "ressarcido": 119082.1,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 119082.1,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35765,7 +35765,7 @@
     "rap_pago": 119082.1,
     "total_pago_tg": 119082.1,
     "total_rap": 238164.2,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004293",
@@ -35783,8 +35783,8 @@
     "valor_unb": 16309.0,
     "valor_unidade": 16309.0,
     "total_ci": 32618.0,
-    "ressarcido": 32618.0,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 32618.0,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35799,7 +35799,7 @@
     "rap_pago": 32618.0,
     "total_pago_tg": 32618.0,
     "total_rap": 65236.0,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   },
   {
     "ne_key": "2025NE004486",
@@ -35817,8 +35817,8 @@
     "valor_unb": 17424.03,
     "valor_unidade": 17424.03,
     "total_ci": 34848.06,
-    "ressarcido": 34848.06,
-    "a_ressarcir": 0.0,
+    "ressarcido": 0.0,
+    "a_ressarcir": 34848.06,
     "tem_nd": false,
     "ug": "154040",
     "favorecido": "RCA PRODUTOS E SERVICOS LTDA.",
@@ -35833,6 +35833,6 @@
     "rap_pago": 34848.06,
     "total_pago_tg": 34848.06,
     "total_rap": 69696.12,
-    "semaforo": "verde"
+    "semaforo": "vermelho"
   }
 ]
